@@ -1,0 +1,30 @@
+{
+  "name": "Slot",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "timeSlot": {
+      "type": "date",
+      "required": true
+    },
+    "bookedId": {
+      "type": "string",
+      "required": true
+    },
+    "duration": {
+      "type": "number",
+      "required": true
+    },
+    "instructorId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

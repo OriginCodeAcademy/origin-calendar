@@ -1,0 +1,36 @@
+{
+  "name": "AptRequest",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "topicSummary": {
+      "type": "string",
+      "required": true
+    },
+    "issueDescription": {
+      "type": "string",
+      "required": true
+    },
+    "times": {
+      "type": [
+        "date"
+      ],
+      "required": true
+    },
+    "studentId": {
+      "type": "string",
+      "required": true
+    },
+    "requestId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
