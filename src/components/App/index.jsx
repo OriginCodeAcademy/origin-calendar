@@ -4,6 +4,7 @@ import Calendar from '../Calendar';
 import Listing from '../Listing';
 import Register from '../Register';
 import SignIn  from '../SignIn';
+import Request from '../Request';
 
 const App = () => (
   <div>
@@ -13,6 +14,8 @@ const App = () => (
       <Link to="/calendar">Calendar</Link>
       <Link to="/listing">Listing</Link>
       <Link to="/signin">Sign In</Link>
+      <Link to="/request">Request</Link>
+
     </nav>
     <div>
       <Route exact path="/" component={() => 'nothing'}></Route>
@@ -20,6 +23,7 @@ const App = () => (
       <Route path="/listing" component={Listing}></Route>
       <Route path="/register" component={Register}></Route>
       <Route path="/signin" component={SignIn}></Route>
+      <Route path="/request" component={Request}></Route>
     </div>
   </div>);
 
