@@ -1,0 +1,21 @@
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: #eff0f3;
+}
+
+nav a {
+  padding: 0 15px;
+}
+
+.bg-light {
+  background-color: #fdfdfd!important;
+  box-shadow: 0 0 2px #0202024d;
+}
+
+nav a:hover {
+  text-decoration: none;
+  color:black;
+}
