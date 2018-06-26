@@ -47,7 +47,8 @@
       },
       {
         "params": "$!../dist"
-      }]
+      }
+    ]
   },
   "final": {
     "loopback#urlNotFound": {}

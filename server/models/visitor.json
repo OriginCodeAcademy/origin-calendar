@@ -1,30 +1,21 @@
 {
-  "name": "Student",
-  "base": "PersistedModel",
+  "name": "Visitor",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "studentId": {
+    "firstName": {
       "type": "string",
       "required": true
     },
-    "studentName": {
-      "type": "string",
-      "required": true
-    },
-    "progress": {
-      "type": "string",
-      "required": true
-    },
-    "email": {
+    "lastName": {
       "type": "string",
       "required": true
     },
     "slackId": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   },
   "validations": [],

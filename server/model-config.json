@@ -13,9 +13,6 @@
       "./mixins"
     ]
   },
-  "User": {
-    "dataSource": "db"
-  },
   "AccessToken": {
     "dataSource": "db",
     "public": false
@@ -35,13 +32,6 @@
     "dataSource": "db",
     "public": false
   },
-  "Note": {
-    "dataSource": "db"
-  },
-  "Student": {
-    "dataSource": "db",
-    "public": true
-  },
   "AptRequest": {
     "dataSource": "db",
     "public": true
@@ -51,6 +41,10 @@
     "public": true
   },
   "Slot": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Visitor": {
     "dataSource": "db",
     "public": true
   }
