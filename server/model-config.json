@@ -44,7 +44,7 @@
     "dataSource": "db",
     "public": true
   },
-  "user": {
+  "Visitor": {
     "dataSource": "db",
     "public": true
   }
