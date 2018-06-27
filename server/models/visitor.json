@@ -19,7 +19,24 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "aptRequests": {
+      "type": "hasMany",
+      "model": "AptRequest",
+      "foreignKey": "visitorId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "bookedApts": {
+      "type": "hasMany",
+      "model": "BookedApt",
+      "foreignKey": "visitorId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }
