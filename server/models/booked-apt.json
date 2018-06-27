@@ -12,7 +12,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "slots": {
+      "type": "hasOne",
+      "model": "Slot",
+      "foreignKey": "bookedAptId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }

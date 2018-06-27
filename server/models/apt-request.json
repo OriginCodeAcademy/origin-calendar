@@ -30,7 +30,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "visitor": {
+      "type": "belongsTo",
+      "model": "Visitor",
+      "foreignKey": "aptRequestId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }
