@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
-import Calendar from '../Calendar';
-import Listing from '../Listing';
+import Home from '../Home';
+import Appointments from '../Appointments';
 import Register from '../Register';
 import SignIn from '../SignIn';
 import Request from '../Request';
@@ -22,10 +22,7 @@ const App = () => (
             <Link to="/register">Register</Link>
           </li>
           <li class="nav-item">
-            <Link to="/calendar">Calendar</Link>
-          </li>
-          <li class="nav-item">
-            <Link to="/listing">Listing</Link>
+            <Link to="/appointments">Appointments</Link>
           </li>
           <li class="nav-item">
             <Link to="/signin">Sign In</Link>
@@ -37,10 +34,9 @@ const App = () => (
       </div>
     </nav>
 
-    <div>
-      <Route exact path="/" component={() => 'nothing'}></Route>
-      <Route path="/calendar" component={Calendar}></Route>
-      <Route path="/listing" component={Listing}></Route>
+    <div className="container-fluid">
+      <Route exact path="/" component={Home}></Route>
+      <Route path="/appointments" component={Appointments}></Route>
       <Route path="/register" component={Register}></Route>
       <Route path="/signin" component={SignIn}></Route>
       <Route path="/request" component={Request}></Route>

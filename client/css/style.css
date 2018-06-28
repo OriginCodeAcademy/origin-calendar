@@ -13,9 +13,21 @@ nav a {
 .bg-light {
   background-color: #fdfdfd!important;
   box-shadow: 0 0 2px #0202024d;
+  margin-bottom: 25px;
 }
 
 nav a:hover {
   text-decoration: none;
   color:black;
+}
+
+.table {
+  background-color: white;
+  box-shadow: 0 0 2px #00000033;
+  border: 1px solid #8080802e;
+}
+
+th {
+  color: whitesmoke;
+  background-color: #4f6995;
 }
