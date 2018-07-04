@@ -23,29 +23,30 @@ class SignIn extends Component {
       method: 'post',
       url: '/api/Visitors/login',
       data: this.state
+    })
+    .then((res) =>{
+      const userId = res.data.userId;
+      axios.get(`/api/Visitors/${userId}`)
+      .then((user) => {
+        this.props.save(res.data, user.data)
+      })
     });
   }
 
   render() {
     const { username, password } = this.state;
     return (
-      <div className='container'>
+      <div className='login'>
         <h2>Please Sign In</h2>
-        <div className='row'>
-          <div className='col-md-4'>
-            <label>username</label>
-            <input type='text' name='username' value={username} onChange={this.handleChange} />
-          </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input type='text' name='username' className="form-control" value={username} onChange={this.handleChange} />
         </div>
-        <div className='row'>
-          <div className='col-md-4'>
-            <label>Password</label>
-            <input type='password' name='password' value={password} onChange={this.handleChange} />
-          </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input type='password' name='password' className="form-control" value={password} onChange={this.handleChange} />
         </div>
-        <div className='row'>
-          <button type='submit' onClick={this.handleSubmit}>Submit</button>
-        </div>
+        <button type='submit' className="btn btn-info" onClick={this.handleSubmit}>Submit</button>
       </div>
     )
   }
