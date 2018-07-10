@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "start": "npm run build && node .",
     "test": "mocha tests --exit",
-    "posttest": "npm run lint && nsp check"
+    "posttest": "npm run lint"
   },
   "dependencies": {
     "chai": "^4.1.2",
