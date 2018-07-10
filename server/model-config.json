@@ -14,38 +14,38 @@
     ]
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": false
   },
   "AptRequest": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": true
   },
   "BookedApt": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": true
   },
   "Slot": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": true
   },
   "Visitor": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": true
   }
 }
