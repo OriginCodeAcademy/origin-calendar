@@ -38,12 +38,18 @@ video {
   overflow: hidden;
 }
 
-.login{
+.form {
   background: rgba(255, 255, 255, 0.89);
   max-width: 500px;
   margin: auto;
   padding: 30px;
   border-radius: 3px;
+}
+
+.form .alert {
+  margin-top: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 2000ms ease forwards;
 }
 
 .title {
@@ -70,4 +76,12 @@ label {
 th {
   color: whitesmoke;
   background-color: #4f6995;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1
+  }
 }

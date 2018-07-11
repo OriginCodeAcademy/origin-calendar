@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class SignIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       username: '',
@@ -36,7 +36,7 @@ class SignIn extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div className='login'>
+      <div className='form'>
         <h2>Please Sign In</h2>
         <div className="form-group">
           <label>Email</label>
