@@ -22,11 +22,11 @@
     },
     "studentId": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "requestId": {
       "type": "string",
-      "required": true
+      "required": false
     }
   },
   "validations": [],
