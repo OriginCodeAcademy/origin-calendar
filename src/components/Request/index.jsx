@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 
 class RequestForm extends Component{
@@ -8,7 +9,8 @@ class RequestForm extends Component{
     this.state = {
       topic: '',
       description: '',
-      time: ''
+      time: null,
+      slots: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,9 +28,7 @@ class RequestForm extends Component{
     axios.post('/api/Visitors/5b3b9e6b869aeb813d095ca1/aptRequests',   {
       "topicSummary": this.state.topic,
       "issueDescription": this.state.description,
-      "times": [
-        "2018-07-10T23:18:44.668Z"
-      ]
+      "time": this.state.time
     }).then((response) => {
       this.setState({
         alert: 'Awesome possum! Your appointment has been requested.',
@@ -41,8 +41,9 @@ class RequestForm extends Component{
       })
     })
   }
-
-
+  componentDidMount() {
+    axios.get('/api/Slots').then(response => this.setState({ slots: response.data }))
+  }
   render() {
     return (
       <div className='form'>
@@ -54,7 +55,12 @@ class RequestForm extends Component{
           </div>
           <div className='form-group'>
             <label>Time</label>
-            <input type='text' className='form-control' onChange={this.handleChange} value={this.state.time} name='time'/>
+            <select className='form-control' onChange={this.handleChange} value={this.state.time} name='time'>
+              <option value=''>--- Select a Time Slot ---</option>
+              {this.state.slots.map(slot =>
+                <option value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") }</option>
+              )}
+            </select >
           </div>
           <div className='form-group'>
             <label>Description</label>
