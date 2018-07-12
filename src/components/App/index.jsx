@@ -50,7 +50,7 @@ class App extends Component{
     </nav>
 
     <div className="container-fluid">
-      <Route exact path="/" render={(props) => <Home {...props} save={this.saveUser} />}></Route>
+      <Route exact path="/" render={(props) => <Home {...props} user={this.state.user} save={this.saveUser} />}></Route>
       <Route path="/appointments" component={Appointments}></Route>
       <Route path="/register" component={Register}></Route>
       <Route path="/signin" render={(props) => <SignIn {...props} save={this.saveUser} />}></Route>
