@@ -10,10 +10,6 @@
       "type": "date",
       "required": true
     },
-    "bookedId": {
-      "type": "string",
-      "required": true
-    },
     "duration": {
       "type": "number",
       "required": true

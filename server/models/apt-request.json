@@ -14,10 +14,8 @@
       "type": "string",
       "required": true
     },
-    "times": {
-      "type": [
-        "date"
-      ],
+    "time": {
+      "type": "date",
       "required": true
     },
     "studentId": {
