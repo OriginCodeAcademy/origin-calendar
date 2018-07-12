@@ -18,7 +18,6 @@ class App extends Component{
 
   saveUser(token, user){
     this.setState({ token, user })
-
   }
 
   render() {
@@ -51,7 +50,7 @@ class App extends Component{
     </nav>
 
     <div className="container-fluid">
-      <Route exact path="/" component={Home}></Route>
+      <Route exact path="/" render={(props) => <Home {...props} user={this.state.user} save={this.saveUser} />}></Route>
       <Route path="/appointments" component={Appointments}></Route>
       <Route path="/register" component={Register}></Route>
       <Route path="/signin" render={(props) => <SignIn {...props} save={this.saveUser} />}></Route>
