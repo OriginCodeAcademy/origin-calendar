@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
-    "node": ">=4"
+    "node": ">=8.11"
   },
   "scripts": {
     "build": "webpack --mode production",
     "lint": "eslint .",
-    "start": "npm run build && node .",
+    "start": "node .",
     "dev": "webpack -w --mode development",
     "test": "mocha tests --exit",
     "posttest": "npm run lint"
