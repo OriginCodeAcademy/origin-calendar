@@ -3,7 +3,14 @@ html {
 }
 
 body {
-  background: #eff0f3;
+  background: linear-gradient(to right, darkslategray, cornflowerblue);
+}
+
+nav .nav-flex {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 nav a {
@@ -77,6 +84,11 @@ th {
   color: whitesmoke;
   background-color: #4f6995;
 }
+
+.loggedIn {
+  color: #fff;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0

@@ -20,17 +20,8 @@ class Home extends Component {
       )
     } else {
       return (
-        <div className="home">
+        <div className="home loggedIn container">
           <h1>Welcome, { user.firstName }</h1>
-          <div className='upcoming-appointments'>
-            <table>
-              <th>
-                <tr>
-
-                </tr>
-              </th>
-            </table>
-          </div>
         </div>
       )
     }

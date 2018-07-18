@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { Redirect } from 'react-router'
 
 
 class RequestForm extends Component{
@@ -9,7 +10,7 @@ class RequestForm extends Component{
     this.state = {
       topic: '',
       description: '',
-      time: null,
+      time: '',
       slots: []
     }
     this.handleChange = this.handleChange.bind(this);
@@ -25,14 +26,17 @@ class RequestForm extends Component{
   handleSubmit(e) {
     e.preventDefault();
 
-    axios.post('/api/Visitors/5b3b9e6b869aeb813d095ca1/aptRequests',   {
+    axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`,   {
       "topicSummary": this.state.topic,
       "issueDescription": this.state.description,
       "time": this.state.time
     }).then((response) => {
       this.setState({
         alert: 'Awesome possum! Your appointment has been requested.',
-        error: false
+        error: false,
+        topic: '',
+        description: '',
+        time: ''
       })
     }).catch ((err) => {
       this.setState({
@@ -58,7 +62,7 @@ class RequestForm extends Component{
             <select className='form-control' onChange={this.handleChange} value={this.state.time} name='time'>
               <option value=''>--- Select a Time Slot ---</option>
               {this.state.slots.map(slot =>
-                <option value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") }</option>
+                <option key={slot.timeSlot} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") }</option>
               )}
             </select >
           </div>
