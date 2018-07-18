@@ -9,16 +9,32 @@
     "timeSlot": {
       "type": "date",
       "required": true
+    },
+    "studentName": {
+      "type": "string",
+      "required": true
+    },
+    "duration": {
+      "type": "number",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "slots": {
-      "type": "hasOne",
-      "model": "Slot",
-      "foreignKey": "bookedAptId",
+    "visitor": {
+      "type": "belongsTo",
+      "model": "Visitor",
+      "foreignKey": "visitorId",
       "options": {
-        "nestRemoting": true
+        "nestRemoting": false
+      }
+    },
+    "slot": {
+      "type": "belongsTo",
+      "model": "Slot",
+      "foreignKey": "slotId",
+      "options": {
+        "nestRemoting": false
       }
     }
   },

@@ -20,7 +20,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "aptRequests": {
+      "type": "hasMany",
+      "model": "AptRequest",
+      "foreignKey": ""
+    },
+    "bookedApt": {
+      "type": "hasOne",
+      "model": "BookedApt",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }
