@@ -25,31 +25,31 @@ class SignIn extends Component {
       url: '/api/Visitors/login',
       data: this.state
     })
-    .then((res) =>{
-      const userId = res.data.userId;
-      axios.get(`/api/Visitors/${userId}`)
-        .then(user => this.props.save(res.data, user.data))
-        .then(() => this.setState({
-          alert: 'Awesome possum! You\'ve been logged in.',
-          error: false,
-        }))
-        .then(setTimeout(() => this.setState({ loggedIn: true }), 1500));
-    })
-    .catch((err) => {
-      this.setState({
-        alert:'Log-in failed! Please try again',
-        error: true
+      .then((res) => {
+        const userId = res.data.userId;
+        axios.get(`/api/Visitors/${userId}`)
+          .then(user => this.props.save(res.data, user.data))
+          .then(() => this.setState({
+            alert: 'Awesome possum! You\'ve been logged in.',
+            error: false,
+          }))
+          .then(setTimeout(() => this.setState({ loggedIn: true }), 1500));
       })
-    })
+      .catch((err) => {
+        this.setState({
+          alert: 'Log-in failed! Please try again',
+          error: true
+        })
+      })
   }
 
   render() {
     const { username, password } = this.state;
-    if (this.state.loggedIn) return <Redirect to='/request'/>
-        return (
-          <div className='form'>
+    if (this.state.loggedIn) return <Redirect to='/request' />
+    return (
+      <div className='form'>
         <h2>Please Sign In</h2>
-        { this.state.alert && <div className={`alert alert-${this.state.error ? 'danger': 'success'}`}>{this.state.alert}</div>}
+        {this.state.alert && <div className={`alert alert-${this.state.error ? 'danger' : 'success'}`}>{this.state.alert}</div>}
         <div className="form-group">
           <label>Email</label>
           <input type='text' name='username' className="form-control" value={username} onChange={this.handleChange} />
