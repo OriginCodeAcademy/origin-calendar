@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import moment from 'moment';
+import PendingAppointments from './Pending';
 
 const Calendar = () => (
   <div>
@@ -12,8 +15,8 @@ const Row = (props) => {
   return (
     <tr>
       <td>{appointment.studentName}</td>
-      <td>{appointment.timeSlot}</td>
-      <td>{appointment.timeSlot}</td>
+      <td>{moment(appointment.timeSlot).format('L')}</td>
+      <td>{moment(appointment.timeSlot).format('hh:MM a')}</td>
       <td>{appointment.duration}</td>
     </tr>
   )
@@ -26,21 +29,11 @@ class Appointments extends Component {
   }
 
   componentDidMount() {
-    //Pretend we are fetching data.
-    console.log('message did componentDidMount.')
-    this.setState({
-      appointments: [
-        {
-          timeSlot: 'Thursday June 25 4:00pm',
-          studentName: "Alex Martinez",
-          duration: '1hr',
-        },
-        {
-          timeSlot: 'Thursday June 25 4:00pm',
-          studentName: "Jake Espino",
-          duration: '1hr',
-        }
-      ]
+    axios.get('/api/BookedApts')
+    .then(res => {
+      this.setState({
+        appointments: res.data
+      })
     })
   }
 
@@ -51,7 +44,9 @@ class Appointments extends Component {
     return (
       <div className='row'>
         { this.state.appointments &&
-        <div className='col-lg-4 col-md-6 col-sm-12'>
+        <div className='col-lg-4 col-md-4 col-sm-12'>
+            <PendingAppointments userId={this.props.user && this.props.user.id}/>
+            <h2>Confirmed Appointments</h2>
             <table className='table'>
               <thead>
                 <tr>
@@ -67,7 +62,7 @@ class Appointments extends Component {
             </table>
           </div>
       }
-        <div className='col-lg-8 col-md-6 col-sm-12'>
+        <div className='col-lg-8 col-md-8 col-sm-12'>
           <Calendar />
         </div>
       </div>

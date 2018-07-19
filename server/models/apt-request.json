@@ -17,14 +17,6 @@
     "time": {
       "type": "date",
       "required": true
-    },
-    "studentId": {
-      "type": "string",
-      "required": false
-    },
-    "requestId": {
-      "type": "string",
-      "required": false
     }
   },
   "validations": [],
@@ -32,9 +24,17 @@
     "visitor": {
       "type": "belongsTo",
       "model": "Visitor",
-      "foreignKey": "aptRequestId",
+      "foreignKey": "visitorId",
       "options": {
-        "nestRemoting": true
+        "nestRemoting": false
+      }
+    },
+    "slot": {
+      "type": "belongsTo",
+      "model": "Slot",
+      "foreignKey": "slotId",
+      "options": {
+        "nestRemoting": false
       }
     }
   },
