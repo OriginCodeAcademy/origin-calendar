@@ -16,7 +16,7 @@ const Row = (props) => {
     <tr>
       <td>{appointment.studentName}</td>
       <td>{moment(appointment.timeSlot).format('L')}</td>
-      <td>{moment(appointment.timeSlot).format('hh:MM a')}</td>
+      <td>{moment(appointment.timeSlot).format('hh:mm a')}</td>
       <td>{appointment.duration}</td>
     </tr>
   )
