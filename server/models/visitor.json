@@ -16,7 +16,10 @@
     },
     "slackId": {
       "type": "string"
-    }
+    },
+    "isAdmin": {
+    "type": "Boolean",
+    "default": false
   },
   "validations": [],
   "relations": {
@@ -39,4 +42,5 @@
   },
   "acls": [],
   "methods": {}
+  }
 }
