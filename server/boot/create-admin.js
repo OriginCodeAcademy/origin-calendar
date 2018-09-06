@@ -5,12 +5,12 @@ require('dotenv').config();
 module.exports = (app) => {
   const {Visitor, Role, RoleMapping} = app.models;
   Visitor.create({
-    'username': 'John',
-    'email': 'instructor@origincodeacademy.com',
-    'firstName': 'John',
-    'lastName': 'Doe',
-    'password': `${process.env.password}`,
-    'isAdmin': true,
+    username: 'John',
+    email: 'instructor@origincodeacademy.com',
+    firstName: 'John',
+    lastName: 'Doe',
+    password: process.env.ADMIN_PASSWWORD,
+    isAdmin: true,
   },
     (err, visitor) => {
       if (err) console.log(err);
