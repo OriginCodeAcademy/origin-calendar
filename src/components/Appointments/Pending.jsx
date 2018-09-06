@@ -12,7 +12,9 @@ class PendingAppointments extends Component {
 
   componentDidMount() {
     if (!this.props.userId) return;
-    axios.get(`/api/Visitors/${this.props.userId}/aptRequests`)
+    const currentDate = new Date();
+    const currentDateIsoFormat = currentDate.toISOString();
+    axios.get(`/api/Visitors/${this.props.userId}/aptRequests?filter[where][time][gt]=` + currentDateIsoFormat)
       .then((response) => {
         this.setState({
           pending: response.data
