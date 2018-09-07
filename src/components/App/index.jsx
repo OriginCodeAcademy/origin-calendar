@@ -33,11 +33,16 @@ class App extends Component{
           <li className="nav-item">
             <Link to="/appointments">Appointments</Link>
           </li>
-          { this.state.user ?
-              <li className="nav-item">
-                <Link to="/request">Request</Link>
-              </li>
-            :
+          { this.state.user && (this.state.user.isAdmin === false) ?
+            <li className="nav-item">
+              <Link to="/request">Request</Link>
+            </li>
+          :
+          this.state.user && (this.state.user.isAdmin) ?
+            <li className="nav-item">
+              <Link to="/availability">Availability</Link>
+            </li>
+          :
               <React.Fragment>
                 <li className="nav-item">
                   <Link to="/signin">Sign In</Link>

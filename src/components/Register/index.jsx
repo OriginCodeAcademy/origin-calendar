@@ -22,7 +22,6 @@ class Register extends Component {
   }
 
   handleSubmit(e) {
-    // const userData = Object.assign({}, this.state, {username: this.state.email});
     axios({
       method: 'post',
       url: '/api/Visitors',
@@ -47,7 +46,7 @@ class Register extends Component {
 
   render() {
     const { firstName, lastName, email, password } = this.state;
-    if (this.state.loggedIn) return <Redirect to='/request' />
+    if (this.state.loggedIn) return <Redirect to='/' />
 
     return (
       <div className='form'>

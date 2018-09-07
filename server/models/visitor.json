@@ -18,7 +18,7 @@
       "type": "string"
     },
     "isAdmin": {
-    "type": "Boolean",
+    "type": "boolean",
     "default": false
   },
   "validations": [],
