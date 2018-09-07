@@ -14,15 +14,11 @@
       "type": "string",
       "required": true
     },
-    "isAdmin": {
-      "type": "boolean",
-      "default": true
-    },
     "slackId": {
       "type": "string"
     },
     "isAdmin": {
-    "type": "Boolean",
+    "type": "boolean",
     "default": false
   },
   "validations": [],
