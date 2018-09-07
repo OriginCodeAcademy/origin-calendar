@@ -21,9 +21,6 @@ class App extends Component{
   }
 
   render() {
-    if (this.state.user != null) {console.log(this.state.user)}
-    if (this.state.user != null) {console.log(this.state.user.isAdmin)}
-    if (this.state.user != null && this.state.user.isAdmin) {console.log('working')}
     return(
   <div>
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
