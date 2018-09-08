@@ -8,7 +8,10 @@ class AptRequests extends Component {
     this.state = {
       requests: []
     }
+<<<<<<< HEAD
     this.handleDelete = this.handleDelete.bind(this);
+=======
+>>>>>>> aptrequests file
   }
 
   componentDidMount() {
@@ -18,15 +21,19 @@ class AptRequests extends Component {
     axios.get(`/api/AptRequests?filter[where][time][gt]=` + currentDateIsoFormat)
       .then((response) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.setState({
           requests: response.data
         })
 =======
+=======
+>>>>>>> aptrequests file
         console.log(response.data)
         this.setState({
           requests: response.data
         })
         console.log(this.state.requests)
+<<<<<<< HEAD
 >>>>>>> aptrequests file
       })
       .catch((error) => {
@@ -44,6 +51,8 @@ class AptRequests extends Component {
         this.setState({
           requests: deleted
         })
+=======
+>>>>>>> aptrequests file
       })
       .catch((error) => {
         console.log(error)
@@ -53,11 +62,15 @@ class AptRequests extends Component {
   render() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     console.log(this.state.requests)
 >>>>>>> aptrequests file
 =======
 >>>>>>> rebase
+=======
+    console.log(this.state.requests)
+>>>>>>> aptrequests file
     return (
       <div>
         <h2>Appointment Requests</h2>
@@ -65,10 +78,15 @@ class AptRequests extends Component {
           <thead>
             <tr>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <th>Name</th>
 =======
               {/* <th>Name</th> */}
 <<<<<<< HEAD
+              <th>Summary</th>
+>>>>>>> aptrequests file
+=======
+              {/* <th>Name</th> */}
               <th>Summary</th>
 >>>>>>> aptrequests file
               <th>Description</th>
@@ -76,6 +94,7 @@ class AptRequests extends Component {
               <th>Time</th>
               <th>Approve</th>
               <th>Deny</th>
+<<<<<<< HEAD
 =======
               <th className="col-3">Summary</th>
               <th className="col-5">Description</th>
@@ -84,12 +103,15 @@ class AptRequests extends Component {
               <th className='col-1'>Approve</th>
               <th className='col-1'>Deny</th>
 >>>>>>> rebase
+=======
+>>>>>>> aptrequests file
             </tr>
           </thead>
           <tbody className='table-striped'>
             {this.state.requests.map((e) => {
               return (
                 <tr>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                   <td>{e.studentName}</td>
@@ -99,12 +121,15 @@ class AptRequests extends Component {
                   <td><button type='button' className='btn btn-success'>Approve</button></td>
                   <td><button id={e.id} type='button' className='btn btn-danger' onClick={this.handleDelete}>Deny</button></td>
 =======
+=======
+>>>>>>> aptrequests file
                   <td>{e.topicSummary}</td>
                   <td>{e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:MM a')}</td>
                   <td><button type='button' className='btn btn-success'>Approve</button></td>
                   <td><button type='button' className='btn btn-danger'>Deny</button></td>
+<<<<<<< HEAD
 >>>>>>> aptrequests file
 =======
                   <td className='col-3'>{e.topicSummary}</td>
@@ -114,6 +139,8 @@ class AptRequests extends Component {
                   <td className='col-1'><button type='button' className='btn btn-success'>Approve</button></td>
                   <td className='col-1'><button id={e.id} type='button' className='btn btn-danger' onClick={this.handleDelete}>Deny</button></td>
 >>>>>>> rebase
+=======
+>>>>>>> aptrequests file
                 </tr>
               )
             })}
