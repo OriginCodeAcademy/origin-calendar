@@ -24,6 +24,14 @@ h2 {
   letter-spacing: 1px;
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  margin-right: -15px;
+  margin-left: 0px;
+}
+
 .form h2 {
   background: transparent;
   color: initial;
@@ -119,6 +127,10 @@ label {
 th {
   color: whitesmoke;
   background-color: #4f6995;
+}
+
+.column-smallWidth {
+  width: 100px;
 }
 
 .loggedIn {
