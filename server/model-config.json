@@ -47,5 +47,9 @@
   "Visitor": {
     "dataSource": "mongo",
     "public": true
+  },
+  "DateTime": {
+    "dataSource": "mongo",
+    "public": true
   }
 }

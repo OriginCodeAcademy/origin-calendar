@@ -1,99 +1,95 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            value: 'Admin 1',
+            dateTime: ''
         };
-
-        this.myFunction= this.myFunction.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChange2 = this.handleChange2.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-     
-    myFunction() {
-        alert("Thank you for your submissions");
-    }
-
     handleChange(event) {
-        this.setState({value: event.target.value});
-      }
-
-    handleSubmit(event) {
-        alert('Thank you ' + this.state.value);
-        event.preventDefault();
+        this.setState({ value: event.target.value });
     }
+    handleChange2(event) {
+        this.setState({ dateTime: event.target.value });
+    }
+    handleSubmit(event) {
+        if (!this.state.dateTime) {
+            alert('Error: Please pick a date and time!')
+        } else {
+            alert('Thank you ' + this.state.value + ' for scheduling an appointment at ' +
+                this.state.dateTime);
+        }
+        event.preventDefault();
 
+        axios.post(`/api/DateTimes`, {
+            "adminName": this.state.value,
+            "timeSlot": this.state.dateTime
+        }).then((response) => {
+        }).catch((err) => {
+            console.log(error)
+        })
+    }
     render() {
         return (
-            <div className='form' >
-                <h2 >Schedule your week</h2>
+            <div className="row">
+                <div className='form col-md-6' >
+                    <h2 >Schedule your Availability</h2>
 
-                <form className="form-group" >
-                    <label>Admin Name</label>
-                    <select className="form-control" value={this.state.value} onChange={this.handleChange}>
-                        <option value="admin 1">Admin 1</option>
-                        <option value="admin 2">Admin 2</option>
-                        <option value="admin 3">Admin 3</option>
-                    </select>
-                    
-                </form>
+                    <form className="form-group" >
+                        <label> Name</label>
+                        <div>
+                            <select
+                                className="form-control"
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                            >
+                                <option value="Admin 1">Admin 1</option>
+                                <option value="Admin 2">Admin 2</option>
+                                <option value="Admin 3">Admin 3</option>
+                            </select>
+                        </div>
 
-                <br />
+                        <br />
 
-                <table >
-                    <tr>
-                        <th>Time</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                    </tr>
+                        <div className="control">
+                            <label for="appt-time">Date/time: </label>
+                            <input
+                                type="datetime-local"
+                                id="avail-date"
+                                name="avail-date"
+                                value={this.state.dateTime}
+                                onChange={this.handleChange2}
+                                required />
+                        </div>
 
-                    <tr>
-                        <td >8:00 am</td>
-                        <td ><input type="checkbox" value=" 8:00 Monday "/></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                    </tr>
+                        <br />
+                        <button onClick={this.handleSubmit}>Submit</button>
+                    </form>
+                </div>
 
-                    <tr>
-                        <td >8:30 am</td>
-                        <td ><input type="checkbox" value=" 8:30 Monday"/></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                    </tr>
+                <div className='col-md-6' >
+                    <form>
+                        <h2 >Here is Your Availability</h2>
+                        <table className='table'>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody className='table-striped'>
 
-                    <tr>
-                        <td >6:00 pm</td>
-                        <td ><input type="checkbox" value=" 6:00 Monday"/></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                    </tr>
-
-                    <tr>
-                        <td >6:30 pm</td>
-                        <td ><input type="checkbox" value=" 6:30 Monday"/></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                        <td ><input type="checkbox" /></td>
-                    </tr>
-
-
-                </table>
-                <br />
-             
-                <button onClick={this.handleSubmit}>Submit</button>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </div>
         )
     }
