@@ -18,8 +18,9 @@
       "type": "string"
     },
     "isAdmin": {
-    "type": "boolean",
-    "default": false
+      "type": "boolean",
+      "default": true
+    }
   },
   "validations": [],
   "relations": {
@@ -42,5 +43,4 @@
   },
   "acls": [],
   "methods": {}
-  }
 }

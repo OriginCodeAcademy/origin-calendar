@@ -1,0 +1,22 @@
+{
+  "name": "date-time",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "adminName": {
+      "type": "string",
+      "required": true
+    },
+    "openTime": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
