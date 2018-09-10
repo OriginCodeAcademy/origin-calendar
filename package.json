@@ -8,7 +8,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "lint": "eslint .",
-    "start": "npm run build && node server/index.js",
+    "start": "node .",
+    "dev-start": "npm run build && node server/server.js",
     "dev": "webpack -w --mode development",
     "test": "mocha tests --exit",
     "posttest": "npm run lint"

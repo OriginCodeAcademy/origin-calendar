@@ -37,6 +37,7 @@ class Appointments extends Component {
   }
 
   render() {
+    console.log(this.state.appointments)
     if (!this.state.appointments) return null;
 
 

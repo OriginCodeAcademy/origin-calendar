@@ -20,6 +20,7 @@
     "isAdmin": {
     "type": "boolean",
     "default": false
+    }
   },
   "validations": [],
   "relations": {
@@ -42,5 +43,5 @@
   },
   "acls": [],
   "methods": {}
-  }
 }
+
