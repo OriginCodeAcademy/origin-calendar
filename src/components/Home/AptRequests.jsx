@@ -9,9 +9,13 @@ class AptRequests extends Component {
       requests: []
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.handleDelete = this.handleDelete.bind(this);
 =======
 >>>>>>> aptrequests file
+=======
+    this.handleDelete = this.handleDelete.bind(this);
+>>>>>>> rebase
   }
 
   componentDidMount() {
@@ -59,7 +63,24 @@ class AptRequests extends Component {
       })
   }
 
+  handleDelete(event) {
+    var id = event.currentTarget.getAttribute('id');
+    var deleted = this.state.requests.filter(function (el) {
+      return el.id != id
+    });
+    axios.delete(`/api/AptRequests/${id}`)
+      .then((response) => {
+        this.setState({
+          requests: deleted
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   render() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -71,6 +92,8 @@ class AptRequests extends Component {
 =======
     console.log(this.state.requests)
 >>>>>>> aptrequests file
+=======
+>>>>>>> rebase
     return (
       <div>
         <h2>Appointment Requests</h2>
@@ -82,6 +105,7 @@ class AptRequests extends Component {
               <th>Name</th>
 =======
               {/* <th>Name</th> */}
+<<<<<<< HEAD
 <<<<<<< HEAD
               <th>Summary</th>
 >>>>>>> aptrequests file
@@ -96,21 +120,27 @@ class AptRequests extends Component {
               <th>Deny</th>
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> rebase
               <th className="col-3">Summary</th>
               <th className="col-5">Description</th>
               <th className='col-1'>Date</th>
               <th className='col-1'>Time</th>
               <th className='col-1'>Approve</th>
               <th className='col-1'>Deny</th>
+<<<<<<< HEAD
 >>>>>>> rebase
 =======
 >>>>>>> aptrequests file
+=======
+>>>>>>> rebase
             </tr>
           </thead>
           <tbody className='table-striped'>
             {this.state.requests.map((e) => {
               return (
                 <tr>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -132,15 +162,20 @@ class AptRequests extends Component {
 <<<<<<< HEAD
 >>>>>>> aptrequests file
 =======
+=======
+>>>>>>> rebase
                   <td className='col-3'>{e.topicSummary}</td>
                   <td className='col-5'>{e.topicSummary} - {e.issueDescription}</td>
                   <td className='col-1'>{moment(e.time).format('L')}</td>
                   <td className='col-1'>{moment(e.time).format('hh:MM a')}</td>
                   <td className='col-1'><button type='button' className='btn btn-success'>Approve</button></td>
                   <td className='col-1'><button id={e.id} type='button' className='btn btn-danger' onClick={this.handleDelete}>Deny</button></td>
+<<<<<<< HEAD
 >>>>>>> rebase
 =======
 >>>>>>> aptrequests file
+=======
+>>>>>>> rebase
                 </tr>
               )
             })}
