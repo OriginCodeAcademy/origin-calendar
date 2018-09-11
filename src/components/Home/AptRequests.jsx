@@ -12,6 +12,7 @@ class AptRequests extends Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.handleApprove = this.handleApprove.bind(this);
   }
+  
    componentDidMount() {
     if (!this.props.userId) return;
     const currentDate = new Date();
@@ -26,6 +27,7 @@ class AptRequests extends Component {
         console.log(error)
       })
   }
+
    handleDelete(event) {
     var id = event.currentTarget.getAttribute('id');
     var deleted = this.state.requests.filter(function (el) {
