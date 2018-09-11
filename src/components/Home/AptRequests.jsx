@@ -16,11 +16,9 @@ class AptRequests extends Component {
     const currentDateIsoFormat = currentDate.toISOString();
     axios.get(`/api/AptRequests?filter[where][time][gt]=` + currentDateIsoFormat)
       .then((response) => {
-        console.log(response.data)
         this.setState({
           requests: response.data
         })
-        console.log(this.state.requests)
       })
       .catch((error) => {
         console.log(error)
