@@ -1,0 +1,22 @@
+{
+    "name": "DateTime",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "adminName": {
+            "type": "string",
+            "required": true
+        },
+        "timeSlot": {
+            "type": "date",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

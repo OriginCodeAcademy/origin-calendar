@@ -25,9 +25,9 @@ class RequestForm extends Component{
 
   handleSubmit(e) {
     e.preventDefault();
-
     axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`,   {
       "topicSummary": this.state.topic,
+      "studentName": this.props.user.firstName + ' ' + this.props.user.lastName,
       "issueDescription": this.state.description,
       "time": this.state.time
     }).then((response) => {
@@ -46,7 +46,7 @@ class RequestForm extends Component{
     })
   }
   componentDidMount() {
-    axios.get('/api/Slots').then(response => this.setState({ slots: response.data }))
+    axios.get('/api/DateTimes').then(response => this.setState({ slots: response.data }))
   }
   render() {
     return (
@@ -62,7 +62,7 @@ class RequestForm extends Component{
             <select className='form-control' onChange={this.handleChange} value={this.state.time} name='time'>
               <option value=''>--- Select a Time Slot ---</option>
               {this.state.slots.map(slot =>
-                <option key={slot.timeSlot} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") }</option>
+                <option key={slot.timeSlot} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") } with {slot.adminName}</option>
               )}
             </select >
           </div>

@@ -11,7 +11,6 @@ const Calendar = () => (
 
 const Row = (props) => {
   const { appointment } = props;
-  //const appointment = this.props.appointment;
   return (
     <tr>
       <td>{appointment.studentName}</td>

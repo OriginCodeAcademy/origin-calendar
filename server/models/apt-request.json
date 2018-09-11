@@ -6,6 +6,10 @@
     "validateUpsert": true
   },
   "properties": {
+    "studentName": {
+      "type": "string",
+      "required": true
+    },
     "topicSummary": {
       "type": "string",
       "required": true

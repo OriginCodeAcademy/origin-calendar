@@ -5,7 +5,8 @@ import Appointments from '../Appointments';
 import Register from '../Register';
 import SignIn from '../SignIn';
 import Request from '../Request';
-
+import Availability from '../TestAvailability';
+ 
 class App extends Component{
   constructor(props){
     super(props)
@@ -33,11 +34,16 @@ class App extends Component{
           <li className="nav-item">
             <Link to="/appointments">Appointments</Link>
           </li>
-          { this.state.user ?
-              <li className="nav-item">
-                <Link to="/request">Request</Link>
-              </li>
-            :
+          { this.state.user && (this.state.user.isAdmin === false) ?
+            <li className="nav-item">
+              <Link to="/request">Request</Link>
+            </li>
+          :
+          this.state.user && (this.state.user.isAdmin) ?
+            <li className="nav-item">
+              <Link to="/availability">Availability</Link>
+            </li>
+          :
               <React.Fragment>
                 <li className="nav-item">
                   <Link to="/signin">Sign In</Link>
@@ -56,7 +62,8 @@ class App extends Component{
       <Route path="/appointments" render={(props) => <Appointments {...props} user={this.state.user} />}></Route>
       <Route path="/register" render={(props) => <Register {...props} save={this.saveUser} />}></Route>
       <Route path="/signin" render={(props) => <SignIn {...props} save={this.saveUser} />}></Route>
-      <Route path="/request"render={(props) => <Request {...props} user={this.state.user || null} />} ></Route>
+      <Route path="/request" render={(props) => <Request {...props} user={this.state.user || null} />} ></Route>
+      <Route path="/availability" render = {(props) => <Availability {...props} user={this.state.user} />} ></Route>
     </div>
   </div>
     )
