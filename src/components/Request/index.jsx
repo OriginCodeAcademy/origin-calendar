@@ -25,9 +25,9 @@ class RequestForm extends Component{
 
   handleSubmit(e) {
     e.preventDefault();
-
     axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`,   {
       "topicSummary": this.state.topic,
+      "studentName": this.props.user.firstName + ' ' + this.props.user.lastName,
       "issueDescription": this.state.description,
       "time": this.state.time
     }).then((response) => {
