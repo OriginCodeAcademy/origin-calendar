@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment'
 
+var push = []
 class AptRequests extends Component {
   constructor(props) {
     super(props)
     this.state = {
       requests: []
     }
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
@@ -18,6 +20,22 @@ class AptRequests extends Component {
       .then((response) => {
         this.setState({
           requests: response.data
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  handleDelete(event) {
+    var id = event.currentTarget.getAttribute('id');
+    var deleted = this.state.requests.filter(function (el) {
+      return el.id != id
+    });
+    axios.delete(`/api/AptRequests/${id}`)
+      .then((response) => {
+        this.setState({
+          requests: deleted
         })
       })
       .catch((error) => {
