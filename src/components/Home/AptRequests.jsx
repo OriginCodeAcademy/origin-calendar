@@ -12,7 +12,7 @@ class AptRequests extends Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.handleApprove = this.handleApprove.bind(this);
   }
-  
+
    componentDidMount() {
     if (!this.props.userId) return;
     const currentDate = new Date();
@@ -99,7 +99,7 @@ class AptRequests extends Component {
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:MM a')}</td>
                   <td><button id={e.id} type='button' className='btn btn-success' onClick={this.handleApprove}>Approve</button></td>
-                  <td><button type='button' className='btn btn-danger'>Deny</button></td>
+                  <td><button id={e.id} type='button' className='btn btn-danger' onClick={this.handleDelete}>Deny</button></td>
                 </tr>
               )
             })}
