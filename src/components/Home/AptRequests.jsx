@@ -11,7 +11,6 @@ class AptRequests extends Component {
     }
 
     this.handleApprove = this.handleApprove.bind(this);
-    this.handleDeny = this.handleDeny.bind(this);
   }
 
   componentDidMount() {
