@@ -10,12 +10,15 @@ class AptRequests extends Component {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.handleDelete = this.handleDelete.bind(this);
 =======
 >>>>>>> aptrequests file
 =======
     this.handleDelete = this.handleDelete.bind(this);
 >>>>>>> rebase
+=======
+>>>>>>> Showing appointment requests at home page with non-functioning buttons
   }
 
   componentDidMount() {
@@ -63,22 +66,6 @@ class AptRequests extends Component {
       })
   }
 
-  handleDelete(event) {
-    var id = event.currentTarget.getAttribute('id');
-    var deleted = this.state.requests.filter(function (el) {
-      return el.id != id
-    });
-    axios.delete(`/api/AptRequests/${id}`)
-      .then((response) => {
-        this.setState({
-          requests: deleted
-        })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
   render() {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -102,6 +89,7 @@ class AptRequests extends Component {
             <tr>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               <th>Name</th>
 =======
               {/* <th>Name</th> */}
@@ -113,11 +101,15 @@ class AptRequests extends Component {
               {/* <th>Name</th> */}
               <th>Summary</th>
 >>>>>>> aptrequests file
+=======
+              <th>Name</th>
+>>>>>>> Showing appointment requests at home page with non-functioning buttons
               <th>Description</th>
               <th>Date</th>
               <th>Time</th>
               <th>Approve</th>
               <th>Deny</th>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -134,6 +126,8 @@ class AptRequests extends Component {
 >>>>>>> aptrequests file
 =======
 >>>>>>> rebase
+=======
+>>>>>>> Showing appointment requests at home page with non-functioning buttons
             </tr>
           </thead>
           <tbody className='table-striped'>
@@ -144,12 +138,16 @@ class AptRequests extends Component {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Showing appointment requests at home page with non-functioning buttons
                   <td>{e.studentName}</td>
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:MM a')}</td>
                   <td><button type='button' className='btn btn-success'>Approve</button></td>
                   <td><button id={e.id} type='button' className='btn btn-danger' onClick={this.handleDelete}>Deny</button></td>
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> aptrequests file
@@ -176,6 +174,8 @@ class AptRequests extends Component {
 >>>>>>> aptrequests file
 =======
 >>>>>>> rebase
+=======
+>>>>>>> Showing appointment requests at home page with non-functioning buttons
                 </tr>
               )
             })}
