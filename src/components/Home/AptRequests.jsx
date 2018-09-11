@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment'
-
 class AptRequests extends Component {
   constructor(props) {
     super(props)
     this.state = {
       requests: []
     }
+    this.handleDelete = this.handleDelete.bind(this)
   }
-
-  componentDidMount() {
+   componentDidMount() {
     if (!this.props.userId) return;
     const currentDate = new Date();
     const currentDateIsoFormat = currentDate.toISOString();
@@ -24,8 +23,22 @@ class AptRequests extends Component {
         console.log(error)
       })
   }
-
-  render() {
+   handleDelete(event) {
+    var id = event.currentTarget.getAttribute('id');
+    var deleted = this.state.requests.filter(function (el) {
+      return el.id != id
+    });
+    axios.delete(`/api/AptRequests/${id}`)
+      .then((response) => {
+        this.setState({
+          requests: deleted
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+   render() {
     return (
       <div>
         <h2>Appointment Requests</h2>
@@ -61,5 +74,4 @@ class AptRequests extends Component {
     )
   }
 }
-
-export default AptRequests;
+ export default AptRequests;

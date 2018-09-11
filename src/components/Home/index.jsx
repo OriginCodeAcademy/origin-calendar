@@ -8,26 +8,8 @@ class Home extends Component {
     super(props);
   }
 
-  // componentDidMount() {
-  //   //if (!this.props.userId) return;
-  //   const currentDate = new Date();
-  //   const currentDateIsoFormat = currentDate.toISOString();
-  //   axios.get(`/api/AptRequests?filter[where][time][gt]=` + currentDateIsoFormat)
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       this.setState({
-  //         request: response.data
-  //       })
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // }
-
   render() {
     const { user, save } = this.props;
-    if (user !== null) {console.log(user)}
-    if (user !== null) {console.log(user.isAdmin)}
     if (user == null) {
       return (
         <div className="home">
