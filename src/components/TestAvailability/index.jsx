@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
             value: 'Admin 1',
-            dateTime: ''
+            dateTime: '',
+            adminAvailSlots: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
@@ -31,10 +33,26 @@ class Availability extends Component {
             "adminName": this.state.value,
             "timeSlot": this.state.dateTime
         }).then((response) => {
-        }).catch((err) => {
+        }).catch((error) => {
             console.log(error)
-        })
+        });
+        axios.get('/api/DateTimes')
+          .then(res => {
+              this.setState({
+                  adminAvailSlots: res.data
+              })
+          })
     }
+
+    componentDidMount() {
+        axios.get('/api/DateTimes')
+          .then(res => {
+              this.setState({
+                  adminAvailSlots: res.data
+              })
+          })
+    }
+
     render() {
         return (
             <div className="row">
@@ -42,7 +60,7 @@ class Availability extends Component {
                     <h2 >Schedule your Availability</h2>
 
                     <form className="form-group" >
-                        <label> Name</label>
+                        <label>Name</label>
                         <div>
                             <select
                                 className="form-control"
@@ -71,8 +89,7 @@ class Availability extends Component {
                         <br />
                         <button onClick={this.handleSubmit}>Submit</button>
                     </form>
-                </div>
-
+                </div>   
                 <div className='col-md-6' >
                     <form>
                         <h2 >Here is Your Availability</h2>
@@ -85,7 +102,17 @@ class Availability extends Component {
                                 </tr>
                             </thead>
                             <tbody className='table-striped'>
-
+                                {
+                                    this.state.adminAvailSlots.map((e) => {
+                            return (
+                                <tr>
+                                    <td>{e.adminName}</td>
+                                    <td>{moment(e.timeSlot).format('L')}</td>
+                                    <td>{moment(e.timeSlot).format('hh:MM a')}</td>
+                                </tr>
+                            )
+                        })
+                                }
                             </tbody>
                         </table>
                     </form>
