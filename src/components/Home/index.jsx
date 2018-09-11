@@ -10,8 +10,6 @@ class Home extends Component {
 
   render() {
     const { user, save } = this.props;
-    if (user !== null) {console.log(user)}
-    if (user !== null) {console.log(user.isAdmin)}
     if (user == null) {
       return (
         <div className="home">
