@@ -33,7 +33,13 @@ class Availability extends Component {
         }).then((response) => {
         }).catch((err) => {
             console.log(error)
-        })
+        });
+        axios.get('/api/DateTimes')
+          .then(res => {
+              this.setState({
+                  adminAvailSlots: res.data
+              })
+          })
     }
     render() {
         return (
@@ -42,7 +48,7 @@ class Availability extends Component {
                     <h2 >Schedule your Availability</h2>
 
                     <form className="form-group" >
-                        <label> Name</label>
+                        <label>Name</label>
                         <div>
                             <select
                                 className="form-control"
@@ -72,7 +78,17 @@ class Availability extends Component {
                         <button onClick={this.handleSubmit}>Submit</button>
                     </form>
                 </div>
-
+                    {
+                        this.state.adminAvailSlots.map((e) => {
+                            return (
+                                <tr>
+                                    <td>{e.adminName}</td>
+                                     <td>{moment(e.timeSlot).format('L')}</td>
+                                    <td>{moment(e.timeSlot).format('hh:MM a')}</td>
+                                </tr>
+                            )
+                        })
+                    }
                 <div className='col-md-6' >
                     <form>
                         <h2 >Here is Your Availability</h2>
@@ -85,7 +101,9 @@ class Availability extends Component {
                                 </tr>
                             </thead>
                             <tbody className='table-striped'>
+                                {
 
+                                }
                             </tbody>
                         </table>
                     </form>
