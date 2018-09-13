@@ -23,14 +23,14 @@
   },
   "RoleMapping": {
     "dataSource": "mongo",
-    "public": false,
+    "public": true,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
     "dataSource": "mongo",
-    "public": false
+    "public": true
   },
   "AptRequest": {
     "dataSource": "mongo",
@@ -46,7 +46,14 @@
   },
   "Visitor": {
     "dataSource": "mongo",
-    "public": true
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "getUserRole": true
+        }
+      }
+    }
   },
   "DateTime": {
     "dataSource": "mongo",

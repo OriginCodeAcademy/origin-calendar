@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
             value: 'Admin 1',
-            dateTime: ''
+            dateTime: '',
+            adminAvailSlots: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
@@ -34,7 +36,23 @@ class Availability extends Component {
         }).catch((err) => {
             console.log(error)
         })
+        axios.get('/api/DateTimes')
+            .then(res => {
+                this.setState({
+                    adminAvailSlots: res.data
+                })
+            })
     }
+
+    componentDidMount() {
+        axios.get('/api/DateTimes')
+            .then(res => {
+                this.setState({
+                    adminAvailSlots: res.data
+                })
+            })
+    }
+
     render() {
         return (
             <div className="row">
@@ -85,7 +103,17 @@ class Availability extends Component {
                                 </tr>
                             </thead>
                             <tbody className='table-striped'>
-
+                                {
+                                    this.state.adminAvailSlots.map((e) => {
+                                        return (
+                                            <tr>
+                                                <td>{e.adminName}</td>
+                                                <td>{moment(e.timeSlot).format('L')}</td>
+                                                <td>{moment(e.timeSlot).format('hh:MM a')}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </table>
                     </form>

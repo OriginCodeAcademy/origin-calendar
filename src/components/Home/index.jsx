@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import SignIn from '../SignIn'
-import PendingAppointments from '../Appointments/Pending'
-import AptRequests from './AptRequests'
+import SignIn from '../SignIn';
+import PendingAppointments from '../Appointments/Pending';
+import AptRequests from './AptRequests';
+
 class Home extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { user, save } = this.props;
+    const { user, save, isAdmin, setAdminStatus } = this.props;
     if (user == null) {
       return (
         <div className="home">
@@ -17,10 +18,12 @@ class Home extends Component {
             <source src="https://www.origincodeacademy.com/wp-content/uploads/2017/09/typing-of-codes-2833-1.mp4" type="video/mp4" />
           </video>
           <h1 className="title">Welcome</h1>
-          <SignIn save={save} />
+          <SignIn save={save}
+            setAdminStatus={setAdminStatus}
+          />
         </div>
       )
-    } else if (user !== null && (user.isAdmin)) {
+    } else if (user !== null && (isAdmin)) {
       return (
       <div className="home loggedIn container">
         <video loop="true">
