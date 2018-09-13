@@ -8,7 +8,7 @@ class SignIn extends Component {
 
     this.state = {
       email: '',
-      password: '',
+      password: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
