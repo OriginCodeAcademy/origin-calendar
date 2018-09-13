@@ -9,9 +9,11 @@ class AptRequests extends Component {
     this.state = {
       requests: []
     }
-    this.handleDelete = this.handleDelete.bind(this);
+
+    this.handleDelete = this.handleDelete.bind(this)
     this.handleApprove = this.handleApprove.bind(this);
   }
+
    componentDidMount() {
     if (!this.props.userId) return;
     const currentDate = new Date();
@@ -26,6 +28,7 @@ class AptRequests extends Component {
         console.log(error)
       })
   }
+
    handleDelete(event) {
     var id = event.currentTarget.getAttribute('id');
     var deleted = this.state.requests.filter(function (el) {
@@ -41,7 +44,7 @@ class AptRequests extends Component {
         console.log(error)
       })
   }
-  
+
   handleApprove(e) {
     let id = e.currentTarget.getAttribute('id');
     let requests = this.state.requests;
@@ -73,7 +76,7 @@ class AptRequests extends Component {
     })
   }
 
-   render() {
+  render() {
     return (
       <div>
         <h2>Appointment Requests</h2>
@@ -109,4 +112,4 @@ class AptRequests extends Component {
     )
   }
 }
- export default AptRequests;
+export default AptRequests;
