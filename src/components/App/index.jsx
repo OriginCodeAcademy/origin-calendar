@@ -6,19 +6,26 @@ import Register from '../Register';
 import SignIn from '../SignIn';
 import Request from '../Request';
 import Availability from '../TestAvailability';
+import axios from 'axios';
  
 class App extends Component{
   constructor(props){
     super(props)
     this.state ={
       user: null,
-      token: null
+      token: null,
+      isAdmin: null
     }
-    this.saveUser= this.saveUser.bind(this)
+    this.saveUser = this.saveUser.bind(this);
+    this.setAdminStatus = this.setAdminStatus.bind(this);
   }
 
   saveUser(token, user){
-    this.setState({ token, user })
+      this.setState({ token, user })
+  }
+
+  setAdminStatus(isAdmin) {
+    this.setState({ isAdmin })
   }
 
   render() {
@@ -34,12 +41,12 @@ class App extends Component{
           <li className="nav-item">
             <Link to="/appointments">Appointments</Link>
           </li>
-          { this.state.user && (this.state.user.isAdmin === false) ?
+          { this.state.user && (this.state.isAdmin === false) ?
             <li className="nav-item">
               <Link to="/request">Request</Link>
             </li>
           :
-          this.state.user && (this.state.user.isAdmin) ?
+          this.state.user && (this.state.isAdmin) ?
             <li className="nav-item">
               <Link to="/availability">Availability</Link>
             </li>
@@ -58,10 +65,10 @@ class App extends Component{
     </nav>
 
     <div className="container-fluid">
-      <Route exact path="/" render={(props) => <Home {...props} user={this.state.user} save={this.saveUser} />}></Route>
+      <Route exact path="/" render={(props) => <Home {...props} user={this.state.user} save={this.saveUser} isAdmin={this.state.isAdmin} setAdminStatus={this.setAdminStatus} />}></Route>
       <Route path="/appointments" render={(props) => <Appointments {...props} user={this.state.user} />}></Route>
-      <Route path="/register" render={(props) => <Register {...props} save={this.saveUser} />}></Route>
-      <Route path="/signin" render={(props) => <SignIn {...props} save={this.saveUser} />}></Route>
+      <Route path="/register" render={(props) => <Register {...props} save={this.saveUser} setAdminStatus={this.setAdminStatus} />}></Route>
+      <Route path="/signin" render={(props) => <SignIn {...props} save={this.saveUser} setAdminStatus={this.setAdminStatus} />}></Route>
       <Route path="/request" render={(props) => <Request {...props} user={this.state.user || null} />} ></Route>
       <Route path="/availability" render = {(props) => <Availability {...props} user={this.state.user} />} ></Route>
     </div>

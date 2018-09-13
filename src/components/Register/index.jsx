@@ -34,7 +34,9 @@ class Register extends Component {
           alert: 'This is bannanananas! You\'ve registered successfully.',
           error: false,
         }))
-        .then(setTimeout(() => this.setState({ loggedIn: true }), 1500));
+        .then(setTimeout(() => this.setState({ loggedIn: true }), 1500))
+        axios.get(`/api/Visitors/isAdminRole?id=${res.data.userId}`)
+          .then(response => this.props.setAdminStatus(response.data))
     })
       .catch((err) => {
         this.setState({
@@ -47,7 +49,6 @@ class Register extends Component {
   render() {
     const { firstName, lastName, email, password } = this.state;
     if (this.state.loggedIn) return <Redirect to='/' />
-
     return (
       <div className='form'>
         <h2>Please Register</h2>

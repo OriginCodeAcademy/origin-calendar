@@ -35,22 +35,23 @@ class Availability extends Component {
         }).then((response) => {
         }).catch((error) => {
             console.log(error)
-        });
+        })
         axios.get('/api/DateTimes')
-          .then(res => {
-              this.setState({
-                  adminAvailSlots: res.data
-              })
-          })
+            .then(res => {
+                this.setState({
+                    adminAvailSlots: res.data
+                })
+            })
+        });
     }
 
     componentDidMount() {
         axios.get('/api/DateTimes')
-          .then(res => {
-              this.setState({
-                  adminAvailSlots: res.data
-              })
-          })
+            .then(res => {
+                this.setState({
+                    adminAvailSlots: res.data
+                })
+            })
     }
 
     render() {
@@ -104,6 +105,14 @@ class Availability extends Component {
                             <tbody className='table-striped'>
                                 {
                                     this.state.adminAvailSlots.map((e) => {
+                                        return (
+                                            <tr>
+                                                <td>{e.adminName}</td>
+                                                <td>{moment(e.timeSlot).format('L')}</td>
+                                                <td>{moment(e.timeSlot).format('hh:MM a')}</td>
+                                            </tr>
+                                        )
+                                    })
                             return (
                                 <tr>
                                     <td>{e.adminName}</td>

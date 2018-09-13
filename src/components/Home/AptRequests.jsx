@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import moment from 'moment'
+import moment from 'moment';
 import { request } from 'https';
 
 class AptRequests extends Component {
@@ -9,6 +9,7 @@ class AptRequests extends Component {
     this.state = {
       requests: []
     }
+
     this.handleDelete = this.handleDelete.bind(this)
     this.handleApprove = this.handleApprove.bind(this);
   }
