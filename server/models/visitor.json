@@ -17,9 +17,13 @@
     "slackId": {
       "type": "string"
     },
-    "isAdmin": {
+    "email": {
+      "type":"string",
+      "required": true
+    },
+    "emailVerified": {
     "type": "boolean",
-    "default": false
+    "default": true
     }
   },
   "validations": [],

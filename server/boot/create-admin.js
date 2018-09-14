@@ -9,8 +9,7 @@ module.exports = (app) => {
     email: 'instructor@origincodeacademy.com',
     firstName: 'John',
     lastName: 'Doe',
-    password: process.env.ADMIN_PASSWORD,
-    isAdmin: true,
+    password: process.env.ADMIN_PASSWORD
   },
     (err, visitor) => {
       if (err) console.log(err);
