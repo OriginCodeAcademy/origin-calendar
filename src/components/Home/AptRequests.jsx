@@ -43,7 +43,7 @@ class AptRequests extends Component {
       .catch((error) => {
         console.log(error)
       })
-  }
+   }
 
   handleApprove(e) {
     console.log(this.state.requests)

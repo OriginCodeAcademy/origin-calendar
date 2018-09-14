@@ -24,6 +24,7 @@ class Availability extends Component {
         if (!this.state.dateTime) {
             alert('Error: Please pick a date and time!')
         } else {
+<<<<<<< HEAD:src/components/AdminAvailability/index.jsx
             
             event.preventDefault();
             
@@ -39,12 +40,40 @@ class Availability extends Component {
             .then(res => this.setState({ adminAvailSlots: res.data})
         )
         }
+=======
+            alert('Thank you ' + this.state.value + ' for scheduling an appointment at ' +
+                this.state.dateTime);
+        }
+        event.preventDefault();
+
+        axios.post(`/api/Slots`, {
+            "adminName": this.state.value,
+            "timeSlot": this.state.dateTime
+        }).then((response) => {
+        }).catch((error) => {
+            console.log(error)
+        })
+        axios.get('/api/Slots')
+            .then(res => {
+                this.setState({
+                    adminAvailSlots: res.data
+                })
+            })
+>>>>>>> rebase:src/components/TestAvailability/index.jsx
     }
 
     componentDidMount() {
         axios.get('/api/Slots')
+<<<<<<< HEAD:src/components/AdminAvailability/index.jsx
             .then(res => this.setState({ adminAvailSlots: res.data })
         )
+=======
+            .then(res => {
+                this.setState({
+                    adminAvailSlots: res.data
+                })
+            })
+>>>>>>> rebase:src/components/TestAvailability/index.jsx
     }
 
     render() {
@@ -83,7 +112,7 @@ class Availability extends Component {
                         <br />
                         <button onClick={this.handleSubmit}>Submit</button>
                     </form>
-                </div>   
+                </div>
                 <div className='col-md-6' >
                     <form>
                         <h2 >Here is Your Availability</h2>
