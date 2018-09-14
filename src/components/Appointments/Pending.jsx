@@ -45,7 +45,7 @@ class PendingAppointments extends Component {
                   <td>{e.topicSummary}</td>
                   <td>{e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
-                  <td>{moment(e.time).format('hh:MM a')}</td>
+                  <td>{moment(e.time).format('hh:mm a')}</td>
                 </tr>
               )
             })}

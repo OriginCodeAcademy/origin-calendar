@@ -5,7 +5,7 @@ import Appointments from '../Appointments';
 import Register from '../Register';
 import SignIn from '../SignIn';
 import Request from '../Request';
-import Availability from '../TestAvailability';
+import Availability from '../AdminAvailability';
 import axios from 'axios';
  
 class App extends Component{
