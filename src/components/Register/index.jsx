@@ -35,7 +35,7 @@ class Register extends Component {
           error: false,
         }))
         .then(setTimeout(() => this.setState({ loggedIn: true }), 1500))
-        axios.get(`/api/Visitors/isAdminRole?id=${res.data.userId}`)
+        axios.get(`/api/Visitors/isAdminRole?id=${newUser.data.id}`)
           .then(response => this.props.setAdminStatus(response.data))
     })
       .catch((err) => {

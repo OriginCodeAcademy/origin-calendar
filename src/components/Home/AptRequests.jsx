@@ -46,6 +46,8 @@ class AptRequests extends Component {
   }
 
   handleApprove(e) {
+    console.log(this.state.requests)
+    let slotId = null;
     let id = e.currentTarget.getAttribute('id');
     let requests = this.state.requests;
     for (let i = 0; i < requests.length; i++) {
@@ -53,13 +55,20 @@ class AptRequests extends Component {
         axios.post(`/api/BookedApts`, {
           "timeSlot": requests[i].time,
           "studentName": requests[i].studentName,
-          "slotId": requests[i].id,
+          "slotId": requests[i].slotId,
           "visitorId": requests[i].visitorId,
           "duration": 30
         }).then((res) => {
         }).catch((err) => {
           console.log(err)
-        });
+        })
+        axios.delete(`/api/Slots/${requests[i].slotId}`)
+          .then((r) => {
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+
       }
     }
     let deleted = requests.filter((el) => {
@@ -98,7 +107,7 @@ class AptRequests extends Component {
                   <td>{e.studentName}</td>
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
-                  <td>{moment(e.time).format('hh:MM a')}</td>
+                  <td>{moment(e.time).format('hh:mm a')}</td>
                   <td><button id={e.id} type='button' className='btn btn-success' onClick={this.handleApprove}>Approve</button></td>
                   <td><button id={e.id} type='button' className='btn btn-danger' onClick={this.handleDelete}>Deny</button></td>
                 </tr>

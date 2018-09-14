@@ -15,6 +15,7 @@ class RequestForm extends Component{
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTimeSlot = this.handleTimeSlot.bind(this);
 
   }
   handleChange(e) {
@@ -22,14 +23,24 @@ class RequestForm extends Component{
       [e.target.name] : e.target.value
     })
   }
+  
+  handleTimeSlot(e) {
+
+    const index = e.target.selectedIndex - 1;
+      this.setState({
+        time: e.target.value,
+        slotId: this.state.slots[index].id,
+        selectedSlot: this.state.slots[index]
+      })
+  }
 
   handleSubmit(e) {
-    e.preventDefault();
-    axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`,   {
+    axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`, {
       "topicSummary": this.state.topic,
       "studentName": this.props.user.firstName + ' ' + this.props.user.lastName,
       "issueDescription": this.state.description,
-      "time": this.state.time
+      "time": this.state.time,
+      "slotId": this.state.slotId
     }).then((response) => {
       this.setState({
         alert: 'Awesome possum! Your appointment has been requested.',
@@ -46,7 +57,7 @@ class RequestForm extends Component{
     })
   }
   componentDidMount() {
-    axios.get('/api/DateTimes').then(response => this.setState({ slots: response.data }))
+    axios.get('/api/Slots').then(response => this.setState({ slots: response.data }))
   }
   render() {
     return (
@@ -59,10 +70,10 @@ class RequestForm extends Component{
           </div>
           <div className='form-group'>
             <label>Time</label>
-            <select className='form-control' onChange={this.handleChange} value={this.state.time} name='time'>
+            <select className='form-control' onChange={this.handleTimeSlot} value={this.state.time} name='time'>
               <option value=''>--- Select a Time Slot ---</option>
               {this.state.slots.map(slot =>
-                <option key={slot.timeSlot} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") } with {slot.adminName}</option>
+                <option key={slot.id} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") } with {slot.instructorId}</option>
               )}
             </select >
           </div>

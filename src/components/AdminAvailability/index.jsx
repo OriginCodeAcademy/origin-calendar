@@ -24,34 +24,27 @@ class Availability extends Component {
         if (!this.state.dateTime) {
             alert('Error: Please pick a date and time!')
         } else {
-            alert('Thank you ' + this.state.value + ' for scheduling an appointment at ' +
-                this.state.dateTime);
-        }
-        event.preventDefault();
-
-        axios.post(`/api/DateTimes`, {
-            "adminName": this.state.value,
-            "timeSlot": this.state.dateTime
-        }).then((response) => {
-        }).catch((error) => {
-            console.log(error)
-        })
-        axios.get('/api/DateTimes')
-            .then(res => {
-                this.setState({
-                    adminAvailSlots: res.data
-                })
+            
+            event.preventDefault();
+            
+            axios.post(`/api/Slots`, {
+                "instructorId": this.state.value,
+                "timeSlot": this.state.dateTime,
+                "duration": 30
+            }).then((response) => {
+            }).catch((error) => {
+                console.log(error)
             })
-        });
+            axios.get('/api/Slots')
+            .then(res => this.setState({ adminAvailSlots: res.data})
+        )
+        }
     }
 
     componentDidMount() {
-        axios.get('/api/DateTimes')
-            .then(res => {
-                this.setState({
-                    adminAvailSlots: res.data
-                })
-            })
+        axios.get('/api/Slots')
+            .then(res => this.setState({ adminAvailSlots: res.data })
+        )
     }
 
     render() {
@@ -107,20 +100,12 @@ class Availability extends Component {
                                     this.state.adminAvailSlots.map((e) => {
                                         return (
                                             <tr>
-                                                <td>{e.adminName}</td>
+                                                <td>{e.instructorId}</td>
                                                 <td>{moment(e.timeSlot).format('L')}</td>
-                                                <td>{moment(e.timeSlot).format('hh:MM a')}</td>
+                                                <td>{moment(e.timeSlot).format('hh:mm a')}</td>
                                             </tr>
                                         )
                                     })
-                            return (
-                                <tr>
-                                    <td>{e.adminName}</td>
-                                    <td>{moment(e.timeSlot).format('L')}</td>
-                                    <td>{moment(e.timeSlot).format('hh:MM a')}</td>
-                                </tr>
-                            )
-                        })
                                 }
                             </tbody>
                         </table>
