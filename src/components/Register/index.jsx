@@ -35,8 +35,8 @@ class Register extends Component {
           error: false,
         }))
         .then(setTimeout(() => this.setState({ loggedIn: true }), 1500))
-        axios.get(`/api/Visitors/isAdminRole?id=${res.data.userId}`)
-          .then(response => this.props.setAdminStatus(response.data))
+        axios.get(`/api/Visitors/isAdminRole?id=${newUser.data.id}`)
+          .then(response => this.props.setAdminStatus(response.data) )
     })
       .catch((err) => {
         this.setState({
@@ -48,7 +48,7 @@ class Register extends Component {
 
   render() {
     const { firstName, lastName, email, password } = this.state;
-    if (this.state.loggedIn) return <Redirect to='/' />
+    if (this.state.loggedIn ) return <Redirect to='/' />
     return (
       <div className='form'>
         <h2>Please Register</h2>

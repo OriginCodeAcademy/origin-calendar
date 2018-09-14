@@ -43,7 +43,7 @@ class AptRequests extends Component {
       .catch((error) => {
         console.log(error)
       })
-  }
+   }
 
   handleApprove(e) {
     let id = e.currentTarget.getAttribute('id');

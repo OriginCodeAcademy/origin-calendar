@@ -46,7 +46,7 @@ class RequestForm extends Component{
     })
   }
   componentDidMount() {
-    axios.get('/api/DateTimes').then(response => this.setState({ slots: response.data }))
+    axios.get('/api/Slots').then(response => this.setState({ slots: response.data }))
   }
   render() {
     return (
