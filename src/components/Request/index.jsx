@@ -73,7 +73,7 @@ class RequestForm extends Component{
             <select className='form-control' onChange={this.handleTimeSlot} value={this.state.time} name='time'>
               <option value=''>--- Select a Time Slot ---</option>
               {this.state.slots.map(slot =>
-                <option key={slot.id} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") } with {slot.adminName}</option>
+                <option key={slot.id} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") } with {slot.instructorId}</option>
               )}
             </select >
           </div>
