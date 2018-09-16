@@ -5,13 +5,6 @@ var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
 
-// var DataSource = require('loopback-datasource-juggler').DataSource;
-
-// var dsSendGrid = new DataSource('loopback-connector-sendgrid', {
-//   api_key: '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 '
-// });
-// loopback.Email.attachTo(dsSendGrid);
-
 app.start = function () {
   // start the web server
   return app.listen(function () {

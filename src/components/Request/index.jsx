@@ -23,7 +23,7 @@ class RequestForm extends Component{
       [e.target.name] : e.target.value
     })
   }
-  
+
   handleTimeSlot(e) {
 
     const index = e.target.selectedIndex - 1;
@@ -38,6 +38,7 @@ class RequestForm extends Component{
     axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`, {
       "topicSummary": this.state.topic,
       "studentName": this.props.user.firstName + ' ' + this.props.user.lastName,
+      "email": this.props.user.email,
       "issueDescription": this.state.description,
       "time": this.state.time,
       "slotId": this.state.slotId

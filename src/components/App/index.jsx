@@ -29,7 +29,7 @@ class App extends Component{
   }
 
   render() {
-    return(
+  return(
   <div>
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <a className="navbar-brand" href="#"><svg width="40" height="27"><g fill="cornflowerblue" fillRule="evenodd"><path fill="darkslategray" d="M29.3 14.6v5.1l-9.4 3.7-9.4-3.7v-5.2l-2.8-1.2v7.4c0 .6.3 1.2.9 1.4l10.8 4.3.5.1.6-.1 10.8-4.3c.6-.2 1-.8 1-1.4v-7.4l-3 1.3"></path><path d="M23.5 15a1.5 1.5 0 0 1-.5-2.8l11.2-4.7L23 2.8a1.5 1.5 0 0 1 1-2.7l14.5 6a1.5 1.5 0 0 1 0 2.8l-14.5 6-.6.1M16 15l-.5-.1-14.6-6A1.5 1.5 0 0 1 1 6l14.6-6a1.5 1.5 0 1 1 1 2.7L5.4 7.5l11.3 4.7c.7.3 1.1 1.1.8 1.9-.2.6-.8 1-1.4 1"></path></g></svg></a>
