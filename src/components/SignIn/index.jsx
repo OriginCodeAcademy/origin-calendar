@@ -7,7 +7,7 @@ class SignIn extends Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: ''
     }
 
@@ -33,7 +33,9 @@ class SignIn extends Component {
             alert: 'Awesome possum! You\'ve been logged in.',
             error: false,
           }))
-          .then(setTimeout(() => this.setState({ loggedIn: true }), 1500));
+          .then(setTimeout(() => this.setState({ loggedIn: true }), 1500))
+          axios.get(`/api/Visitors/isAdminRole?id=${res.data.userId}`)
+           .then(response => this.props.setAdminStatus(response.data))
       })
       .catch((err) => {
         this.setState({
@@ -41,18 +43,19 @@ class SignIn extends Component {
           error: true
         })
       })
+
   }
 
   render() {
-    const { username, password } = this.state;
-    if (this.state.loggedIn) return <Redirect to='/request' />
+    const { email, password } = this.state;
+    if (this.state.loggedIn) return <Redirect to='/' />
     return (
       <div className='form'>
         <h2>Please Sign In</h2>
         {this.state.alert && <div className={`alert alert-${this.state.error ? 'danger' : 'success'}`}>{this.state.alert}</div>}
         <div className="form-group">
           <label>Email</label>
-          <input type='text' name='username' className="form-control" value={username} onChange={this.handleChange} />
+          <input type='text' name='email' className="form-control" value={email} onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label>Password</label>

@@ -16,6 +16,14 @@
     },
     "slackId": {
       "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "emailVerified": {
+      "type": "boolean",
+      "requires": true
     }
   },
   "validations": [],
@@ -40,3 +48,4 @@
   "acls": [],
   "methods": {}
 }
+
