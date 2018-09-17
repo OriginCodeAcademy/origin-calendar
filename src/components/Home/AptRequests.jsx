@@ -7,9 +7,7 @@ class AptRequests extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      requests: [],
-      email: '',
-      id: null,
+      requests: []
     }
 
     this.handleDelete = this.handleDelete.bind(this)
@@ -17,7 +15,6 @@ class AptRequests extends Component {
   }
 
    componentDidMount() {
-     console.log(this.state.requests)
     if (!this.props.userId) return;
     const currentDate = new Date();
     const currentDateIsoFormat = currentDate.toISOString();
@@ -35,11 +32,12 @@ class AptRequests extends Component {
    handleDelete(event) {
     const id = event.currentTarget.getAttribute('id');
     const email = event.currentTarget.getAttribute('email')
-    axios.post(`/api/AptRequests/Email`, {
-      email: email
+    const time = event.currentTarget.getAttribute('time')
+    axios.post(`/api/AptRequests/denyEmail`, {
+      email: email,
+      time: time
     })
       .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -59,7 +57,6 @@ class AptRequests extends Component {
    }
 
   handleApprove(e) {
-    console.log(this.state.requests)
     let slotId = null;
     let id = e.currentTarget.getAttribute('id');
     let requests = this.state.requests;
@@ -84,6 +81,17 @@ class AptRequests extends Component {
 
       }
     }
+    const email = e.currentTarget.getAttribute('email')
+    const time = e.currentTarget.getAttribute('time')
+    axios.post(`/api/AptRequests/approveEmail`, {
+      email: email,
+      time: time
+    })
+      .then(function (response) {
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     let deleted = requests.filter((el) => {
       return el.id != id;
     });
@@ -121,8 +129,8 @@ class AptRequests extends Component {
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
-                  <td><button id={e.id} type='button' className='btn btn-success' onClick={this.handleApprove}>Approve</button></td>
-                  <td><button id={e.id} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
+                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
+                  <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
                 </tr>
               )
             })}
