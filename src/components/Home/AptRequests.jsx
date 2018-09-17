@@ -69,15 +69,16 @@ class AptRequests extends Component {
           "visitorId": requests[i].visitorId,
           "duration": 30
         }).then((res) => {
-        }).catch((err) => {
-          console.log(err)
-        })
-        axios.delete(`/api/Slots/${requests[i].slotId}`)
+          axios.delete(`/api/Slots/${requests[i].slotId}`)
           .then((r) => {
           })
           .catch((e) => {
             console.log(e)
           })
+        }).catch((err) => {
+          console.log(err)
+        })
+
 
       }
     }

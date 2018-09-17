@@ -6,20 +6,17 @@ class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'Instructor A',
+            admin: 'Instructor A',
             dateTime: '',
             adminAvailSlots: []
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleChange2 = this.handleChange2.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(event) {
-        this.setState({ value: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
     }
-    handleChange2(event) {
-        this.setState({ dateTime: event.target.value });
-    }
+
     handleSubmit(event) {
         if (!this.state.dateTime) {
             alert('Error: Please pick a date and time!')
@@ -28,7 +25,7 @@ class Availability extends Component {
             event.preventDefault();
 
             axios.post(`/api/Slots`, {
-                "instructorId": this.state.value,
+                "instructorId": this.state.admin,
                 "timeSlot": this.state.dateTime,
                 "duration": 30
             }).then((response) => {
@@ -62,8 +59,9 @@ class Availability extends Component {
                         <div>
                             <select
                                 className="form-control"
-                                value={this.state.value}
+                                value={this.state.admin}
                                 onChange={this.handleChange}
+                                name="admin"
                             >
                                 <option value="Instructor A">Instructor A</option>
                                 <option value="Instructor B">Instructor B</option>
@@ -78,9 +76,9 @@ class Availability extends Component {
                             <input
                                 type="datetime-local"
                                 id="avail-date"
-                                name="avail-date"
+                                name="dateTime"
                                 value={this.state.dateTime}
-                                onChange={this.handleChange2}
+                                onChange={this.handleChange}
                                 required />
                         </div>
 
