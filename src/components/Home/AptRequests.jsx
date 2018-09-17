@@ -33,48 +33,17 @@ class AptRequests extends Component {
   }
 
    handleDelete(event) {
-    debugger;
-    console.log(event.currentTarget)
     const id = event.currentTarget.getAttribute('id');
-    const visitorId = event.currentTarget.getAttribute('visitorId')
-    console.log(visitorId)
-    const index = this.state.requests.findIndex(x => x.id === id)
-    console.log(index)
-    const timeSlotInput = this.state.requests[index].time
-    console.log(timeSlotInput)
     const email = event.currentTarget.getAttribute('email')
-    console.log(email)
-    axios.get(`/api/Visitors/${visitorId}`)
-      .then(res => this.setState({
-        id: res.data.id,
-        email: res.data.email,
-      }))
-      .then(() =>console.log(this.state.email))
+    axios.post(`/api/AptRequests/Email`, {
+      email: email
+    })
+      .then(function (response) {
+        console.log(response);
+      })
       .catch(function (error) {
         console.log(error);
-      })
-      .then(() => console.log(typeof this.state.email))
-      .then(axios.post(`/api/AptRequests/Email`, {
-        //"id": this.state.id,
-        email: email
-      })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        }))
-    console.log(this.state.id)
-    // axios.post(`/api/AptRequests/Email`, {
-    //   id: this.state.id,
-    //   email: this.state.email
-    // })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+      });
     var deleted = this.state.requests.filter(function (el) {
       return el.id != id
     });
@@ -130,7 +99,6 @@ class AptRequests extends Component {
   }
 
   render() {
-    console.log(this.state.requests)
     return (
       <div>
         <h2>Appointment Requests</h2>

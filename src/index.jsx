@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-require('dotenv').config()
 
 const Hello = () => "hello world";
 

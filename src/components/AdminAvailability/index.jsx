@@ -25,7 +25,6 @@ class Availability extends Component {
             alert('Error: Please pick a date and time!')
         } else {
 
-<<<<<<< HEAD:src/components/AdminAvailability/index.jsx
             event.preventDefault();
 
             axios.post(`/api/Slots`, {
@@ -40,35 +39,12 @@ class Availability extends Component {
             .then(res => this.setState({ adminAvailSlots: res.data})
         )
         }
-=======
-        axios.post(`/api/Slots`, {
-            "adminName": this.state.value,
-            "timeSlot": this.state.dateTime
-        }).then((response) => {
-        }).catch((error) => {
-            console.log(error)
-        })
-        axios.get('/api/Slots')
-            .then(res => {
-                this.setState({
-                    adminAvailSlots: res.data
-                })
-            })
->>>>>>> cddba922964dec6d18f7ea145cf5f81d5a31f319:src/components/TestAvailability/index.jsx
     }
 
     componentDidMount() {
         axios.get('/api/Slots')
-<<<<<<< HEAD:src/components/AdminAvailability/index.jsx
             .then(res => this.setState({ adminAvailSlots: res.data })
         )
-=======
-            .then(res => {
-                this.setState({
-                    adminAvailSlots: res.data
-                })
-            })
->>>>>>> cddba922964dec6d18f7ea145cf5f81d5a31f319:src/components/TestAvailability/index.jsx
     }
 
     render() {
