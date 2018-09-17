@@ -31,8 +31,8 @@ class AptRequests extends Component {
 
    handleDelete(event) {
     const id = event.currentTarget.getAttribute('id');
-    const email = event.currentTarget.getAttribute('email')
-    const time = event.currentTarget.getAttribute('time')
+    const email = event.currentTarget.getAttribute('email');
+    const time = event.currentTarget.getAttribute('time');
     axios.post(`/api/AptRequests/denyEmail`, {
       email: email,
       time: time
@@ -53,8 +53,8 @@ class AptRequests extends Component {
       })
       .catch((error) => {
         console.log(error)
-      })
-   }
+      });
+  }
 
   handleApprove(e) {
     let slotId = null;

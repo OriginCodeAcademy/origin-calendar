@@ -9,7 +9,6 @@ module.exports = function(Aptrequest) {
       subject: 'Appointment Denied',
       text: `Your appointment on ${moment(time).format('L')} at ${moment(time).format('hh:mm a')} was denied.`,
     }, function(err, mail) {
-      console.log(mail);
       if (err) cb(err);
       return cb(null, mail);
     });
@@ -28,7 +27,6 @@ module.exports = function(Aptrequest) {
       subject: 'Appointment Approved',
       text: `Your appointment on ${moment(time).format('L')} at ${moment(time).format('hh:mm a')} was approved`,
     }, function(err, mail) {
-      console.log(mail);
       if (err) cb(err);
       return cb(null, mail);
     });
