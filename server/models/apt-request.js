@@ -7,7 +7,8 @@ module.exports = function(Aptrequest) {
       to: email,
       from: 'instructor@origincodeacademy.com',
       subject: 'Appointment Denied',
-      text: `Your appointment on ${moment(time).format('L')} at ${moment(time).format('hh:mm a')} was denied.`,
+      text: `Your appointment on ${moment(time).format('L')}
+       at ${moment(time).format('hh:mm a')} was denied.`,
     }, function(err, mail) {
       if (err) cb(err);
       return cb(null, mail);
@@ -25,7 +26,8 @@ module.exports = function(Aptrequest) {
       to: email,
       from: 'instructor@origincodeacademy.com',
       subject: 'Appointment Approved',
-      text: `Your appointment on ${moment(time).format('L')} at ${moment(time).format('hh:mm a')} was approved`,
+      text: `Your appointment on ${moment(time).format('L')}
+       at ${moment(time).format('hh:mm a')} was approved`,
     }, function(err, mail) {
       if (err) cb(err);
       return cb(null, mail);
