@@ -30,7 +30,7 @@ class Home extends Component {
           <source src="https://www.origincodeacademy.com/wp-content/uploads/2017/09/typing-of-codes-2833-1.mp4" type="video/mp4" />
         </video>
         <h1>Welcome, { user.firstName }</h1>
-        <AptRequests userId={user.id} />
+        <AptRequests userId={user.id} email={user.email}/>
       </div>
       )
     } else {

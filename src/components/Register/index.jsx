@@ -48,7 +48,7 @@ class Register extends Component {
 
   render() {
     const { firstName, lastName, email, password } = this.state;
-    if (this.state.loggedIn) return <Redirect to='/' />
+    if (this.state.loggedIn ) return <Redirect to='/' />
     return (
       <div className='form'>
         <h2>Please Register</h2>

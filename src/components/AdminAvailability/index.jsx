@@ -6,7 +6,7 @@ class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'Admin 1',
+            value: 'Instructor A',
             dateTime: '',
             adminAvailSlots: []
         };
@@ -24,9 +24,9 @@ class Availability extends Component {
         if (!this.state.dateTime) {
             alert('Error: Please pick a date and time!')
         } else {
-            
+
             event.preventDefault();
-            
+
             axios.post(`/api/Slots`, {
                 "instructorId": this.state.value,
                 "timeSlot": this.state.dateTime,
@@ -35,25 +35,29 @@ class Availability extends Component {
             }).catch((error) => {
                 console.log(error)
             })
-            axios.get('/api/Slots')
+            const currentDate = new Date();
+            const currentDateIsoFormat = currentDate.toISOString();
+            axios.get(`/api/Slots?filter[where][timeSlot][gt]=` + currentDateIsoFormat)
             .then(res => this.setState({ adminAvailSlots: res.data})
         )
         }
     }
 
     componentDidMount() {
-        axios.get('/api/Slots')
-            .then(res => this.setState({ adminAvailSlots: res.data })
-        )
+      const currentDate = new Date();
+      const currentDateIsoFormat = currentDate.toISOString();
+      axios.get(`/api/Slots?filter[where][timeSlot][gt]=` + currentDateIsoFormat)
+          .then(res => this.setState({ adminAvailSlots: res.data })
+      )
     }
 
     render() {
         return (
             <div className="row">
-                <div className='form col-md-6' >
+                <div className='col-md-6' >
                     <h2 >Schedule your Availability</h2>
 
-                    <form className="form-group" >
+                    <form className="form" >
                         <label>Name</label>
                         <div>
                             <select
@@ -61,16 +65,16 @@ class Availability extends Component {
                                 value={this.state.value}
                                 onChange={this.handleChange}
                             >
-                                <option value="Admin 1">Admin 1</option>
-                                <option value="Admin 2">Admin 2</option>
-                                <option value="Admin 3">Admin 3</option>
+                                <option value="Instructor A">Instructor A</option>
+                                <option value="Instructor B">Instructor B</option>
+                                <option value="Instructor C">Instructor C</option>
                             </select>
                         </div>
 
                         <br />
 
                         <div className="control">
-                            <label for="appt-time">Date/time: </label>
+                            <label for="appt-time">Date, Time</label>
                             <input
                                 type="datetime-local"
                                 id="avail-date"
@@ -81,34 +85,36 @@ class Availability extends Component {
                         </div>
 
                         <br />
-                        <button onClick={this.handleSubmit}>Submit</button>
+                        <button className="btn btn-info" onClick={this.handleSubmit}>Submit</button>
                     </form>
-                </div>   
+                </div>
                 <div className='col-md-6' >
                     <form>
                         <h2 >Here is Your Availability</h2>
-                        <table className='table'>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                </tr>
-                            </thead>
-                            <tbody className='table-striped'>
-                                {
-                                    this.state.adminAvailSlots.map((e) => {
-                                        return (
-                                            <tr>
-                                                <td>{e.instructorId}</td>
-                                                <td>{moment(e.timeSlot).format('L')}</td>
-                                                <td>{moment(e.timeSlot).format('hh:mm a')}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
+                        <div style={{overflowY: 'auto', maxHeight: '500px'}}>
+                          <table className='table'>
+                              <thead>
+                                  <tr>
+                                      <th>Name</th>
+                                      <th>Date</th>
+                                      <th>Time</th>
+                                  </tr>
+                              </thead>
+                              <tbody className='table-striped'>
+                                  {
+                                      this.state.adminAvailSlots.map((e) => {
+                                          return (
+                                              <tr>
+                                                  <td>{e.instructorId}</td>
+                                                  <td>{moment(e.timeSlot).format('L')}</td>
+                                                  <td>{moment(e.timeSlot).format('hh:mm a')}</td>
+                                              </tr>
+                                          )
+                                      })
+                                  }
+                              </tbody>
+                          </table>
+                        </div>
                     </form>
                 </div>
             </div>
