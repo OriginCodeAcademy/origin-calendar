@@ -28,7 +28,7 @@ jobs:
           command: sudo npm install --global --unsafe-perm now
       - run:
           name: Deploy using Now
-          command: now  -t ${NOW_TOKEN} -T origin -e SENDGRID_API_KEY -e MONGODB_URI -e NODE_ENV -e ADMIN_PASSWORD
+          command: now  -t ${NOW_TOKEN} -T origin -e SENDGRID_API_KEY -e MONGO_URI -e NODE_ENV -e ADMIN_PASSWORD
       - run:
           name: Alias Now
           command: now -t ${NOW_TOKEN} alias
