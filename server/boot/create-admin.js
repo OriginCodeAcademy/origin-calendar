@@ -8,6 +8,15 @@ module.exports = (app) => {
     where: {
       email: 'instructor@origincodeacademy.com',
     },
+    where: {
+      email: 'anthony@origincodeacademy.com',
+    },
+    where: {
+      email: 'christian@origincodeacademy.com',
+    },
+    where: {
+      email: 'michael@origincodeacademy.com',
+    },
   },
     {
       email: 'instructor@origincodeacademy.com',
@@ -16,7 +25,28 @@ module.exports = (app) => {
       password: process.env.ADMIN_PASSWORD,
       emailVerified: true,
     },
-    (err, visitor) => {
+    {
+      email: 'anthony@origincodeacademy.com',
+      firstName: 'Anthony',
+      lastName: 'Valera',
+      password: process.env.ADMIN_PASSWORD,
+      emailVerified: true,
+    },
+    {
+      email: 'christian@origincodeacademy.com',
+      firstName: 'Christian',
+      lastName: 'McFarland',
+      password: process.env.ADMIN_PASSWORD2,
+      emailVerified: true,
+    },
+    {
+      email: 'michael@origincodeacademy.com',
+      firstName: 'Michael',
+      lastName: 'Roberts',
+      password: process.env.ADMIN_PASSWORD3,
+      emailVerified: true,
+    },
+    (err, Visitor) => {
       if (err) console.log(err);
       Role.findOrCreate({
         where: {
@@ -35,7 +65,7 @@ module.exports = (app) => {
           },
             {
               principalType: 'ADMIN',
-              principalId: visitor.id,
+              principalId: Visitor.id,
             }, (error, mapping) => {
               if (err) console.log(err);
             });
