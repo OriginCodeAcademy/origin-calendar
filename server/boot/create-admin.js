@@ -46,7 +46,7 @@ module.exports = (app) => {
       password: process.env.ADMIN_PASSWORD3,
       emailVerified: true,
     },
-    (err, visitor) => {
+    (err, Visitor) => {
       if (err) console.log(err);
       Role.findOrCreate({
         where: {
@@ -65,7 +65,7 @@ module.exports = (app) => {
           },
             {
               principalType: 'ADMIN',
-              principalId: visitor.id,
+              principalId: Visitor.id,
             }, (error, mapping) => {
               if (err) console.log(err);
             });
