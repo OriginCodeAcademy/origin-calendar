@@ -105,6 +105,7 @@ module.exports = (app) => {
             where: {
               principalType: 'ADMIN',
               principalId: visitor.id,
+<<<<<<< HEAD
             },
           },
             {
@@ -142,6 +143,8 @@ module.exports = (app) => {
             where: {
               principalType: 'ADMIN',
               principalId: visitor.id,
+=======
+>>>>>>> Sends instructor email on appointment request
             },
           },
             {
