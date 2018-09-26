@@ -62,6 +62,17 @@ class RequestForm extends Component{
         error: true
       })
     })
+
+    const instructorId = this.state.instructorId
+    const time = this.state.time;
+    const studentName = (this.props.user.firstName + ' ' + this.props.user.lastName);
+    axios.post(`/api/AptRequests/emailAdmin`, {
+      instructorEmail: `${instructorId}@origincodeacademy.com`,
+      time: time,
+      studentName: studentName,  
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
   componentDidMount() {
     axios.get('/api/Slots').then(response => this.setState({ slots: response.data }))
