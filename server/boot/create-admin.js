@@ -8,15 +8,6 @@ module.exports = (app) => {
     where: {
       email: 'instructor@origincodeacademy.com',
     },
-    where: {
-      email: 'anthony@origincodeacademy.com',
-    },
-    where: {
-      email: 'christian@origincodeacademy.com',
-    },
-    where: {
-      email: 'michael@origincodeacademy.com',
-    },
   },
     {
       email: 'instructor@origincodeacademy.com',
@@ -25,6 +16,36 @@ module.exports = (app) => {
       password: process.env.ADMIN_PASSWORD,
       emailVerified: true,
     },
+  (err, visitor) => {
+    Role.findOrCreate({
+      where: {
+        name: 'ADMIN',
+      },
+    },
+      {
+        name: 'ADMIN',
+      },
+      (err, role) => {
+        if (err) console.log('error creating role', err);
+        RoleMapping.findOrCreate({
+          where: {
+            principalType: 'ADMIN',
+            principalId: visitor.id,
+          },
+        },
+          {
+            principalType: 'ADMIN',
+            principalId: visitor.id,
+          }, (error, mapping) => {
+            if (err) console.log(err);
+          });
+      });
+  });
+  Visitor.findOrCreate({
+    where: {
+      email: 'anthony@origincodeacademy.com',
+    },
+  },
     {
       email: 'anthony@origincodeacademy.com',
       firstName: 'Anthony',
@@ -32,22 +53,7 @@ module.exports = (app) => {
       password: process.env.ADMIN_PASSWORD,
       emailVerified: true,
     },
-    {
-      email: 'christian@origincodeacademy.com',
-      firstName: 'Christian',
-      lastName: 'McFarland',
-      password: process.env.ADMIN_PASSWORD2,
-      emailVerified: true,
-    },
-    {
-      email: 'michael@origincodeacademy.com',
-      firstName: 'Michael',
-      lastName: 'Roberts',
-      password: process.env.ADMIN_PASSWORD3,
-      emailVerified: true,
-    },
-    (err, Visitor) => {
-      if (err) console.log(err);
+    (err, visitor) => {
       Role.findOrCreate({
         where: {
           name: 'ADMIN',
@@ -61,11 +67,86 @@ module.exports = (app) => {
           RoleMapping.findOrCreate({
             where: {
               principalType: 'ADMIN',
+              principalId: visitor.id,
             },
           },
             {
               principalType: 'ADMIN',
-              principalId: Visitor.id,
+              principalId: visitor.id,
+            }, (error, mapping) => {
+              if (err) console.log(err);
+            });
+        });
+    });
+  Visitor.findOrCreate({
+    where: {
+      email: 'christian@origincodeacademy.com',
+    },
+  },
+    {
+      email: 'christian@origincodeacademy.com',
+      firstName: 'Christian',
+      lastName: 'McFarland',
+      password: process.env.ADMIN_PASSWORD2,
+      emailVerified: true,
+    },
+    (err, visitor) => {
+      Role.findOrCreate({
+        where: {
+          name: 'ADMIN',
+        },
+      },
+        {
+          name: 'ADMIN',
+        },
+        (err, role) => {
+          if (err) console.log('error creating role', err);
+          RoleMapping.findOrCreate({
+            where: {
+              principalType: 'ADMIN',
+              principalId: visitor.id,
+            },
+          },
+            {
+              principalType: 'ADMIN',
+              principalId: visitor.id,
+            }, (error, mapping) => {
+              if (err) console.log(err);
+            });
+        });
+    });
+  Visitor.findOrCreate({
+    where: {
+      email: 'michael@origincodeacademy.com',
+    },
+  },
+    {
+      email: 'michael@origincodeacademy.com',
+      firstName: 'Michael',
+      lastName: 'Roberts',
+      password: process.env.ADMIN_PASSWORD3,
+      emailVerified: true,
+    },
+    (err, visitor) => {
+      Role.findOrCreate({
+        where: {
+          name: 'ADMIN',
+        },
+      },
+        {
+          name: 'ADMIN',
+        },
+        (err, role) => {
+          if (err) console.log('error creating role', err);
+          RoleMapping.findOrCreate({
+            where: {
+              principalType: 'ADMIN',
+              principalId: visitor.id,
+            },
+          },
+            {
+              principalType: 'ADMIN',
+              principalId: visitor.id,
             }, (error, mapping) => {
               if (err) console.log(err);
             });
