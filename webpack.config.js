@@ -1,9 +1,11 @@
 'use strict';
 const path = require('path');
-const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   devtool: 'source-map',
+  target: 'node',
+  // externals: [nodeExternals()],
   context: path.join(__dirname, './src'),
   entry: {
     javascript: './index.jsx',
