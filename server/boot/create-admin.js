@@ -108,6 +108,7 @@ module.exports = (app) => {
             where: {
               principalType: 'ADMIN',
               principalId: visitor.id,
+<<<<<<< HEAD
             },
           },
             {
@@ -146,6 +147,8 @@ module.exports = (app) => {
             where: {
               principalType: 'ADMIN',
               principalId: visitor.id,
+=======
+>>>>>>> Merging conflicts
             },
           },
             {
