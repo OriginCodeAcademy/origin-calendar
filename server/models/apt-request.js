@@ -40,6 +40,7 @@ module.exports = function(Aptrequest) {
     returns: {arg: 'res', type: 'Object'},
   });
 
+<<<<<<< HEAD
   Aptrequest.removeApt = function(email, time, studentName, cb) {
     Aptrequest.app.models.Email.send({
       to: email,
@@ -80,3 +81,28 @@ module.exports = function(Aptrequest) {
     returns: {arg: 'res', type: 'Object'},
   });
 };
+=======
+
+
+  Aptrequest.removeApt = function(email, time, studentName, cb) {
+  Aptrequest.app.models.Email.send({
+    to: email,
+    from: 'instructor@origincodeacademy.com',
+    subject: 'Appointment Removed',
+    text: `Your appointment on ${moment(time).format('L')}
+     at ${moment(time).format('hh:mm a')} was removed`,
+  }, function(err, mail) {
+    if (err) console.log(err);
+    return cb(null, mail);
+  });
+  };
+
+  Aptrequest.remoteMethod('removeApt', {
+  accepts: [{arg: 'email', type: 'string', required: true},
+            {arg: 'time', type: 'string', required: true},
+            {arg: 'studentName', type: 'string', required: true}],
+
+  returns: {arg: 'res', type: 'Object'},
+  });
+};  
+>>>>>>> sets up remove apt button

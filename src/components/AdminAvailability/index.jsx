@@ -12,7 +12,11 @@ class Availability extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+<<<<<<< HEAD
         this.handleDelete = this.handleDelete.bind(this);
+=======
+        
+>>>>>>> sets up remove apt button
     }
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
@@ -87,9 +91,15 @@ class Availability extends Component {
                                 onChange={this.handleChange}
                                 name="admin"
                             >
+<<<<<<< HEAD
                                 <option value="anthony">Anthony</option>
                                 <option value="christian">Christian</option>
                                 <option value="michael">Michael</option>
+=======
+                                <option value="Anthony">Anthony</option>
+                                <option value="Christian">Christian</option>
+                                <option value="Micheal">Micheal</option>
+>>>>>>> sets up remove apt button
                             </select>
                         </div>
 

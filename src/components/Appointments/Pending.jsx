@@ -12,6 +12,7 @@ class PendingAppointments extends Component {
   }
 
   handleRemoveApt(event) {
+<<<<<<< HEAD
     console.log(this.state.ending);
     const id = event.currentTarget.getAttribute('id');
     const studentEmail = event.currentTarget.getAttribute('email');
@@ -19,6 +20,32 @@ class PendingAppointments extends Component {
     const time = event.currentTarget.getAttribute('time');
     const studentName = event.currentTarget.getAttribute('studentName');
   
+=======
+    console.log(this.state.pending);
+    const id = event.currentTarget.getAttribute('id');
+    const studentEmail = event.currentTarget.getAttribute('email');
+    const instructorEmail = "kaiyawalker87@gmail.com"
+    const time = event.currentTarget.getAttribute('time');
+    const studentName = event.currentTarget.getAttribute('studentName');
+     console.log(studentEmail)
+     console.log(time)
+     console.log(studentName)
+
+    //  axios.post('/api/AptRequests/removeApt', {
+    //   "personalizations": [{
+    //     "to": [{
+    //       "email": "kaiyawalker87@gmail.com"
+    //     },{
+   //       "email": "eric.b.dodds@gmail.com"
+    //     }]
+    //   }]
+    // })
+    
+    //   email: "kaiyawalker87@gmail.com",
+    //   time: time,
+    //   studentName: "Kaiya Walker"
+    // })
+>>>>>>> sets up remove apt button
    
     axios.post('/api/AptRequests/removeApt', {
       email: studentEmail,
@@ -33,8 +60,12 @@ class PendingAppointments extends Component {
       });
 
       axios.post('/api/AptRequests/removeApt', {
+<<<<<<< HEAD
         instructorId: instructorId,
         email: `${instructorId}@origincodeacademy.com`,
+=======
+        email: instructorEmail,
+>>>>>>> sets up remove apt button
         time: time,
         studentName: studentName
       })
@@ -101,7 +132,11 @@ class PendingAppointments extends Component {
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
                   <td>
+<<<<<<< HEAD
                   <button className="btn btn-info" instructorId={e.instructorId} email={e.email} studentName={e.studentName} id={e.id} time={e.time} onClick={this.handleRemoveApt}>Remove</button>
+=======
+                  <button className="btn btn-info" email={e.email} studentName={e.studentName} id={e.id} time={e.time} onClick={this.handleRemoveApt}>Remove</button>
+>>>>>>> sets up remove apt button
                   </td>
                 </tr>
               )
