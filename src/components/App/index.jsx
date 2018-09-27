@@ -10,6 +10,8 @@ import Christianviews from '../Request/Christianview';
 import Anthonyviews from '../Request/Anthonyview';
 import Michaelviews from '../Request/Michaelview';
 import axios from 'axios';
+import Credentials from './credentials';
+import {google} from 'googleapis';
 
 class App extends Component{
   constructor(props){
@@ -17,10 +19,13 @@ class App extends Component{
     this.state ={
       user: null,
       token: null,
-      isAdmin: null
+      isAdmin: null,
+      oAuthToken: null,
     }
     this.saveUser = this.saveUser.bind(this);
     this.setAdminStatus = this.setAdminStatus.bind(this);
+    this.setInput = this.setInput.bind(this);
+    this.getGoogleAuth = this.getGoogleAuth.bind(this);
   }
 
   saveUser(token, user){
@@ -29,6 +34,12 @@ class App extends Component{
 
   setAdminStatus(isAdmin) {
     this.setState({ isAdmin })
+  }
+
+  setInput(e) {
+    this.setState({
+      oAuthToken: e.target.value
+    })
   }
 
   render() {
@@ -56,7 +67,7 @@ class App extends Component{
           :
               <React.Fragment>
                 <li className="nav-item">
-                  <Link to="/signin">Sign In</Link>
+                  <Link to="/request">Request</Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/register">Register</Link>

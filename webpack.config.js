@@ -1,9 +1,9 @@
 'use strict';
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
+  target: 'node',
   context: path.join(__dirname, './src'),
   entry: {
     javascript: './index.jsx',
