@@ -8,10 +8,10 @@
   "scripts": {
     "build": "webpack --mode production",
     "lint": "eslint .",
-    "start": "node .",
+    "start": "node . && npm run build",
     "dev-start": "npm run build && node server/server.js",
     "dev": "webpack -w --mode development",
-    "test": "mocha tests --exit",
+    "test": "mocha tests/* --exit",
     "posttest": " "
   },
   "dependencies": {
@@ -37,6 +37,7 @@
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
     "morgan": "^1.9.0",
+    "nightmare": "^3.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
