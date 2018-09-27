@@ -7,6 +7,8 @@ const server = require('../server/server');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
+const url = 'http://localhost:8080' || process.env.PORT;
+
 describe('server.js', () => {
   beforeEach((done) => {
     server.listen(4444);

@@ -55,11 +55,11 @@ class SignIn extends Component {
         {this.state.alert && <div className={`alert alert-${this.state.error ? 'danger' : 'success'}`}>{this.state.alert}</div>}
         <div className="form-group">
           <label>Email</label>
-          <input type='text' name='email' className="form-control" value={email} onChange={this.handleChange} />
+          <input type='text' name='email' id='inputemail' className="form-control" value={email} onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label>Password</label>
-          <input type='password' name='password' className="form-control" value={password} onChange={this.handleChange} />
+          <input type='password' name='password' id='inputemailpassword' className="form-control" value={password} onChange={this.handleChange} />
         </div>
         <button type='submit' className="btn btn-info" onClick={this.handleSubmit}>Submit</button>
       </div>
