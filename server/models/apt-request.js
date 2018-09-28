@@ -100,6 +100,7 @@ module.exports = function(Aptrequest) {
   Aptrequest.remoteMethod('removeApt', {
   accepts: [{arg: 'email', type: 'string', required: true},
             {arg: 'time', type: 'string', required: true},
+            // {arg: 'instructorId', type: 'string', required: true},
             {arg: 'studentName', type: 'string', required: true}],
 
   returns: {arg: 'res', type: 'Object'},
