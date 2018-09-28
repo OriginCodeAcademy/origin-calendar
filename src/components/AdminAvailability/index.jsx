@@ -12,7 +12,7 @@ class Availability extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
+        this.handleDelete = this.handleDelete.bind(this);
     }
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
@@ -36,17 +36,27 @@ class Availability extends Component {
             const currentDate = new Date();
             const currentDateIsoFormat = currentDate.toISOString();
             axios.get(`/api/Slots?filter[where][timeSlot][gt]=` + currentDateIsoFormat)
-            .then(res => this.setState({ adminAvailSlots: res.data})
-        )
+                .then(res => this.setState({ adminAvailSlots: res.data })
+            )
         }
     }
 
+    handleDelete(event) {
+        let slot = this.state.adminAvailSlots.findIndex(slot => slot.id == event.target.id);
+        let adminAvailSlots = this.state.adminAvailSlots
+        adminAvailSlots.splice(slot, 1);
+        axios.delete(`/api/Slots/${event.target.id}`)
+        this.setState({
+            adminAvailSlots: adminAvailSlots,
+        })
+    }
+
     componentDidMount() {
-      const currentDate = new Date();
-      const currentDateIsoFormat = currentDate.toISOString();
-      axios.get(`/api/Slots?filter[where][timeSlot][gt]=` + currentDateIsoFormat)
-          .then(res => this.setState({ adminAvailSlots: res.data })
-      )
+        const currentDate = new Date();
+        const currentDateIsoFormat = currentDate.toISOString();
+        axios.get(`/api/Slots?filter[where][timeSlot][gt]=` + currentDateIsoFormat)
+            .then(res => this.setState({ adminAvailSlots: res.data })
+            )
     }
 
     render() {
@@ -73,7 +83,7 @@ class Availability extends Component {
                         <br />
 
                         <div className="control">
-                            <label for="appt-time">Date, Time</label>
+                            <label htmlFor="appt-time">Date, Time</label>
                             <input
                                 type="datetime-local"
                                 id="avail-date"
@@ -90,29 +100,33 @@ class Availability extends Component {
                 <div className='col-md-6' >
                     <form>
                         <h2 >Here is Your Availability</h2>
-                        <div style={{overflowY: 'auto', maxHeight: '500px'}}>
-                          <table className='table'>
-                              <thead>
-                                  <tr>
-                                      <th>Name</th>
-                                      <th>Date</th>
-                                      <th>Time</th>
-                                  </tr>
-                              </thead>
-                              <tbody className='table-striped'>
-                                  {
-                                      this.state.adminAvailSlots.map((e) => {
-                                          return (
-                                              <tr>
-                                                  <td>{e.instructorId}</td>
-                                                  <td>{moment(e.timeSlot).format('L')}</td>
-                                                  <td>{moment(e.timeSlot).format('hh:mm a')}</td>
-                                              </tr>
-                                          )
-                                      })
-                                  }
-                              </tbody>
-                          </table>
+                        <div style={{ overflowY: 'auto', maxHeight: '500px' }}>
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody className='table-striped'>
+{/* Availability */}
+
+                                    {
+                                        this.state.adminAvailSlots.map((e) => {
+                                            console.log('Availability Page', e)
+                                            return (
+                                                <tr key={e.id}>
+                                                    <td>{e.instructorId}</td>
+                                                    <td>{moment(e.timeSlot).format('L')}</td>
+                                                    <td>{moment(e.timeSlot).format('hh:mm a')}</td>
+                                                    <td><button id={e.id} onClick={this.handleDelete}type='button' className='btn btn-danger'>Delete</button></td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </form>
                 </div>
