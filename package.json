@@ -11,7 +11,7 @@
     "start": "npm run build && node server/server.js",
     "dev-start": "npm run build && node server/server.js",
     "dev": "webpack -w --mode development",
-    "test": "mocha tests/* --exit",
+    "test": "npm run build && mocha tests/* --exit",
     "posttest": " "
   },
   "dependencies": {
