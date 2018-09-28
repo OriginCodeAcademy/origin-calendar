@@ -71,7 +71,7 @@ class RequestForm extends Component{
           <div className='form-group'>
  
   <div className="nav nav-tabs text-center" id="nav-tab" role="tablist">
-    <Link to ='/christianviews' className="nav-item nav-link" role="tab"aria-selected="true">Christian</Link>
+    <Link to ='/christianviews' id='christian' className="nav-item nav-link" role="tab"aria-selected="true">Christian</Link>
     <Link to ='/anthonyviews' className="nav-item nav-link" role="tab" aria-selected="true">Anthony</Link>
     <Link to='/michaelviews' className="nav-item nav-link" role="tab" aria-selected="true">Michael</Link>
   </div>

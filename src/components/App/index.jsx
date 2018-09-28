@@ -41,12 +41,12 @@ class App extends Component{
           <li className="nav-item active">
             <Link to="/">Home</Link>
           </li>
-          <li className="nav-item">
+          <li id='appt' className="nav-item">
             <Link to="/appointments">Appointments</Link>
           </li>
           { this.state.user && (this.state.isAdmin === false) ?
             <li className="nav-item">
-              <Link to="/request">Request</Link>
+              <Link id='reqtest' to="/request" >Request</Link>
             </li>
           :
           this.state.user && (this.state.isAdmin) ?

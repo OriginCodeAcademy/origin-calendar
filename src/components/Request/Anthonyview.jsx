@@ -57,7 +57,7 @@ export default class Anthonyview extends react.Component{
         })
       }
       componentDidMount() {
-        const data = `/api/Slots?filter[where][instructorId]=0012`;
+        const data = `/api/Slots?filter[where][instructorId]=112`;
         axios.get(data).then(response => this.setState({ slots: response.data }))
         
      
