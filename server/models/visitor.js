@@ -66,21 +66,21 @@ module.exports = function(Visitor) {
 
   Visitor.oAuthConfirm = (code) => {
     console.log(code);
-    // const {clientId, clientSecret, redirectUris} = credentials.installed;
-    // const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
+    const {clientId, clientSecret, redirectUris} = credentials.installed;
+    const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
-    // oAuth2Client.getToken(code, (err, token) => {
-    //   if (err) return console.error('Error retrieving access token', err);
-    //   oAuth2Client.setCredentials(token);
+    oAuth2Client.getToken(code, (err, token) => {
+      if (err) return console.error('Error retrieving access token', err);
+      oAuth2Client.setCredentials(token);
       
-    //   axios.post()
+      axios.get()
 
-    //   fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-    //     if (err) console.error(err);
-    //     console.log('Token stored to', TOKEN_PATH);
-    //   });
-    //   callback(oAuth2Client);
-    // });
+      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+        if (err) console.error(err);
+        console.log('Token stored to', TOKEN_PATH);
+      });
+      callback(oAuth2Client);
+    });
   };
 
   Visitor.remoteMethod('oAuthConfirm', {
