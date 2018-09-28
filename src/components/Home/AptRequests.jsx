@@ -10,8 +10,9 @@ class AptRequests extends Component {
       requests: []
     }
 
-    this.handleDelete = this.handleDelete.bind(this)
+    this.handleDeny = this.handleDeny.bind(this)
     this.handleApprove = this.handleApprove.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
    componentDidMount() {
@@ -29,7 +30,21 @@ class AptRequests extends Component {
       })
   }
 
-   handleDelete(event) {
+  handleDelete(e) {
+    axios.delete(`/api/Slots/${e.target.slot}`)
+    axios.delete(`/api/AptRequests/${e.target.id}`)
+    axios.post(`/api/AptRequests/denyEmail`, {
+      email: e.currentTarget.getAttribute('email'),
+      time: e.currentTarget.getAttribute('time')
+    })
+    let requests = this.state.requests
+    let filteredRequests = requests.filter(item => item.id != e.target.id)
+    this.setState({
+      requests: filteredRequests
+    })
+  }
+
+   handleDeny(event) {
     const id = event.currentTarget.getAttribute('id');
     const email = event.currentTarget.getAttribute('email');
     const time = event.currentTarget.getAttribute('time');
@@ -66,7 +81,7 @@ class AptRequests extends Component {
           "timeSlot": requests[i].time,
           "studentName": requests[i].studentName,
           "slotId": requests[i].slotId,
-          "visitorId": requests[i].visitorId,
+          "visitorId": requests[i].visitor,
           "duration": 30
         }).then((res) => {
           axios.delete(`/api/Slots/${requests[i].slotId}`)
@@ -125,13 +140,14 @@ class AptRequests extends Component {
           <tbody className='table-striped'>
             {this.state.requests.map((e) => {
               return (
-                <tr>
+                <tr key={e.id}>
                   <td>{e.studentName}</td>
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
                   <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
-                  <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
+                  <td><button id={e.id} time={e.time} visitor={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDeny}>Deny</button></td>
+                  <td><button slot={e.slotId} id={e.id} time={e.time} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Delete</button></td>
                 </tr>
               )
             })}
