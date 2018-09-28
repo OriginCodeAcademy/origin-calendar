@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import Home from '../Home';
 import Appointments from '../Appointments';
 import Register from '../Register';
 import SignIn from '../SignIn';
 import Request from '../Request';
 import Availability from '../AdminAvailability';
+import Christianviews from '../Request/Christianview';
+import Anthonyviews from '../Request/Anthonyview';
+import Michaelviews from '../Request/Michaelview';
 import axios from 'axios';
 
 class App extends Component{
@@ -38,12 +41,12 @@ class App extends Component{
           <li className="nav-item active">
             <Link to="/">Home</Link>
           </li>
-          <li className="nav-item">
+          <li id='appt' className="nav-item">
             <Link to="/appointments">Appointments</Link>
           </li>
           { this.state.user && (this.state.isAdmin === false) ?
             <li className="nav-item">
-              <Link to="/request">Request</Link>
+              <Link id='reqtest' to="/request" >Request</Link>
             </li>
           :
           this.state.user && (this.state.isAdmin) ?
@@ -63,14 +66,19 @@ class App extends Component{
         </ul>
       </div>
     </nav>
-
+  
     <div className="container-fluid">
-      <Route exact path="/" render={(props) => <Home {...props} user={this.state.user} save={this.saveUser} isAdmin={this.state.isAdmin} setAdminStatus={this.setAdminStatus} />}></Route>
-      <Route path="/appointments" render={(props) => <Appointments {...props} user={this.state.user} />}></Route>
-      <Route path="/register" render={(props) => <Register {...props} save={this.saveUser} setAdminStatus={this.setAdminStatus} isAdmin={this.state.isAdmin} />}></Route>
-      <Route path="/signin" render={(props) => <SignIn {...props} save={this.saveUser} setAdminStatus={this.setAdminStatus} />}></Route>
-      <Route path="/request" render={(props) => <Request {...props} user={this.state.user || null} />} ></Route>
-      <Route path="/availability" render = {(props) => <Availability {...props} user={this.state.user} />} ></Route>
+        
+        <Route exact path="/" render={(props) => <Home {...props} user={this.state.user} save={this.saveUser} isAdmin={this.state.isAdmin} setAdminStatus={this.setAdminStatus} />}></Route>
+        <Route path="/appointments" render={(props) => <Appointments />}></Route>
+        <Route path="/register" render={(props) => <Register {...props} save={this.saveUser} setAdminStatus={this.setAdminStatus} isAdmin={this.state.isAdmin} />}></Route>
+        <Route path="/signin" render={(props) => <SignIn {...props} save={this.saveUser} setAdminStatus={this.setAdminStatus} />}></Route>
+        <Route path="/request" render={(props) => <Request {...props} user={this.state.user || null} />} ></Route>
+        <Route path="/availability" render = {(props) => <Availability {...props} user={this.state.user} />} ></Route>
+        <Route path="/christianviews" render = {(props) => <Christianviews {...props} user={this.state.user} />}></Route>
+        <Route path="/anthonyviews" render = {(props) => <Anthonyviews {...props} user={this.state.user} />}></Route>
+        <Route path="/michaelviews" render = {(props) => <Michaelviews {...props} user={this.state.user} />}></Route>
+      
     </div>
   </div>
     )
