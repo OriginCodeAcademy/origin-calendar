@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom';
 
 
 class RequestForm extends Component{
@@ -59,30 +60,24 @@ class RequestForm extends Component{
   }
   componentDidMount() {
     axios.get('/api/Slots').then(response => this.setState({ slots: response.data }))
+    
+ 
   }
   render() {
     return (
       <div className='form'>
-        <h2>Request an Appointment</h2>
+        <h2>Choose an instructor you would like to schedule and appointment with.</h2>
         { this.state.alert && <div className={`alert alert-${this.state.error ? 'danger': 'success'}`}>{this.state.alert}</div>}
           <div className='form-group'>
-            <label>Topic</label>
-            <input type='text' className='form-control' onChange={this.handleChange} value={this.state.topic} name='topic'/>
-          </div>
-          <div className='form-group'>
-            <label>Time</label>
-            <select className='form-control' onChange={this.handleTimeSlot} value={this.state.time} name='time'>
-              <option value=''>--- Select a Time Slot ---</option>
-              {this.state.slots.map(slot =>
-                <option key={slot.id} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") } with {slot.instructorId}</option>
-              )}
-            </select >
-          </div>
-          <div className='form-group'>
-            <label>Description</label>
-            <textarea rows='4' columns='50' className='form-control' onChange={this.handleChange} value={this.state.description} name='description'></textarea>
-          </div>
-          <button className='btn btn-info' onClick={this.handleSubmit}>Submit</button>
+ 
+  <div className="nav nav-tabs text-center" id="nav-tab" role="tablist">
+    <Link to ='/christianviews' id='christian' className="nav-item nav-link" role="tab"aria-selected="true">Christian</Link>
+    <Link to ='/anthonyviews' className="nav-item nav-link" role="tab" aria-selected="true">Anthony</Link>
+    <Link to='/michaelviews' className="nav-item nav-link" role="tab" aria-selected="true">Michael</Link>
+  </div>
+
+            
+      </div>
       </div>)
   }
 }
