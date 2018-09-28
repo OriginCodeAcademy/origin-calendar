@@ -57,7 +57,7 @@ export default class Michaelview extends react.Component{
         })
       }
       componentDidMount() {
-        const data = `/api/Slots?filter[where][instructorId]=0006`;
+        const data = `/api/Slots?filter[where][instructorId]=6`;
         axios.get(data).then(response => this.setState({ slots: response.data }))
         
      

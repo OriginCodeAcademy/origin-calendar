@@ -62,7 +62,9 @@ export default class Christianview extends react.Component{
         })
       }
       componentDidMount() {
-        const data = `/api/Slots?filter[where][instructorId]=5ba95294889b848f2e323a68`;
+        const currentdate = new Date();
+        const currentDateIsosFormat = currentdate.toISOString();
+        const data = `/api/Slots?filter[where][instructorId]=119`;
         axios.get(data).then(response => this.setState({ slots: response.data }))
       }
     render(){
@@ -81,14 +83,14 @@ export default class Christianview extends react.Component{
                                 <select className='form-control' onChange={this.handleTimeSlot} value={this.state.time}name='time'>
                                 <option value=''>---Available Times ---</option>
                                 {avail.map(slot=> 
-                                    <option key={slot.id} value={slot.timeSlot}> 
+                                    <option key={slot.id} value={slot.timeSlot} id='optionselect'> 
                                         { moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a")} with Christian
                                     </option>)}
                                 </select >
                                 </div>
                                 <div className='form-group'>
                                 <label>Description</label>
-                                <textarea rows='4' columns='50' className='form-control' onChange={this.handleChange} value={this.state.description} name='description'></textarea>
+                                <textarea rows='4' columns='50' className='form-control' id='cdesk'onChange={this.handleChange} value={this.state.description} name='description'></textarea>
                                 </div>
                                 <button className='btn btn-info' id='cbutton' onClick={this.handleSubmit}>Submit</button>
                                 
