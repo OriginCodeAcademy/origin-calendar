@@ -10,8 +10,8 @@ class AptRequests extends Component {
       requests: []
     }
 
-    this.handleDelete = this.handleDelete.bind(this)
     this.handleApprove = this.handleApprove.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -140,7 +140,7 @@ class AptRequests extends Component {
           <tbody className='table-striped'>
             {this.state.requests.map((e) => {
               return (
-                <tr>
+                <tr key={e.id}>
                   <td>{e.studentName}</td>
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
