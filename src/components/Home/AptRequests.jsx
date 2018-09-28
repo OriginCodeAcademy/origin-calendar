@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { request } from 'https';
 
 class AptRequests extends Component {
   constructor(props) {

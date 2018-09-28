@@ -7,8 +7,6 @@ import SignIn from '../SignIn';
 import Request from '../Request';
 import Availability from '../AdminAvailability';
 import axios from 'axios';
-import Credentials from './credentials';
-import {google} from 'googleapis';
 
 class App extends Component{
   constructor(props){
@@ -41,33 +39,10 @@ class App extends Component{
 
   getGoogleAuth() {
     let user = this.state.user;
-    // console.log('USER:', user)
-    // axios.post(`/api/Visitors/oAuth`, {
-    //   user: user,
-    // });
-
-    const SCOPES = ['https://www.googleapis.com/auth/calendar'];
-    const TOKEN_PATH = './google-calendar/token.json';
-
-    authorize(Credentials);
-
-    function authorize(Credentials, callback) {
-      const {clientId, clientSecret, redirectUris} = Credentials;
-      const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
-
-    // Check if we have previously stored a token.
-      if (!user.authToken) return getAccessToken(oAuth2Client);
-      oAuth2Client.setCredentials(user.authToken);
-      callback(oAuth2Client);
-    }
-
-    function getAccessToken(oAuth2Client) {
-      const authUrl = oAuth2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: SCOPES,
-      });
-      window.open(authUrl);
-    }
+    console.log('USER:', user)
+    axios.post(`/api/Visitors/oAuth`, {
+      user: user,
+    });
   }
 
   render() {
@@ -91,9 +66,7 @@ class App extends Component{
                 this.state.user && (this.state.isAdmin) ?
                   <li className="nav-item">
                     <Link to="/availability">Availability</Link>
-                    <button onClick={this.getGoogleAuth}>Auth Calendar</button>
-                    <input value={this.state.oAuthToken} onChange={this.setInput}/>
-                    <button onClick={this.setOAuth}>Authorize</button>
+                    <button className='btn btn-danger auth' onClick={this.getGoogleAuth}>Auth Calendar</button>
                   </li>
                 :
                   <React.Fragment>

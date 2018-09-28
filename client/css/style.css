@@ -145,3 +145,9 @@ th {
     opacity: 1
   }
 }
+
+.auth {
+  position: absolute;
+  right: 17px;
+  bottom: 8px;
+}
