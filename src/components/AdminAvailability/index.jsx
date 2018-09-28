@@ -6,12 +6,13 @@ class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: 'Instructor A',
+            admin: 'anthony',
             dateTime: '',
             adminAvailSlots: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        
     }
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
@@ -63,9 +64,9 @@ class Availability extends Component {
                                 onChange={this.handleChange}
                                 name="admin"
                             >
-                                <option value="Instructor A">Instructor A</option>
-                                <option value="Instructor B">Instructor B</option>
-                                <option value="Instructor C">Instructor C</option>
+                                <option value="anthony">Anthony</option>
+                                <option value="christian">Christian</option>
+                                <option value="michael">Michael</option>
                             </select>
                         </div>
 
