@@ -15,27 +15,10 @@ class PendingAppointments extends Component {
     console.log(this.state.pending);
     const id = event.currentTarget.getAttribute('id');
     const studentEmail = event.currentTarget.getAttribute('email');
-    const instructorEmail = "kaiyawalker87@gmail.com"
+    const instructorId = event.currentTarget.getAttribute('instructorId');
     const time = event.currentTarget.getAttribute('time');
     const studentName = event.currentTarget.getAttribute('studentName');
-     console.log(studentEmail)
-     console.log(time)
-     console.log(studentName)
-
-    //  axios.post('/api/AptRequests/removeApt', {
-    //   "personalizations": [{
-    //     "to": [{
-    //       "email": "kaiyawalker87@gmail.com"
-    //     },{
-   //       "email": "eric.b.dodds@gmail.com"
-    //     }]
-    //   }]
-    // })
-    
-    //   email: "kaiyawalker87@gmail.com",
-    //   time: time,
-    //   studentName: "Kaiya Walker"
-    // })
+  
    
     axios.post('/api/AptRequests/removeApt', {
       email: studentEmail,
@@ -50,7 +33,8 @@ class PendingAppointments extends Component {
       });
 
       axios.post('/api/AptRequests/removeApt', {
-        email: instructorEmail,
+        instructorId: instructorId,
+        email: `${instructorId}@origincodeacademy.com`,
         time: time,
         studentName: studentName
       })
@@ -117,7 +101,7 @@ class PendingAppointments extends Component {
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
                   <td>
-                  <button className="btn btn-info" email={e.email} studentName={e.studentName} id={e.id} time={e.time} onClick={this.handleRemoveApt}>Remove</button>
+                  <button className="btn btn-info" instructorId={e.instructorId} email={e.email} studentName={e.studentName} id={e.id} time={e.time} onClick={this.handleRemoveApt}>Remove</button>
                   </td>
                 </tr>
               )

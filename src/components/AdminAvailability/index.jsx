@@ -6,7 +6,7 @@ class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: 'Instructor A',
+            admin: 'anthony',
             dateTime: '',
             adminAvailSlots: []
         };
@@ -64,9 +64,9 @@ class Availability extends Component {
                                 onChange={this.handleChange}
                                 name="admin"
                             >
-                                <option value="Anthony">Anthony</option>
-                                <option value="Christian">Christian</option>
-                                <option value="Micheal">Micheal</option>
+                                <option value="anthony">Anthony</option>
+                                <option value="christian">Christian</option>
+                                <option value="michael">Michael</option>
                             </select>
                         </div>
 

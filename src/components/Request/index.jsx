@@ -11,6 +11,7 @@ class RequestForm extends Component{
       topic: '',
       description: '',
       time: '',
+      instructorId:'',
       slots: []
     }
     this.handleChange = this.handleChange.bind(this);
@@ -25,14 +26,17 @@ class RequestForm extends Component{
   }
 
   handleTimeSlot(e) {
-
     const index = e.target.selectedIndex - 1;
       this.setState({
         time: e.target.value,
         slotId: this.state.slots[index].id,
-        selectedSlot: this.state.slots[index]
+        selectedSlot: this.state.slots[index],
+        instructorId: this.state.slots[index].instructorId
       })
+      console.log(this.state.slots);
+      console.log(this.state.slots[index].instructorId);
   }
+
 
   handleSubmit(e) {
     axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`, {
@@ -41,7 +45,8 @@ class RequestForm extends Component{
       "email": this.props.user.email,
       "issueDescription": this.state.description,
       "time": this.state.time,
-      "slotId": this.state.slotId
+      "slotId": this.state.slotId,
+      "instructorId": this.state.instructorId
     }).then((response) => {
       this.setState({
         alert: 'Awesome possum! Your appointment has been requested.',
