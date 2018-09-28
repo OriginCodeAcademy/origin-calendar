@@ -12,7 +12,7 @@ class PendingAppointments extends Component {
   }
 
   handleRemoveApt(event) {
-    console.log(this.state.pending);
+    console.log(this.state.ending);
     const id = event.currentTarget.getAttribute('id');
     const studentEmail = event.currentTarget.getAttribute('email');
     const instructorId = event.currentTarget.getAttribute('instructorId');
