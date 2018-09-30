@@ -40,8 +40,6 @@ module.exports = function(Aptrequest) {
     returns: {arg: 'res', type: 'Object'},
   });
 
-
-
   Aptrequest.removeApt = function(email, time, studentName, cb) {
   Aptrequest.app.models.Email.send({
     to: email,
