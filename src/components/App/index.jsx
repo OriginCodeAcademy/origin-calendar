@@ -39,7 +39,6 @@ class App extends Component{
 
   getGoogleAuth() {
     let user = this.state.user;
-    console.log('USER:', user)
     axios.post(`/api/Visitors/oAuth`, {
       user: user,
     });

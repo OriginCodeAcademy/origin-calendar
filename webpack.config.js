@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
   devtool: 'source-map',
+  target: 'node',
   context: path.join(__dirname, './src'),
   entry: {
     javascript: './index.jsx',

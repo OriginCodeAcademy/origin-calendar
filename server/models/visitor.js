@@ -4,6 +4,7 @@ require('dotenv').config();
 const {google} = require('googleapis');
 const opn = require('opn');
 const axios = require('axios');
+let currentUser = null;
 
 const credentials = {
   installed: {
@@ -35,6 +36,7 @@ module.exports = function(Visitor) {
 
 
   Visitor.oAuth = (user) => {
+    currentUser = user;
     authorize(credentials);
 
     function authorize(credentials, callback) {
@@ -64,23 +66,18 @@ module.exports = function(Visitor) {
     returns: {arg: 'data', type: 'object', root: true},
   });
 
-
   Visitor.oAuthConfirm = (code) => {
-    console.log(code);
     const {clientId, clientSecret, redirectUris} = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return console.error('Error retrieving access token', err);
       oAuth2Client.setCredentials(token);
-      
-      axios.get()
 
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) console.error(err);
-        console.log('Token stored to', TOKEN_PATH);
+      Visitor.findAndModify({
+        query: {id: currentUser.id},
+        update: {authToken: {token}},
       });
-      callback(oAuth2Client);
     });
   };
 
