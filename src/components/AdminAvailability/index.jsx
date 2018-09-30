@@ -42,10 +42,25 @@ class Availability extends Component {
     }
 
     handleDelete(event) {
-        let slot = this.state.adminAvailSlots.findIndex(slot => slot.id == event.target.id);
         let adminAvailSlots = this.state.adminAvailSlots
-        adminAvailSlots.splice(slot, 1);
+        let slot = adminAvailSlots.findIndex(slot => slot.id == event.target.id);
+
+        console.log('Admin Slots', this.state.adminAvailSlots)
+        console.log('Slot Index', slot)
+        axios.get(`/api/Slots/${adminAvailSlots[slot].id}/aptRequests`)
+        .then(res => {
+            console.log(res)
+            res.data.map(request => {
+                axios.delete(`/api/AptRequests/${request.id}`)
+                axios.post(`/api/AptRequests/denyEmail`, {
+                    email: request.email,
+                    time: request.time,
+                })
+            })
+        })
+        .catch(response => console.log(response))
         axios.delete(`/api/Slots/${event.target.id}`)
+        delete adminAvailSlots[slot]
         this.setState({
             adminAvailSlots: adminAvailSlots,
         })
