@@ -54,13 +54,18 @@ class AptRequests extends Component {
       .catch((error) => {
         console.log(error)
       });
-  }
-
-  handleApprove(e) {
-    let slotId = null;
-    let id = e.currentTarget.getAttribute('id');
-    let requests = this.state.requests;
+    }
+    
+    handleApprove(e) {
+      const time = e.currentTarget.getAttribute('time')
+      const email = e.currentTarget.getAttribute('email')
+      const instructorId = e.currentTarget.getAttribute('instructorId')
+      let slotId = null;
+      let id = e.currentTarget.getAttribute('id');
+      let requests = this.state.requests;
     for (let i = 0; i < requests.length; i++) {
+      // added && requests[i].time != time and else if
+      //added instructorId 
       if (requests[i].id === id) {
         axios.post(`/api/BookedApts`, {
           "timeSlot": requests[i].time,
@@ -78,12 +83,28 @@ class AptRequests extends Component {
         }).catch((err) => {
           console.log(err)
         })
+      } else if (requests[i].time === time) {
+        axios.post(`/api/AptRequests/replacedEmail`, {
+          email: email,
+          instructor: instructorId,
+          time: time
+        }).then((response) => {
 
-
+        }).catch((e) => {
+          console.log(e)
+        })
       }
+      
+   //
+  //
+ //
+//
     }
-    const email = e.currentTarget.getAttribute('email')
-    const time = e.currentTarget.getAttribute('time')
+  // 
+ // 
+// 
+     // time attribute here if failed
+    // fuck that wont work cause its gonna not going to filter later
     axios.post(`/api/AptRequests/approveEmail`, {
       email: email,
       time: time
@@ -130,7 +151,7 @@ class AptRequests extends Component {
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
-                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
+                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' instructorId={e.instructorId} email={e.email} onClick={this.handleApprove}>Approve</button></td>
                   <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
                 </tr>
               )
