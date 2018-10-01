@@ -6,7 +6,8 @@ class AptRequests extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      requests: []
+      user: props.user,
+      requests: [],
     }
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -26,6 +27,17 @@ class AptRequests extends Component {
       .catch((error) => {
         console.log(error)
       })
+
+    axios.get(`api/Visitors/${this.props.userId}`)
+      .then(res => {
+        this.setState({
+          user: res.data
+        })
+        axios.post(`/api/Visitors/oAuth`, {
+          user: this.state.user,
+        });
+      })
+      
   }
 
    handleDelete(event) {

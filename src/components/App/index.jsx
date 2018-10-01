@@ -18,12 +18,10 @@ class App extends Component{
       user: null,
       token: null,
       isAdmin: null,
-      oAuthToken: null,
+      oAuthToken: {},
     }
     this.saveUser = this.saveUser.bind(this);
     this.setAdminStatus = this.setAdminStatus.bind(this);
-    this.setInput = this.setInput.bind(this);
-    this.getGoogleAuth = this.getGoogleAuth.bind(this);
   }
 
   saveUser(token, user){
@@ -32,22 +30,6 @@ class App extends Component{
 
   setAdminStatus(isAdmin) {
     this.setState({ isAdmin })
-  }
-
-  setInput(e) {
-    this.setState({
-      oAuthToken: e.target.value
-    })
-  }
-
-  getGoogleAuth() {
-  }
-  
-  componentDidMount() {
-    let user = this.state.user;
-    axios.post(`/api/Visitors/oAuth`, {
-      user: user,
-    });
   }
 
   render() {
