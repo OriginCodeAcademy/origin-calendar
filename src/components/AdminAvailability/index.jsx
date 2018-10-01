@@ -45,11 +45,8 @@ class Availability extends Component {
         let adminAvailSlots = this.state.adminAvailSlots
         let slot = adminAvailSlots.findIndex(slot => slot.id == event.target.id);
 
-        console.log('Admin Slots', this.state.adminAvailSlots)
-        console.log('Slot Index', slot)
         axios.get(`/api/Slots/${adminAvailSlots[slot].id}/aptRequests`)
         .then(res => {
-            console.log(res)
             res.data.map(request => {
                 axios.delete(`/api/AptRequests/${request.id}`)
                 axios.post(`/api/AptRequests/denyEmail`, {
@@ -60,7 +57,8 @@ class Availability extends Component {
         })
         .catch(response => console.log(response))
         axios.delete(`/api/Slots/${event.target.id}`)
-        delete adminAvailSlots[slot]
+        adminAvailSlots.splice(slot, 1);
+
         this.setState({
             adminAvailSlots: adminAvailSlots,
         })
@@ -115,6 +113,7 @@ class Availability extends Component {
                 <div className='col-md-6' >
                     <form>
                         <h2 >Here is Your Availability</h2>
+<<<<<<< HEAD
                         <div style={{overflowY: 'auto', maxHeight: '500px'}}>
                           <table className='table'>
                               <thead>
@@ -139,6 +138,34 @@ class Availability extends Component {
                                   }
                               </tbody>
                           </table>
+=======
+                        <div style={{ overflowY: 'auto', maxHeight: '500px' }}>
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody className='table-striped'>
+
+                                    {
+                                        this.state.adminAvailSlots.map((e) => {
+                                            return (
+                                                <tr className='availRow' key={e.id}>
+                                                    <td>{e.instructorId}</td>
+                                                    <td>{moment(e.timeSlot).format('L')}</td>
+                                                    <td>{moment(e.timeSlot).format('hh:mm a')}</td>
+                                                    <td><button className='btn btn-danger' id={e.id} onClick={this.handleDelete}>Delete</button></td>
+                                                    <td><svg className='trash' id={e.id} onClick={this.handleDelete} version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 32 32"><title>bin</title><path d="M4 10v20c0 1.1 0.9 2 2 2h18c1.1 0 2-0.9 2-2v-20h-22zM10 28h-2v-14h2v14zM14 28h-2v-14h2v14zM18 28h-2v-14h2v14zM22 28h-2v-14h2v14z"></path><path d="M26.5 4h-6.5v-2.5c0-0.825-0.675-1.5-1.5-1.5h-7c-0.825 0-1.5 0.675-1.5 1.5v2.5h-6.5c-0.825 0-1.5 0.675-1.5 1.5v2.5h26v-2.5c0-0.825-0.675-1.5-1.5-1.5zM18 4h-6v-1.975h6v1.975z"></path></svg></td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+>>>>>>> Fixes delete button
                         </div>
                     </form>
                 </div>
