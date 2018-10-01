@@ -54,17 +54,22 @@ export default class Christianview extends react.Component{
             description: '',
             time: ''
           })
-        }).catch ((err) => {
+        }).catch (err => {
           this.setState({
             alert: 'Sorry, something went wrong! Try again',
             error: true
           })
         })
+
+       
+
       }
       componentDidMount() {
         const currentdate = new Date();
-        const currentDateIsosFormat = currentdate.toISOString();
-        const data = `/api/Slots?filter[where][instructorId]=119`;
+        const data = `/api/Slots?filter[where][and][0][timeSlot][gt]=${currentdate}
+                      &filter[where][and][1][instructorId]=christian`;
+        //axios.get(`/api/Slots?filter[where][timeSlot][gt]=` + currentDateIsoFormat)
+
         axios.get(data).then(response => this.setState({ slots: response.data }))
       }
     render(){
