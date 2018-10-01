@@ -24,8 +24,8 @@ describe('sending a success response', ()=>{
   it('should expect input textarea and submit buttons to exist', () =>
   nightmare
     .goto(path)
-    .type('#inputemail', 'taylorgreatlakes@yahoo.com')//nightmare logs in with email
-    .type('#inputemailpassword', 'newObject91')//nightmare logs in with password
+    .type('#inputemail', 'student@origincodeacademy.com')//nightmare logs in with email
+    .type('#inputemailpassword', 'testies')//nightmare logs in with password
     .click('.btn-info')//clicks on button
     .wait('#reqtest')
     .click('#reqtest')//clicks on request page
