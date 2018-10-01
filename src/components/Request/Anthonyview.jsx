@@ -2,6 +2,7 @@ import react from 'react';
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 
 export default class Anthonyview extends react.Component{
     constructor(props){
@@ -57,7 +58,9 @@ export default class Anthonyview extends react.Component{
         })
       }
       componentDidMount() {
-        const data = `/api/Slots?filter[where][instructorId]=anthony`;
+        const currentdate = new Date();
+        const data = `/api/Slots?filter[where][and][0][timeSlot][gt]=${currentdate}
+                      &filter[where][and][1][instructorId]=anthony`;
         axios.get(data).then(response => this.setState({ slots: response.data }))
         
      

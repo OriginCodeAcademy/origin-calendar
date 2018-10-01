@@ -43,15 +43,6 @@
       "options": {
         "nestRemoting": true
       }
-    },
-    "slots":{
-      "type": "hasMany",
-      "model": "Slot",
-      "foreignKey": "instructorId",
-      "options": {
-        "nestRemoting": true
-      }
-      
     }
   },
   "acls": [],
