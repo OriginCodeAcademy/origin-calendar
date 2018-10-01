@@ -34,16 +34,22 @@ module.exports = function(Visitor) {
     returns: {arg: 'data', type: 'object', root: true},
   });
 
+<<<<<<< HEAD
   Visitor.oAuth = (user) => {
+=======
+  Visitor.oAuth = (user, res) => {
+    console.log('oAuth User: ', user);
+    console.log('Token Type: ',  !user.authToken.accessToken);
+>>>>>>> Gets auth token for admin when logging in
     currentUser = user;
     authorize(credentials);
 
-    function authorize(credentials, callback) {
+    function authorize(credentials, callback, res) {
       const {clientId, clientSecret, redirectUris} = credentials.installed;
       const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
     // Check if we have previously stored a token.
-      if (!user.authToken) return getAccessToken(oAuth2Client);
+      if (Object.keys(user.authToken).length == 0) return getAccessToken(oAuth2Client);
       oAuth2Client.setCredentials(user.authToken);
       callback(oAuth2Client);
     }
@@ -52,38 +58,45 @@ module.exports = function(Visitor) {
       const authUrl = oAuth2Client.generateAuthUrl({
         access_type: 'offline',
         scope: ['https://www.googleapis.com/auth/calendar'],
-        user: user.id,
       });
+
+      // res.redirect(authUrl);
       opn(authUrl);
     }
   };
 
   Visitor.remoteMethod('oAuth', {
     description: 'Returns a user oAuth.',
-    accepts: {arg: 'user', type: 'object'},
+    accepts: [
+      {arg: 'user', type: 'object'},
+      {arg: 'res', type: 'object', http: {source: 'res'}},
+    ],
     http: {path: '/oAuth', verb: 'post'},
     returns: {arg: 'data', type: 'object', root: true},
   });
 
-  Visitor.oAuthConfirm = (code) => {
+  Visitor.oAuthConfirm = (code, res) => {
+    console.log('Code: ', code);
     const {clientId, clientSecret, redirectUris} = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
     oAuth2Client.getToken(code, (err, token) => {
+      console.log('Token: ', token);
       if (err) return console.error('Error retrieving access token', err);
       oAuth2Client.setCredentials(token);
+      Visitor.upsertWithWhere({id: currentUser.id}, {authToken: token});
 
-      Visitor.findAndModify({
-        query: {id: currentUser.id},
-        update: {authToken: {token}},
-      });
+      res.redirect('/');
     });
   };
 
   Visitor.remoteMethod('oAuthConfirm', {
     description: 'Returns a user oAuth Token.',
-    accepts: {arg: 'code', type: 'string'},
-    http: {path: '/oAuth/Confirm', verb: 'get'},
+    accepts: [
+      {arg: 'code', type: 'string'},
+      {arg: 'res', type: 'object', http: ctx => ctx.res},
+    ],
+    http: {path: '/oAuthConfirm', verb: 'get'},
     returns: {arg: 'data', type: 'object', root: true},
   });
 };

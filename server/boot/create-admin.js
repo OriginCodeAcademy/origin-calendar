@@ -15,6 +15,7 @@ module.exports = (app) => {
       lastName: 'Doe',
       password: process.env.ADMIN_PASSWORD,
       emailVerified: true,
+      authToken: {},
     },
   (err, visitor) => {
     Role.findOrCreate({
@@ -52,6 +53,7 @@ module.exports = (app) => {
       lastName: 'Valera',
       password: process.env.ADMIN_PASSWORD,
       emailVerified: true,
+      authToken: {},
     },
     (err, visitor) => {
       Role.findOrCreate({
@@ -89,6 +91,7 @@ module.exports = (app) => {
       lastName: 'McFarland',
       password: process.env.ADMIN_PASSWORD2,
       emailVerified: true,
+      authToken: {},
     },
     (err, visitor) => {
       Role.findOrCreate({
@@ -166,6 +169,7 @@ module.exports = (app) => {
       lastName: 'Roberts',
       password: process.env.ADMIN_PASSWORD3,
       emailVerified: true,
+      authToken: {},
     },
     (err, visitor) => {
       Role.findOrCreate({
