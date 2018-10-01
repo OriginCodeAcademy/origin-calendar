@@ -82,7 +82,7 @@ export default class Michaelview extends react.Component{
                                 <option value=''>---Available Times ---</option>
                                 {avail.map(slot=> 
                                     <option key={slot.id} value={slot.timeSlot}> 
-                                        { moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a")} with Christian
+                                        { moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a")} with Michael
                                     </option>)}
                                 </select >
                                 </div>

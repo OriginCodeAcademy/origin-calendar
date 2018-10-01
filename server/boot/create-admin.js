@@ -117,40 +117,55 @@ module.exports = (app) => {
     });
   Visitor.findOrCreate({
     where: {
-      email: 'michael@origincodeacademy.com',
+      email: 'student@origincodeacademy.com',
     },
   },
     {
-      email: 'michael@origincodeacademy.com',
-      firstName: 'Michael',
-      lastName: 'Roberts',
-      password: process.env.ADMIN_PASSWORD3,
+      email: 'student@origincodeacademy.com',
+      firstName: 'Test',
+      lastName: 'Testerson',
+      password: 'testies',
       emailVerified: true,
     },
-    (err, visitor) => {
-      Role.findOrCreate({
-        where: {
-          name: 'ADMIN',
-        },
+    
+      
+    );
+    Visitor.findOrCreate({
+      where: {
+        email: 'michael@origincodeacademy.com',
       },
-        {
-          name: 'ADMIN',
-        },
-        (err, role) => {
-          if (err) console.log('error creating role', err);
-          RoleMapping.findOrCreate({
-            where: {
-              principalType: 'ADMIN',
-              principalId: visitor.id,
-            },
+    },
+      {
+        email: 'michael@origincodeacademy.com',
+        firstName: 'Michael',
+        lastName: 'Roberts',
+        password: process.env.ADMIN_PASSWORD3,
+        emailVerified: true,
+      },
+      (err, visitor) => {
+        Role.findOrCreate({
+          where: {
+            name: 'ADMIN',
           },
-            {
-              principalType: 'ADMIN',
-              principalId: visitor.id,
-            }, (error, mapping) => {
-              if (err) console.log(err);
-            });
-        });
-    });
+        },
+          {
+            name: 'ADMIN',
+          },
+          (err, role) => {
+            if (err) console.log('error creating role', err);
+            RoleMapping.findOrCreate({
+              where: {
+                principalType: 'ADMIN',
+                principalId: visitor.id,
+              },
+            },
+              {
+                principalType: 'ADMIN',
+                principalId: visitor.id,
+              }, (error, mapping) => {
+                if (err) console.log(err);
+              });
+          });
+      });
 };
 
