@@ -34,24 +34,16 @@ module.exports = function(Visitor) {
     returns: {arg: 'data', type: 'object', root: true},
   });
 
-<<<<<<< HEAD
   Visitor.oAuth = (user) => {
-=======
-  Visitor.oAuth = (user, res) => {
-    console.log('oAuth User: ', user);
-    console.log('Token Type: ',  !user.authToken.accessToken);
->>>>>>> Gets auth token for admin when logging in
     currentUser = user;
     authorize(credentials);
 
-    function authorize(credentials, callback, res) {
+    function authorize(credentials) {
       const {clientId, clientSecret, redirectUris} = credentials.installed;
       const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
-    // Check if we have previously stored a token.
       if (Object.keys(user.authToken).length == 0) return getAccessToken(oAuth2Client);
       oAuth2Client.setCredentials(user.authToken);
-      callback(oAuth2Client);
     }
 
     function getAccessToken(oAuth2Client) {
@@ -60,7 +52,6 @@ module.exports = function(Visitor) {
         scope: ['https://www.googleapis.com/auth/calendar'],
       });
 
-      // res.redirect(authUrl);
       opn(authUrl);
     }
   };
@@ -69,14 +60,13 @@ module.exports = function(Visitor) {
     description: 'Returns a user oAuth.',
     accepts: [
       {arg: 'user', type: 'object'},
-      {arg: 'res', type: 'object', http: {source: 'res'}},
+      {arg: 'res', type: 'object', http: ctx => ctx.res},
     ],
     http: {path: '/oAuth', verb: 'post'},
     returns: {arg: 'data', type: 'object', root: true},
   });
 
   Visitor.oAuthConfirm = (code, res) => {
-    console.log('Code: ', code);
     const {clientId, clientSecret, redirectUris} = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
