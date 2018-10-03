@@ -38,4 +38,30 @@ describe('sending a success response', ()=>{
     .evaluate(()=> document.querySelector('button[name=submit]'))
     .then(button => expect(button).to.equal)  
     ).timeout(30000)
+
+    it('should check to see if select is populated with values greater than current time', ()=>
+    nightmare
+    .goto(path)
+    .type('#inputemail', 'student@origincodeacademy.com')
+    .type('#inputemailpassword', 'testies')
+    .click('.btn-info')
+    .wait('#reqtest')
+    .click('#reqtest')
+    .wait('#christian')
+    .click('#christian')
+    .wait('#formtest')
+    .select('#formtest', '#optionselect')
+    
+    
+    // .select('#nightmarejs','nightmare2')
+   
+    
+
+  ).timeout(6500)
+
+
+      
+
+
+
   })
