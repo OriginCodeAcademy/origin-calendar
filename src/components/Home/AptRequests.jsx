@@ -9,11 +9,9 @@ class AptRequests extends Component {
       requests: []
     }
 
-<<<<<<< HEAD
-=======
-    this.handleDelete = this.handleDelete.bind(this)
->>>>>>> fixes delete button
+
     this.handleApprove = this.handleApprove.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -31,15 +29,7 @@ class AptRequests extends Component {
       })
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  handleDelete(event) {
-=======
-   handleDeny(event) {
->>>>>>> Deletes Slot and send email to pending request students
-=======
    handleDelete(event) {
->>>>>>> fixes delete button
     const id = event.currentTarget.getAttribute('id');
     const email = event.currentTarget.getAttribute('email');
     const time = event.currentTarget.getAttribute('time');
@@ -155,17 +145,8 @@ class AptRequests extends Component {
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
-<<<<<<< HEAD
                   <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} instructorId={e.instructorId} slotId={e.slotId} onClick={this.handleApprove}>Approve</button></td>
                   <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
-=======
-                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
-<<<<<<< HEAD
-                  <td><button id={e.id} time={e.time} visitor={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDeny}>Deny</button></td>
->>>>>>> Deletes Slot and send email to pending request students
-=======
-                  <td><button id={e.id} time={e.time} visitor={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
->>>>>>> fixes delete button
                 </tr>
               )
             })}
