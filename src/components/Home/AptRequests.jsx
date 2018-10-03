@@ -62,6 +62,7 @@ class AptRequests extends Component {
     const slotId = e.currentTarget.getAttribute('slotId')
     let id = e.currentTarget.getAttribute('id');
     let requests = this.state.requests;
+<<<<<<< HEAD
 
     let booked = requests.find((book) => {
       return book.id === id
@@ -83,6 +84,18 @@ class AptRequests extends Component {
           }
         }
         axios.delete(`/api/Slots/${booked.slotId}`)
+=======
+    for (let i = 0; i < requests.length; i++) {
+      if (requests[i].id === id) {
+        axios.post(`/api/BookedApts`, {
+          "timeSlot": requests[i].time,
+          "studentName": requests[i].studentName,
+          "slotId": requests[i].slotId,
+          "visitorId": requests[i].visitor,
+          "duration": 30
+        }).then((res) => {
+          axios.delete(`/api/Slots/${requests[i].slotId}`)
+>>>>>>> eb1b8fdfe52fb847bf0c2a8cdcb2c42a7a2ade62
           .then((r) => {
           })
           .catch((e) => {
@@ -144,8 +157,13 @@ class AptRequests extends Component {
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
+<<<<<<< HEAD
                   <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} instructorId={e.instructorId} slotId={e.slotId} onClick={this.handleApprove}>Approve</button></td>
                   <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDeny}>Deny</button></td>
+=======
+                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
+                  <td><button id={e.id} time={e.time} visitor={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
+>>>>>>> eb1b8fdfe52fb847bf0c2a8cdcb2c42a7a2ade62
                 </tr>
               )
             })}
