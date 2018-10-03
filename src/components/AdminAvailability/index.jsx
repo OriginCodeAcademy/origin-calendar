@@ -6,7 +6,7 @@ class Availability extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: '',
+            admin: 'anthony',
             dateTime: '',
             adminAvailSlots: []
         };
