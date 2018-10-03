@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 class Availability extends Component {
     constructor(props) {
@@ -105,8 +105,8 @@ class Availability extends Component {
                                           return (
                                               <tr>
                                                   <td>{e.instructorId}</td>
-                                                  <td>{moment(e.timeSlot).format('L')}</td>
-                                                  <td>{moment(e.timeSlot).format('hh:mm a')}</td>
+                                                  <td>{moment.utc(e.timeSlot).tz('America/Los_Angeles').format('L')}</td>
+                                                  <td>{moment.utc(e.timeSlot).tz('America/Los_Angeles').format('hh:mm a')}</td>
                                               </tr>
                                           )
                                       })
