@@ -56,6 +56,22 @@ export default class Anthonyview extends react.Component{
             error: true
           })
         })
+        let selecturd = this.state.selectedSlot;
+        let slotties = this.state.slots;
+
+        for(var i =0; i < slotties.length; i++){
+            if(slotties[i].id === selecturd.id){
+              slotties.splice(i, 1);
+            }
+            
+            
+        } 
+        
+        console.log(slotties);
+        
+        
+        this.setState({slots:slotties});
+
       }
       componentDidMount() {
         const currentdate = new Date();
@@ -63,6 +79,23 @@ export default class Anthonyview extends react.Component{
                       &filter[where][and][1][instructorId]=anthony`;
         axios.get(data).then(response => this.setState({ slots: response.data }))
         
+
+        let selecturd = this.state.selectedSlot;
+        let slotties = this.state.slots;
+
+        for(var i =0; i < slotties.length; i++){
+            if(slotties[i].id === selecturd.id){
+              slotties.splice(i, 1);
+            }
+            
+            
+        } 
+        
+        console.log(slotties);
+        
+        
+        this.setState({slots:slotties});
+
      
       }
       render(){

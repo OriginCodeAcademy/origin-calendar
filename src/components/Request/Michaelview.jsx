@@ -56,12 +56,32 @@ export default class Michaelview extends react.Component{
             error: true
           })
         })
+        let selecturd = this.state.selectedSlot;
+        let slotties = this.state.slots;
+
+        for(var i =0; i < slotties.length; i++){
+            if(slotties[i].id === selecturd.id){
+              slotties.splice(i, 1);
+            }
+            
+            
+        } 
+        
+        console.log(slotties);
+        
+        
+        this.setState({slots:slotties});
+
       }
       componentDidMount() {
         const currentdate = new Date();
         const data = `/api/Slots?filter[where][and][0][timeSlot][gt]=${currentdate}
                       &filter[where][and][1][instructorId]=michael`;
         axios.get(data).then(response => this.setState({ slots: response.data }))
+
+
+
+      
         
      
       }

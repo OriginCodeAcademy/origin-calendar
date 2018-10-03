@@ -1,22 +1,27 @@
-import react from 'react';
-import React, {Component} from 'react';
+import react from 'react' ;
+import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 
 export default class Christianview extends react.Component{
     constructor(props){
+
         super(props);
         this.state = {
           topic: '',
           description: '',
           time: '',
-          slots: []
+          slots: [],
+          slotId:'',
+          selectedSlot:'',
+          indexSelect:''
+
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTimeSlot = this.handleTimeSlot.bind(this);
-    
+        
       }
       handleChange(e) {
           console.log("EVENT");
@@ -25,15 +30,20 @@ export default class Christianview extends react.Component{
 
         })
       }
-    
+  
       handleTimeSlot(e) {
     
-        const index = e.target.selectedIndex - 1;
+       let index = e.target.selectedIndex - 1;
           this.setState({
             time: e.target.value,
             slotId: this.state.slots[index].id,
-            selectedSlot: this.state.slots[index]
+            selectedSlot: this.state.slots[index],
+            indexSelect: index
+        
+            
           })
+          
+        
       }
     
       handleSubmit(e) {
@@ -46,7 +56,6 @@ export default class Christianview extends react.Component{
           "time": this.state.time,
           "slotId": this.state.slotId
         }).then((response) => {
-            console.log('then is working!');
           this.setState({
             alert: 'Awesome possum! Your appointment has been requested.',
             error: false,
@@ -61,8 +70,26 @@ export default class Christianview extends react.Component{
           })
         })
 
-  
+        let selecturd = this.state.selectedSlot;
+        let slotties = this.state.slots;
 
+        for(var i =0; i < slotties.length; i++){
+            if(slotties[i].id === selecturd.id){
+              slotties.splice(i, 1);
+            }
+            
+            
+        } 
+        
+        console.log(slotties);
+        
+        
+        this.setState({slots:slotties});
+
+        
+        
+        
+                 
       }
       componentDidMount() {
         const currentdate = new Date();
@@ -72,6 +99,9 @@ export default class Christianview extends react.Component{
 
         axios.get(data).then(response => this.setState({ slots: response.data }))
       }
+
+      
+
     render(){
         const avail = this.state.slots;
         return( 
@@ -85,7 +115,7 @@ export default class Christianview extends react.Component{
                                 
                                 <div className='form-group'>
                                 
-                                <select className='form-control' onChange={this.handleTimeSlot} value={this.state.time}name='time'>
+                                <select className='form-control' onChange={this.handleTimeSlot} value={this.state.time}name='time' id='formtest'>
                                 <option value=''>---Available Times ---</option>
                                 {avail.map(slot=> 
                                     <option key={slot.id} value={slot.timeSlot} id='optionselect'> 
@@ -101,11 +131,11 @@ export default class Christianview extends react.Component{
                                 
                                 <Link to="/request"><button className="btn btn-info" id='cancelbro'>Cancel</button></Link>
                                         
-                                </div>              
+                                </div>       
+                                 
                 </div>
             </div>)
     }
 }
-                        
-                           
-                           
+
+                      
