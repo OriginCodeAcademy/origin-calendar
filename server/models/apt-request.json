@@ -18,6 +18,10 @@
       "type": "string",
       "required": true
     },
+    "instructorId": {
+      "type": "string",
+      "required": false
+    },
     "time": {
       "type": "date",
       "required": true

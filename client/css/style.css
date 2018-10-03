@@ -124,6 +124,10 @@ label {
   border-top: 1px solid #9393932b;
 }
 
+.trash {
+  fill: #dc4245;
+}
+
 th {
   color: whitesmoke;
   background-color: #4f6995;
