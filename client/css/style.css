@@ -145,3 +145,17 @@ th {
     opacity: 1
   }
 }
+
+.text-center{
+  margin:auto;
+  justify-content: center;
+}
+
+#cancelbro{
+  margin:10;
+}
+
+select.form-control{
+  width:30%;
+  margin:left;
+}
