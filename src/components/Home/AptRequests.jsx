@@ -14,7 +14,7 @@ class AptRequests extends Component {
     this.handleApprove = this.handleApprove.bind(this);
   }
 
-   componentDidMount() {
+  componentDidMount() {
     if (!this.props.userId) return;
     const currentDate = new Date();
     const currentDateIsoFormat = currentDate.toISOString();
@@ -29,7 +29,7 @@ class AptRequests extends Component {
       })
   }
 
-   handleDelete(event) {
+  handleDelete(event) {
     const id = event.currentTarget.getAttribute('id');
     const email = event.currentTarget.getAttribute('email');
     const time = event.currentTarget.getAttribute('time');
@@ -57,54 +57,69 @@ class AptRequests extends Component {
   }
 
   handleApprove(e) {
-    let slotId = null;
+    const time = e.currentTarget.getAttribute('time')
+    const email = e.currentTarget.getAttribute('email')
+    const instructorId = e.currentTarget.getAttribute('instructorId')
+    const slotId = e.currentTarget.getAttribute('slotId')
     let id = e.currentTarget.getAttribute('id');
     let requests = this.state.requests;
-    for (let i = 0; i < requests.length; i++) {
-      if (requests[i].id === id) {
-        axios.post(`/api/BookedApts`, {
-          "timeSlot": requests[i].time,
-          "studentName": requests[i].studentName,
-          "slotId": requests[i].slotId,
-          "visitorId": requests[i].visitorId,
-          "duration": 30
-        }).then((res) => {
-          axios.delete(`/api/Slots/${requests[i].slotId}`)
+
+    let booked = requests.find((book) => {
+      return book.id === id
+    })
+    axios.post(`/api/BookedApts`, {
+      "timeSlot": booked.time,
+      "studentName": booked.studentName,
+      "slotId": booked.slotId,
+      "visitorId": booked.visitorId,
+      "duration": 30
+    })
+      .then((res) => {
+        for (let i = 0; i < requests.length; i++) {
+          if (requests[i].slotId === slotId && requests[i].id !== booked.id) {
+            axios.post(`/api/AptRequests/replacedApt`, {
+              email: requests[i].email,
+              time: requests[i].time
+            })
+          }
+        }
+        axios.delete(`/api/Slots/${booked.slotId}`)
           .then((r) => {
           })
           .catch((e) => {
             console.log(e)
           })
-        }).catch((err) => {
-          console.log(err)
-        })
+      }).catch((err) => {
+        console.log(err)
+      })
 
 
-      }
-    }
-    const email = e.currentTarget.getAttribute('email')
-    const time = e.currentTarget.getAttribute('time')
+
     axios.post(`/api/AptRequests/approveEmail`, {
-      email: email,
-      time: time
+      email: booked.email,
+      time: booked.time
     })
       .then(function (response) {
       })
       .catch(function (error) {
         console.log(error);
       });
-    let deleted = requests.filter((el) => {
-      return el.id != id;
+    let replaced = requests.filter((el) => {
+      return el.slotId != slotId;
     });
-    axios.delete(`/api/AptRequests/${id}`)
-    .then((response) => {
-      this.setState({
-        requests: deleted
+    let deleted = requests.filter((le) => {
+      return le.slotId === slotId;
+    });
+   let results= deleted.map(Apt => axios.delete(`/api/AptRequests/${Apt.id}`))
+    return axios.all(results)
+      .then((response) => {
+        this.setState({
+          requests: replaced
+        })
       })
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   render() {
@@ -130,7 +145,7 @@ class AptRequests extends Component {
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
-                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
+                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} instructorId={e.instructorId} slotId={e.slotId} onClick={this.handleApprove}>Approve</button></td>
                   <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
                 </tr>
               )
