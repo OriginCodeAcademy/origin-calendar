@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { request } from 'https';
 
 class AptRequests extends Component {
   constructor(props) {
@@ -12,7 +11,6 @@ class AptRequests extends Component {
 
     this.handleDeny = this.handleDeny.bind(this)
     this.handleApprove = this.handleApprove.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +28,7 @@ class AptRequests extends Component {
       })
   }
 
-  handleDelete(event) {
+  handleDeny(event) {
     const id = event.currentTarget.getAttribute('id');
     const email = event.currentTarget.getAttribute('email');
     const time = event.currentTarget.getAttribute('time');
@@ -148,7 +146,6 @@ class AptRequests extends Component {
                   <td>{moment(e.time).format('hh:mm a')}</td>
                   <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} instructorId={e.instructorId} slotId={e.slotId} onClick={this.handleApprove}>Approve</button></td>
                   <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDeny}>Deny</button></td>
-                  <td><button slot={e.slotId} id={e.id} time={e.time} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Delete</button></td>
                 </tr>
               )
             })}
