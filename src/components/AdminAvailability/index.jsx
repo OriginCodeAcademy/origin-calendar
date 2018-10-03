@@ -59,10 +59,6 @@ class Availability extends Component {
         axios.delete(`/api/Slots/${event.target.id}`)
         adminAvailSlots.splice(slot, 1);
 
-        let slot = this.state.adminAvailSlots.findIndex(slot => slot.id == event.target.id);
-        let adminAvailSlots = this.state.adminAvailSlots
-        adminAvailSlots.splice(slot, 1);
-        axios.delete(`/api/Slots/${event.target.id}`)
         this.setState({
             adminAvailSlots: adminAvailSlots,
         })
