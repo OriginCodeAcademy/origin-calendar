@@ -90,10 +90,6 @@ class Availability extends Component {
                                 <option value="anthony">Anthony</option>
                                 <option value="christian">Christian</option>
                                 <option value="michael">Michael</option>
-<<<<<<< HEAD
-=======
-                 
->>>>>>> 7e4017379f9d483613bdea731db9ccc1ddc488a8
                             </select>
                         </div>
 
