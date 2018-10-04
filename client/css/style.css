@@ -124,6 +124,11 @@ label {
   border-top: 1px solid #9393932b;
 }
 
+.table-striped {
+  overflow: scroll;
+  max-height: 500px;
+}
+
 th {
   color: whitesmoke;
   background-color: #4f6995;
