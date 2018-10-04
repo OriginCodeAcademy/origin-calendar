@@ -166,6 +166,6 @@ select.form-control{
 }
 .auth {
   position: absolute;
-  right: 17px;
-  bottom: 8px;
+  right: 15px;
+  top: 3px;
 }

@@ -4,7 +4,7 @@ require('dotenv').config();
 const {google} = require('googleapis');
 const opn = require('opn');
 const axios = require('axios');
-let currentUser = null;
+let currentUser = {};
 
 const credentials = {
   installed: {
@@ -42,13 +42,33 @@ module.exports = function(Visitor) {
       const {clientId, clientSecret, redirectUris} = credentials.installed;
       const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
-      if (Object.keys(user.authToken).length == 0) return getAccessToken(oAuth2Client);
+      if (Object.keys(user.authToken).length == 0) {
+        return getAccessToken(oAuth2Client);
+      } else {
+        oAuth2Client.refreshToken(user.authToken.refresh_token)
+        .then(res => {
+          Visitor.upsertWithWhere(
+            {id: currentUser.id},
+            {
+              authToken: {
+                access_token: res.tokens.access_token,
+                refresh_token: user.authToken.refresh_token,
+                scope: 'https://www.googleapis.com/auth/calendar',
+                token_type: 'Bearer',
+                expiry_date: res.tokens.expiry_date,
+              },
+            });
+        })
+        .catch(err => console.log(err));
+      }
+
       oAuth2Client.setCredentials(user.authToken);
     }
 
     function getAccessToken(oAuth2Client) {
       const authUrl = oAuth2Client.generateAuthUrl({
         access_type: 'offline',
+        prompt: 'consent',
         scope: ['https://www.googleapis.com/auth/calendar'],
       });
 
@@ -71,7 +91,6 @@ module.exports = function(Visitor) {
     const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
     oAuth2Client.getToken(code, (err, token) => {
-      console.log('Token: ', token);
       if (err) return console.error('Error retrieving access token', err);
       oAuth2Client.setCredentials(token);
       Visitor.upsertWithWhere({id: currentUser.id}, {authToken: token});
