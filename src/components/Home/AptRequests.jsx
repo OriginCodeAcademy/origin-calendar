@@ -93,7 +93,7 @@ class AptRequests extends Component {
     })
       .then((res) => {
         for (let i = 0; i < requests.length; i++) {
-          if (requests[i].slotId === slotId && requests[i].id !== booked.id) {
+          if (requests[i].time === time && requests[i].id !== booked.id) {
             axios.post(`/api/AptRequests/replacedApt`, {
               email: requests[i].email,
               time: requests[i].time
@@ -122,10 +122,10 @@ class AptRequests extends Component {
         console.log(error);
       });
     let replaced = requests.filter((el) => {
-      return el.slotId != slotId;
+      return el.time != time;
     });
     let deleted = requests.filter((le) => {
-      return le.slotId === slotId;
+      return le.time === time;
     });
    let results= deleted.map(Apt => axios.delete(`/api/AptRequests/${Apt.id}`))
     return axios.all(results)
@@ -137,12 +137,6 @@ class AptRequests extends Component {
       .catch((err) => {
         console.log(err);
       })
-  }
-
-  getGoogleAuth() {
-    axios.post(`/api/Visitors/oAuth`, {
-      user: this.state.user
-    })
   }
 
   getGoogleAuth() {
