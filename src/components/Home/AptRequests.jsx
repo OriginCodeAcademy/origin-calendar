@@ -145,12 +145,6 @@ class AptRequests extends Component {
     })
   }
 
-  getGoogleAuth() {
-    axios.post(`/api/Visitors/oAuth`, {
-      user: this.state.user
-    })
-  }
-
   render() {
     return (
       <div>

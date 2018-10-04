@@ -87,6 +87,7 @@ class PendingAppointments extends Component {
               <th>Description</th>
               <th>Date</th>
               <th>Time</th>
+              <th></th>
               
             </tr>
             
@@ -101,7 +102,7 @@ class PendingAppointments extends Component {
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
                   <td>
-                  <button className="btn btn-info" instructorId={e.instructorId} email={e.email} studentName={e.studentName} id={e.id} time={e.time} onClick={this.handleRemoveApt}>Remove</button>
+                  <button className="btn btn-danger" instructorId={e.instructorId} email={e.email} studentName={e.studentName} id={e.id} time={e.time} onClick={this.handleRemoveApt}>X</button>
                   </td>
                 </tr>
               )

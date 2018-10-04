@@ -61,12 +61,11 @@ class RequestForm extends Component{
       })
     })
 
-    const instructorId = this.state.instructorId
-    const instructorEmail = `${this.state.instructor}@origincodeacademy.com`
+    const instructorEmail = `${this.state.selectedSlot.instructorId}@origincodeacademy.com`
     const time = this.state.time;
     const studentName = (this.props.user.firstName + ' ' + this.props.user.lastName);
     axios.post(`/api/AptRequests/emailAdmin`, {
-      instructorEmail: `${instructorId}@origincodeacademy.com`,
+      instructorEmail: instructorEmail,
       time: time,
       studentName: studentName,  
     })
