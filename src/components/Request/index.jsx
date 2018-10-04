@@ -34,8 +34,6 @@ class RequestForm extends Component{
         selectedSlot: this.state.slots[index],
         instructorId: this.state.slots[index].instructorId
       })
-      console.log(this.state.slots);
-      console.log(this.state.slots[index].instructorId);
   }
 
 
@@ -63,7 +61,11 @@ class RequestForm extends Component{
       })
     })
 
+<<<<<<< HEAD
     const instructorEmail = `${this.state.selectedSlot.instructorId}@origincodeacademy.com`
+=======
+    const instructorEmail = `${this.state.instructor}@origincodeacademy.com`
+>>>>>>> Adds token to user model
     const time = this.state.time;
     const studentName = (this.props.user.firstName + ' ' + this.props.user.lastName);
     axios.post(`/api/AptRequests/emailAdmin`, {
@@ -71,7 +73,7 @@ class RequestForm extends Component{
       time: time,
       studentName: studentName,  
     })
-      .then((res) => console.log(res))
+      .then()
       .catch((err) => console.log(err));
   }
   componentDidMount() {
