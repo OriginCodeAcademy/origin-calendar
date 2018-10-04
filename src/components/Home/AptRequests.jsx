@@ -9,7 +9,7 @@ class AptRequests extends Component {
       requests: []
     }
 
-
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleApprove = this.handleApprove.bind(this);
   }
 
@@ -144,8 +144,8 @@ class AptRequests extends Component {
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
-                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} instructorId={e.instructorId} slotId={e.slotId} onClick={this.handleApprove}>Approve</button></td>
-                  <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
+                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
+                  <td><button id={e.id} time={e.time} visitor={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
                 </tr>
               )
             })}

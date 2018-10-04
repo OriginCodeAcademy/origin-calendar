@@ -113,34 +113,32 @@ class Availability extends Component {
                 <div className='col-md-6' >
                     <form>
                         <h2 >Here is Your Availability</h2>
-                        <div style={{ overflowY: 'auto', maxHeight: '500px' }}>
-                            <div>
-                                <table className='table'>
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className='table-striped'>
+                        <div>
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody className='table-striped'>
 
-                                        {
-                                            this.state.adminAvailSlots.map((e) => {
-                                                return (
-                                                    <tr className='availRow' key={e.id}>
-                                                        <td>{e.instructorId}</td>
-                                                        <td>{moment(e.timeSlot).format('L')}</td>
-                                                        <td>{moment(e.timeSlot).format('hh:mm a')}</td>
-                                                        <td><button className='btn btn-danger' id={e.id} onClick={this.handleDelete}>X</button></td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                    {
+                                        this.state.adminAvailSlots.map((e) => {
+                                            return (
+                                                <tr className='availRow' key={e.id}>
+                                                    <td>{e.instructorId}</td>
+                                                    <td>{moment(e.timeSlot).format('L')}</td>
+                                                    <td>{moment(e.timeSlot).format('hh:mm a')}</td>
+                                                    <td><button className='btn btn-danger' id={e.id} onClick={this.handleDelete}>X</button></td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </form>
                 </div>
