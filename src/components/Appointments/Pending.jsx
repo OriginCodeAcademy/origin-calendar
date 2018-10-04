@@ -12,18 +12,14 @@ class PendingAppointments extends Component {
   }
 
   handleRemoveApt(event) {
-    console.log(this.state.ending);
     const id = event.currentTarget.getAttribute('id');
-    const studentEmail = event.currentTarget.getAttribute('email');
-    const instructorId = event.currentTarget.getAttribute('instructorId');
+    const instructorid = event.currentTarget.getAttribute('instructorid');
     const time = event.currentTarget.getAttribute('time');
-    const studentName = event.currentTarget.getAttribute('studentName');
-  
-   
+
     axios.post('/api/AptRequests/removeApt', {
-      email: studentEmail,
+      instructorId: instructorid,
+      email: `${instructorid}@origincodeacademy.com`,
       time: time,
-      studentName: studentName
     })
       .then(function (response) {
         console.log(response);
@@ -31,23 +27,11 @@ class PendingAppointments extends Component {
       .catch(function (error) {
         console.log(error,"error");
       });
-
-      axios.post('/api/AptRequests/removeApt', {
-        instructorId: instructorId,
-        email: `${instructorId}@origincodeacademy.com`,
-        time: time,
-        studentName: studentName
-      })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error,"error");
-        });
       
     var deleted = this.state.pending.filter(function (el) {
       return el.id != id
     });
+
     axios.delete(`/api/AptRequests/${id}`)
       .then((response) => {
         this.setState({
@@ -96,13 +80,13 @@ class PendingAppointments extends Component {
 
             {this.state.pending.map((e) => {
               return (
-                <tr>
+                <tr key={e.id}>
                   <td>{e.topicSummary}</td>
                   <td>{e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
                   <td>
-                  <button className="btn btn-danger" instructorId={e.instructorId} email={e.email} studentName={e.studentName} id={e.id} time={e.time} onClick={this.handleRemoveApt}>X</button>
+                  <button className="btn btn-danger" instructorid={e.instructorid} email={e.email} studentname={e.studentname} id={e.id} time={e.time} onClick={this.handleRemoveApt}>X</button>
                   </td>
                 </tr>
               )

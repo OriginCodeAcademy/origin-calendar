@@ -44,7 +44,7 @@ class Appointments extends Component {
       <div className='row'>
         { this.state.appointments &&
         <div className='col-lg-4 col-md-4 col-sm-12'>
-            <PendingAppointments userId={this.props.user && this.props.user.id}/>
+            <PendingAppointments userId={this.props.user.id} user={this.props.user}/>
             <h2>Confirmed Appointments</h2>
             <table className='table'>
               <thead>
@@ -56,7 +56,7 @@ class Appointments extends Component {
                 </tr>
               </thead>
               <tbody className='table-striped'>
-                { this.state.appointments.map(singleApt => <Row key={singleApt.timeSlot} appointment={singleApt} />) }
+                { this.state.appointments.map(singleApt => <Row key={singleApt.id} appointment={singleApt} />) }
               </tbody>
             </table>
           </div>
