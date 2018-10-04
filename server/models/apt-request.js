@@ -46,11 +46,7 @@ module.exports = function(Aptrequest) {
       from: 'instructor@origincodeacademy.com',
       subject: 'Appointment Removed',
       text: `Your appointment on ${moment(time).format('L')}
-<<<<<<< HEAD
      at ${moment(time).format('hh:mm a')} was removed`,
-=======
-      at ${moment(time).format('hh:mm a')} was removed`,
->>>>>>> 79808fab72d7d09bc4aa93f1ccf087bd72e4fd49
     }, function(err, mail) {
       if (err) console.log(err);
       return cb(null, mail);
@@ -59,7 +55,6 @@ module.exports = function(Aptrequest) {
 
   Aptrequest.remoteMethod('removeApt', {
     accepts: [{arg: 'email', type: 'string', required: true},
-<<<<<<< HEAD
             {arg: 'time', type: 'string', required: true},
             // {arg: 'instructorId', type: 'string', required: true},
             {arg: 'studentName', type: 'string', required: true}],
@@ -82,12 +77,6 @@ module.exports = function(Aptrequest) {
   Aptrequest.remoteMethod('replacedApt', {
     accepts: [{arg: 'email', type: 'string', required: true},
               {arg: 'time', type: 'string', required: true}],
-=======
-              {arg: 'time', type: 'string', required: true},
-              // {arg: 'instructorId', type: 'string', required: true},
-              {arg: 'studentName', type: 'string', required: true}],
-
->>>>>>> 79808fab72d7d09bc4aa93f1ccf087bd72e4fd49
     returns: {arg: 'res', type: 'Object'},
   });
 
