@@ -50,7 +50,6 @@ class App extends Component{
                 this.state.user && (this.state.isAdmin) ?
                   <li className="nav-item">
                     <Link to="/availability">Availability</Link>
-                    <button className='btn btn-danger auth' onClick={this.getGoogleAuth}>Auth Calendar</button>
                   </li>
                 :
                   <React.Fragment>
