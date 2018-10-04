@@ -61,11 +61,8 @@ class RequestForm extends Component{
       })
     })
 
-<<<<<<< HEAD
     const instructorId = this.state.instructorId
-=======
     const instructorEmail = `${this.state.instructor}@origincodeacademy.com`
->>>>>>> Adds token to user model
     const time = this.state.time;
     const studentName = (this.props.user.firstName + ' ' + this.props.user.lastName);
     axios.post(`/api/AptRequests/emailAdmin`, {
