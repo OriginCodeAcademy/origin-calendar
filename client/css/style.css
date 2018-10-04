@@ -151,6 +151,7 @@ th {
   }
 }
 
+<<<<<<< HEAD
 .text-center{
   margin:auto;
   justify-content: center;
@@ -164,6 +165,8 @@ select.form-control{
   width:30%;
   margin:left;
 }
+=======
+>>>>>>> 79808fab72d7d09bc4aa93f1ccf087bd72e4fd49
 .auth {
   position: absolute;
   right: 15px;
