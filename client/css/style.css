@@ -128,6 +128,9 @@ label {
   overflow: scroll;
   max-height: 500px;
 }
+.trash {
+  fill: #dc4245;
+}
 
 th {
   color: whitesmoke;
