@@ -167,3 +167,8 @@ select.form-control{
   width:30%;
   margin:left;
 }
+.auth {
+  position: absolute;
+  right: 17px;
+  bottom: 8px;
+}
