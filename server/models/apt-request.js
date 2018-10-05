@@ -40,7 +40,7 @@ module.exports = function(Aptrequest) {
     returns: {arg: 'res', type: 'Object'},
   });
 
-  Aptrequest.removeApt = function(email, time, studentName, cb) {
+  Aptrequest.removeApt = function(email, time, cb) {
     Aptrequest.app.models.Email.send({
       to: email,
       from: 'instructor@origincodeacademy.com',
@@ -55,9 +55,7 @@ module.exports = function(Aptrequest) {
 
   Aptrequest.remoteMethod('removeApt', {
     accepts: [{arg: 'email', type: 'string', required: true},
-            {arg: 'time', type: 'string', required: true},
-            // {arg: 'instructorId', type: 'string', required: true},
-            {arg: 'studentName', type: 'string', required: true}],
+            {arg: 'time', type: 'string', required: true}],
     returns: {arg: 'res', type: 'Object'},
   });
 
