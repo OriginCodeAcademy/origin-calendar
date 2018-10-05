@@ -46,11 +46,7 @@ module.exports = function(Aptrequest) {
       from: 'instructor@origincodeacademy.com',
       subject: 'Appointment Removed',
       text: `Your appointment on ${moment(time).format('L')}
-<<<<<<< HEAD
      at ${moment(time).format('hh:mm a')} was removed`,
-=======
-      at ${moment(time).format('hh:mm a')} was removed`,
->>>>>>> adds token to user model
     }, function(err, mail) {
       if (err) console.log(err);
       return cb(null, mail);

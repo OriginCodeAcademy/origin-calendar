@@ -42,6 +42,7 @@ module.exports = function(Visitor) {
       const {clientId, clientSecret, redirectUris} = credentials.installed;
       const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
+<<<<<<< HEAD
       if (Object.keys(user.authToken).length == 0) {
         return getAccessToken(oAuth2Client);
       } else {
@@ -62,6 +63,9 @@ module.exports = function(Visitor) {
         .catch(err => console.log(err));
       }
 
+=======
+      if (Object.keys(user.authToken).length == 0) return getAccessToken(oAuth2Client);
+>>>>>>> fixes authorize
       oAuth2Client.setCredentials(user.authToken);
     }
 
