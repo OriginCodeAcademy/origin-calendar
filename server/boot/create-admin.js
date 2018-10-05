@@ -108,7 +108,6 @@ module.exports = (app) => {
             where: {
               principalType: 'ADMIN',
               principalId: visitor.id,
-<<<<<<< HEAD
             },
           },
             {
@@ -131,45 +130,6 @@ module.exports = (app) => {
       password: process.env.ADMIN_PASSWORD3,
       emailVerified: true,
       authToken: {},
-    },
-    (err, visitor) => {
-      Role.findOrCreate({
-        where: {
-          name: 'ADMIN',
-        },
-      },
-        {
-          name: 'ADMIN',
-        },
-        (err, role) => {
-          if (err) console.log('error creating role', err);
-          RoleMapping.findOrCreate({
-            where: {
-              principalType: 'ADMIN',
-              principalId: visitor.id,
-=======
->>>>>>> Merging conflicts
-            },
-          },
-            {
-              principalType: 'ADMIN',
-              principalId: visitor.id,
-            }, (error, mapping) => {
-              if (err) console.log(err);
-            });
-        });
-    });
-  Visitor.findOrCreate({
-    where: {
-      email: 'michael@origincodeacademy.com',
-    },
-  },
-    {
-      email: 'michael@origincodeacademy.com',
-      firstName: 'Michael',
-      lastName: 'Roberts',
-      password: process.env.ADMIN_PASSWORD3,
-      emailVerified: true,
     },
     (err, visitor) => {
       Role.findOrCreate({

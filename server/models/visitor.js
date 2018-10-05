@@ -91,6 +91,7 @@ module.exports = function(Visitor) {
     const oAuth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUris[0]);
 
     oAuth2Client.getToken(code, (err, token) => {
+      console.log('Token: ', token);
       if (err) return console.error('Error retrieving access token', err);
       oAuth2Client.setCredentials(token);
       Visitor.upsertWithWhere({id: currentUser.id}, {authToken: token});
