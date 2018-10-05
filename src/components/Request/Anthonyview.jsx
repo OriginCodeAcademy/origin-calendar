@@ -63,14 +63,23 @@ export default class Anthonyview extends react.Component{
             if(slotties[i].id === selecturd.id){
               slotties.splice(i, 1);
             }
-            
-            
         } 
-        
-        console.log(slotties);
-        
-        
-        this.setState({slots:slotties});
+
+        this.setState({
+          slots:slotties
+        });
+
+        const instructorEmail = `${this.state.selectedSlot.instructorId}@origincodeacademy.com`
+        const time = this.state.time;
+        const studentName = (this.props.user.firstName + ' ' + this.props.user.lastName);
+        console.log(this.state);
+        axios.post(`/api/AptRequests/emailAdmin`, {
+          instructorEmail: instructorEmail,
+          time: time,
+          studentName: studentName,  
+        })
+          .then()
+          .catch((err) => console.log(err));
 
       }
       componentDidMount() {
