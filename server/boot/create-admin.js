@@ -15,6 +15,7 @@ module.exports = (app) => {
       lastName: 'Doe',
       password: process.env.ADMIN_PASSWORD,
       emailVerified: true,
+      authToken: {},
     },
   (err, visitor) => {
     Role.findOrCreate({
@@ -52,6 +53,7 @@ module.exports = (app) => {
       lastName: 'Valera',
       password: process.env.ADMIN_PASSWORD,
       emailVerified: true,
+      authToken: {},
     },
     (err, visitor) => {
       Role.findOrCreate({
@@ -89,6 +91,7 @@ module.exports = (app) => {
       lastName: 'McFarland',
       password: process.env.ADMIN_PASSWORD2,
       emailVerified: true,
+      authToken: {},
     },
     (err, visitor) => {
       Role.findOrCreate({
@@ -117,55 +120,41 @@ module.exports = (app) => {
     });
   Visitor.findOrCreate({
     where: {
-      email: 'student@origincodeacademy.com',
+      email: 'michael@origincodeacademy.com',
     },
   },
     {
-      email: 'student@origincodeacademy.com',
-      firstName: 'Test',
-      lastName: 'Testerson',
-      password: 'testies',
+      email: 'michael@origincodeacademy.com',
+      firstName: 'Michael',
+      lastName: 'Roberts',
+      password: process.env.ADMIN_PASSWORD3,
       emailVerified: true,
+      authToken: {},
     },
-    
-      
-    );
-    Visitor.findOrCreate({
-      where: {
-        email: 'michael@origincodeacademy.com',
-      },
-    },
-      {
-        email: 'michael@origincodeacademy.com',
-        firstName: 'Michael',
-        lastName: 'Roberts',
-        password: process.env.ADMIN_PASSWORD3,
-        emailVerified: true,
-      },
-      (err, visitor) => {
-        Role.findOrCreate({
-          where: {
-            name: 'ADMIN',
-          },
+    (err, visitor) => {
+      Role.findOrCreate({
+        where: {
+          name: 'ADMIN',
         },
-          {
-            name: 'ADMIN',
-          },
-          (err, role) => {
-            if (err) console.log('error creating role', err);
-            RoleMapping.findOrCreate({
-              where: {
-                principalType: 'ADMIN',
-                principalId: visitor.id,
-              },
+      },
+        {
+          name: 'ADMIN',
+        },
+        (err, role) => {
+          if (err) console.log('error creating role', err);
+          RoleMapping.findOrCreate({
+            where: {
+              principalType: 'ADMIN',
+              principalId: visitor.id,
             },
-              {
-                principalType: 'ADMIN',
-                principalId: visitor.id,
-              }, (error, mapping) => {
-                if (err) console.log(err);
-              });
-          });
-      });
+          },
+            {
+              principalType: 'ADMIN',
+              principalId: visitor.id,
+            }, (error, mapping) => {
+              if (err) console.log(err);
+            });
+        });
+    });
 };
 

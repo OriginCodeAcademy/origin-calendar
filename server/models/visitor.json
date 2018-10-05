@@ -24,6 +24,10 @@
     "emailVerified": {
       "type": "boolean",
       "requires": true
+    },
+    "authToken": {
+      "type": "object",
+      "required": false
     }
   },
   "validations": [],

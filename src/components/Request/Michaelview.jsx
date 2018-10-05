@@ -72,6 +72,17 @@ export default class Michaelview extends react.Component{
         
         this.setState({slots:slotties});
 
+        const instructorEmail = `${this.state.selectedSlot.instructorId}@origincodeacademy.com`
+        const time = this.state.time;
+        const studentName = (this.props.user.firstName + ' ' + this.props.user.lastName);
+        axios.post(`/api/AptRequests/emailAdmin`, {
+          instructorEmail: instructorEmail,
+          time: time,
+          studentName: studentName,  
+        })
+          .then()
+          .catch((err) => console.log(err));
+
       }
       componentDidMount() {
         const currentdate = new Date();

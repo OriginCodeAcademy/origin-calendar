@@ -6,11 +6,15 @@ class AptRequests extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      requests: []
+      user: {
+        authToken: {}
+      },
+      requests: [],
     }
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleApprove = this.handleApprove.bind(this);
+    this.getGoogleAuth = this.getGoogleAuth.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +30,20 @@ class AptRequests extends Component {
       .catch((error) => {
         console.log(error)
       })
+
+    axios.get(`/api/Visitors/${this.props.userId}`)
+      .then(res => {
+        this.setState({
+          user: res.data
+        })
+        
+        if (Object.keys(this.state.user.authToken).length > 0) {
+          axios.post(`/api/Visitors/oAuth`, {
+            user: this.state.user
+          })
+        } 
+      })
+
   }
 
    handleDelete(event) {
@@ -75,7 +93,7 @@ class AptRequests extends Component {
     })
       .then((res) => {
         for (let i = 0; i < requests.length; i++) {
-          if (requests[i].slotId === slotId && requests[i].id !== booked.id) {
+          if (requests[i].time === time && requests[i].id !== booked.id) {
             axios.post(`/api/AptRequests/replacedApt`, {
               email: requests[i].email,
               time: requests[i].time
@@ -104,10 +122,10 @@ class AptRequests extends Component {
         console.log(error);
       });
     let replaced = requests.filter((el) => {
-      return el.slotId != slotId;
+      return el.time != time;
     });
     let deleted = requests.filter((le) => {
-      return le.slotId === slotId;
+      return le.time === time;
     });
    let results= deleted.map(Apt => axios.delete(`/api/AptRequests/${Apt.id}`))
     return axios.all(results)
@@ -121,9 +139,20 @@ class AptRequests extends Component {
       })
   }
 
+  getGoogleAuth() {
+    axios.post(`/api/Visitors/oAuth`, {
+      user: this.state.user
+    })
+  }
+
   render() {
     return (
       <div>
+        {
+          (Object.keys(this.state.user.authToken).length != 0) ? 
+          <span className='auth'/> :
+          <button className='btn btn-info auth' onClick={this.getGoogleAuth}>Authenticate Calendar</button>
+        }
         <h2>Appointment Requests</h2>
         {this.state.requests ? <table className='table'>
           <thead>
