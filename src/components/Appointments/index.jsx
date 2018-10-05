@@ -9,31 +9,69 @@ const Calendar = () => (
   </div>
 );
 
-const Row = (props) => {
-  const { appointment } = props;
-  return (
-    <tr>
-      <td>{appointment.studentName}</td>
-      <td>{moment(appointment.timeSlot).format('L')}</td>
-      <td>{moment(appointment.timeSlot).format('hh:mm a')}</td>
-      <td>{appointment.duration}</td>
-    </tr>
-  )
-}
 
 class Appointments extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      appointments: []
+    };
+
+    this.handleRemoveConfirmed = this.handleRemoveConfirmed.bind(this);
+
+  }
+
+
+  handleRemoveConfirmed(e) {
+
+    const id = e.currentTarget.getAttribute('id');
+    const studentEmail = e.currentTarget.getAttribute('email');
+    const instructorId = e.currentTarget.getAttribute('instructorId');
+    const time = e.currentTarget.getAttribute('time');
+    const studentName = e.currentTarget.getAttribute('studentName');
+  
+ 
+
+        axios.post('/api/BookedApts/removedConfirmed', {
+          email: `${instructorId}@origincodeacademy.com`,
+          time: time,
+          studentName: studentName
+        })
+          .then(function (response) {
+
+          })
+          .catch(function (error) {
+            console.log(error, "error");
+          });
+
+
+    var deleted = this.state.appointments.filter(function (el) {
+      return el.id != id
+    });
+
+
+    axios.delete(`/api/BookedApts/${id}`)
+      .then((response) => {
+        this.setState({
+          appointments: deleted
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+
   }
 
   componentDidMount() {
     axios.get('/api/BookedApts')
-    .then(res => {
-      this.setState({
-        appointments: res.data
+      .then(res => {
+        this.setState({
+          appointments: res.data
+          
+        })
+       
       })
-    })
+      
   }
 
   render() {
@@ -53,14 +91,28 @@ class Appointments extends Component {
                   <th>Date</th>
                   <th>Time</th>
                   <th>Duration</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody className='table-striped'>
-                { this.state.appointments.map(singleApt => <Row key={singleApt.id} appointment={singleApt} />) }
+
+                {this.state.appointments.map((e) => {
+                  return (
+                    <tr>
+                      <td>{e.studentName}</td>
+                      <td>{moment(e.timeSlot).format('L')}</td>
+                      <td>{moment(e.timeSlot).format('hh:mm a')}</td>
+                      <td>{e.duration}</td>
+                      <td>
+                        <button class="btn btn-danger" instructorId={e.instructorId} email={e.email} studentName={e.studentName} id={e.id} time={e.timeSlot} onClick={this.handleRemoveConfirmed}>X</button>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
-      }
+        }
         <div className='col-lg-8 col-md-8 col-sm-12'>
           <Calendar />
         </div>
