@@ -129,6 +129,7 @@ module.exports = (app) => {
       lastName: 'Roberts',
       password: process.env.ADMIN_PASSWORD3,
       emailVerified: true,
+      authToken: {},
     },
     (err, visitor) => {
       Role.findOrCreate({
