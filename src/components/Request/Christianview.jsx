@@ -54,7 +54,8 @@ export default class Christianview extends react.Component{
           "email": this.props.user.email,
           "issueDescription": this.state.description,
           "time": this.state.time,
-          "slotId": this.state.slotId
+          "slotId": this.state.slotId,
+          "instructorId": "christian"
         }).then((response) => {
           this.setState({
             alert: 'Awesome possum! Your appointment has been requested.',

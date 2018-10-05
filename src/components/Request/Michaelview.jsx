@@ -41,7 +41,8 @@ export default class Michaelview extends react.Component{
           "email": this.props.user.email,
           "issueDescription": this.state.description,
           "time": this.state.time,
-          "slotId": this.state.slotId
+          "slotId": this.state.slotId,
+          "instructorId": "michael"
         }).then((response) => {
           this.setState({
             alert: 'Awesome possum! Your appointment has been requested.',
