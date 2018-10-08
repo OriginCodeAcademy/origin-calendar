@@ -10,12 +10,12 @@ let nightmare;
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-const path = 'http://localhost:8080' || process.env.PORT;
+const path = 'http://localhost:8080';
 
 describe('sending a success response', ()=>{
     before(() => {
-        server.listen(8080);
-    })
+      server.listen(8080);
+    });
 
   beforeEach(()=>{
     nightmare = new Nightmare();
@@ -24,20 +24,20 @@ describe('sending a success response', ()=>{
   it('should expect input textarea and submit buttons to exist', () =>
   nightmare
     .goto(path)
-    .type('#inputemail', 'student@origincodeacademy.com')//nightmare logs in with email
-    .type('#inputemailpassword', 'testies')//nightmare logs in with password
-    .click('.btn-info')//clicks on button
+    .type('#inputemail', 'student@origincodeacademy.com')
+    .type('#inputemailpassword', 'testies')
+    .click('.btn-info')
     .wait('#reqtest')
-    .click('#reqtest')//clicks on request page
+    .click('#reqtest')
     .wait('#christian')
-    .click('#christian')//clicks on christian
+    .click('#christian')
     .wait('input')
-    .exists('input')//checks to see if there are input elements on the submit page
+    .exists('input')
     .wait('option')
-    .exists('option')//checks to see if there is an option value element on the submit page
+    .exists('option')
     .evaluate(()=> document.querySelector('button[name=submit]'))
-    .then(button => expect(button).to.equal)  
-    ).timeout(30000)
+    .then(button => expect(button).to.equal)
+    ).timeout(30000);
 
     it('should check to see if select is populated with values greater than current time', ()=>
     nightmare
@@ -51,17 +51,5 @@ describe('sending a success response', ()=>{
     .click('#christian')
     .wait('#formtest')
     .select('#formtest', '#optionselect')
-    
-    
-    // .select('#nightmarejs','nightmare2')
-   
-    
-
-  ).timeout(6500)
-
-
-      
-
-
-
-  })
+  ).timeout(6500);
+});

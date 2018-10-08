@@ -43,7 +43,6 @@ class SignIn extends Component {
           error: true
         })
       })
-
   }
 
   render() {

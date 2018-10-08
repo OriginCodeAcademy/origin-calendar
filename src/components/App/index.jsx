@@ -9,7 +9,6 @@ import Availability from '../AdminAvailability';
 import Christianviews from '../Request/Christianview';
 import Anthonyviews from '../Request/Anthonyview';
 import Michaelviews from '../Request/Michaelview';
-import axios from 'axios';
 
 class App extends Component{
   constructor(props){
@@ -69,7 +68,6 @@ class App extends Component{
     </nav>
   
     <div className="container-fluid">
-        
         <Route exact path="/" render={(props) => <Home {...props} user={this.state.user} save={this.saveUser} isAdmin={this.state.isAdmin} setAdminStatus={this.setAdminStatus} />}></Route>
         <Route path="/appointments" render={(props) => <Appointments {...props} user={this.state.user} />}></Route>
         <Route path="/register" render={(props) => <Register {...props} save={this.saveUser} setAdminStatus={this.setAdminStatus} isAdmin={this.state.isAdmin} />}></Route>
@@ -79,7 +77,6 @@ class App extends Component{
         <Route path="/christianviews" render = {(props) => <Christianviews {...props} user={this.state.user} />}></Route>
         <Route path="/anthonyviews" render = {(props) => <Anthonyviews {...props} user={this.state.user} />}></Route>
         <Route path="/michaelviews" render = {(props) => <Michaelviews {...props} user={this.state.user} />}></Route>
-      
     </div>
   </div>
     )

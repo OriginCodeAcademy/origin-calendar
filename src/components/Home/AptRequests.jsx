@@ -36,8 +36,6 @@ class AptRequests extends Component {
       email: email,
       time: time
     })
-      .then(function (response) {
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -57,9 +55,6 @@ class AptRequests extends Component {
 
   handleApprove(e) {
     const time = e.currentTarget.getAttribute('time')
-    const email = e.currentTarget.getAttribute('email')
-    const instructorId = e.currentTarget.getAttribute('instructorId')
-    const slotId = e.currentTarget.getAttribute('slotId')
     let id = e.currentTarget.getAttribute('id');
     let requests = this.state.requests;
 
@@ -81,30 +76,26 @@ class AptRequests extends Component {
             email: requests[i].email,
             time: requests[i].time
           })
+          .then(res => {
+            axios.post(`/api/AptRequests/approveEmail`, {
+              email: booked.email,
+              time: booked.time
+            })
+              .catch(function (error) {
+                console.log(error);
+              });
+          })
+          .catch(err => console.log(err))
         }
       }
       axios.delete(`/api/Slots/${booked.slotId}`)
-      .then((r) => {
-      })
       .catch((e) => {
         console.log(e)
       })
-      console.log('instructorId', instructorId);
     }).catch((err) => {
       console.log(err)
     })
     
-    
-    
-    axios.post(`/api/AptRequests/approveEmail`, {
-      email: booked.email,
-      time: booked.time
-    })
-      .then(function (response) {
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
     let replaced = requests.filter((el) => {
       return el.time != time;
     });

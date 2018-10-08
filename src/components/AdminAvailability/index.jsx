@@ -14,6 +14,7 @@ class Availability extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
+    
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -22,15 +23,13 @@ class Availability extends Component {
         if (!this.state.dateTime) {
             alert('Error: Please pick a date and time!')
         } else {
-
             event.preventDefault();
-
             axios.post(`/api/Slots`, {
                 "instructorId": this.state.admin,
                 "timeSlot": this.state.dateTime,
                 "duration": 30
-            }).then((response) => {
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 console.log(error)
             })
             const currentDate = new Date();
@@ -49,10 +48,13 @@ class Availability extends Component {
         .then(res => {
             res.data.map(request => {
                 axios.delete(`/api/AptRequests/${request.id}`)
-                axios.post(`/api/AptRequests/denyEmail`, {
-                    email: request.email,
-                    time: request.time,
-                })
+                    .then(res => {
+                        axios.post(`/api/AptRequests/denyEmail`, {
+                            email: request.email,
+                            time: request.time,
+                        })
+                    })
+                    .catch(response => console.log(response))
             })
         })
         .catch(response => console.log(response))

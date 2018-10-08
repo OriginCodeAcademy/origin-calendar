@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment'
+import { resolve } from 'dns';
 
 class PendingAppointments extends Component {
   constructor(props) {
@@ -17,24 +18,20 @@ class PendingAppointments extends Component {
     const time = event.currentTarget.getAttribute('time');
     const studentName = event.currentTarget.getAttribute('studentName');
    
-    axios.post('/api/AptRequests/removeApt', {
-      instructorId: instructorid,
-      email: `${instructorid}@origincodeacademy.com`,
-      time: time,
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error,"error");
-      });
-      
     var deleted = this.state.pending.filter(function (el) {
       return el.id != id
     });
 
     axios.delete(`/api/AptRequests/${id}`)
       .then((response) => {
+        axios.post('/api/AptRequests/removeApt', {
+          instructorId: instructorid,
+          email: `${instructorid}@origincodeacademy.com`,
+          time: time,
+        })
+          .catch(function (error) {
+            console.log(error,"error");
+          });
         this.setState({
           pending: deleted
         })
@@ -62,11 +59,8 @@ class PendingAppointments extends Component {
   render() {
     return (
       <div>
-      
         <h2>Pending Appointments</h2>
-
         {this.state.pending.length ? <table className='table'>
-       
           <thead>
             <tr>
               <th>Summary</th>
@@ -74,14 +68,10 @@ class PendingAppointments extends Component {
               <th>Date</th>
               <th>Time</th>
               <th></th>
-              
             </tr>
-            
-            
           </thead>
           
           <tbody className='table-striped'>
-
             {this.state.pending.map((e) => {
               return (
                 <tr key={e.id}>
@@ -93,17 +83,13 @@ class PendingAppointments extends Component {
                   <button className="btn btn-danger" instructorid={e.instructorid} email={e.email} studentname={e.studentname} id={e.id} time={e.time} onClick={this.handleRemoveApt}>X</button>
                   </td>
                 </tr>
-                 
               )
             })}
           </tbody>
         </table>
-        
           : <div className="alert alert-info">You haven't scheduled any appointments yet!</div>
         }
       </div>
-      
-   
     )
   }
 }

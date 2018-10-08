@@ -69,7 +69,6 @@ class RequestForm extends Component{
       time: time,
       studentName: studentName,  
     })
-      .then()
       .catch((err) => console.log(err));
   }
   componentDidMount() {

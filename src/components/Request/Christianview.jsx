@@ -47,7 +47,6 @@ export default class Christianview extends react.Component{
       }
     
       handleSubmit(e) {
-          console.log('Handle Submit is working!');
         axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`, {
           "topicSummary": this.state.topic,
           "studentName": this.props.user.firstName + ' ' + this.props.user.lastName,
@@ -81,9 +80,6 @@ export default class Christianview extends react.Component{
             
             
         } 
-        
-        console.log(slotties);
-        
         
         this.setState({slots:slotties});
 

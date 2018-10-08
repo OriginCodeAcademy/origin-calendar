@@ -18,48 +18,36 @@ class Appointments extends Component {
     };
 
     this.handleRemoveConfirmed = this.handleRemoveConfirmed.bind(this);
-
   }
 
-
   handleRemoveConfirmed(e) {
-
     const id = e.currentTarget.getAttribute('id');
     const studentEmail = e.currentTarget.getAttribute('email');
     const instructorId = e.currentTarget.getAttribute('instructorId');
     const time = e.currentTarget.getAttribute('time');
     const studentName = e.currentTarget.getAttribute('studentName');
-  
- 
-
-        axios.post('/api/BookedApts/removedConfirmed', {
-          email: `${instructorId}@origincodeacademy.com`,
-          time: time,
-          studentName: studentName
-        })
-          .then(function (response) {
-
-          })
-          .catch(function (error) {
-            console.log(error, "error");
-          });
-
 
     var deleted = this.state.appointments.filter(function (el) {
       return el.id != id
     });
 
-
     axios.delete(`/api/BookedApts/${id}`)
       .then((response) => {
-        this.setState({
-          appointments: deleted
+        axios.post('/api/BookedApts/removedConfirmed', {
+          email: `${instructorId}@origincodeacademy.com`,
+          time: time,
+          studentName: studentName
         })
+          .catch(function (error) {
+            console.log(error, "error");
+          });
+          this.setState({
+            appointments: deleted
+          })
       })
       .catch((error) => {
         console.log(error)
       });
-
   }
 
   componentDidMount() {
@@ -67,17 +55,12 @@ class Appointments extends Component {
       .then(res => {
         this.setState({
           appointments: res.data
-          
         })
-       
       })
-      
   }
 
   render() {
     if (!this.state.appointments) return null;
-
-
     return (
       <div className='row'>
         { this.state.appointments &&
