@@ -80,7 +80,7 @@ module.exports = (app) => {
       email: 'student@origincodeacademy.com',
       firstName: 'Student',
       lastName: 'Studentson',
-      password: process.env.ADMIN_PASSWORD,
+      password: 'abc123',
       emailVerified: true,
     });
 };
