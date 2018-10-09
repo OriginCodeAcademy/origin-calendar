@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment'
-import { resolve } from 'dns';
 
 class PendingAppointments extends Component {
   constructor(props) {

@@ -70,4 +70,17 @@ module.exports = (app) => {
           });
       });
   });
+
+  Visitor.findOrCreate({
+    where: {
+      email: 'student@origincodeacademy.com',
+    },
+  },
+    {
+      email: 'student@origincodeacademy.com',
+      firstName: 'Student',
+      lastName: 'Studentson',
+      password: process.env.ADMIN_PASSWORD,
+      emailVerified: true,
+    });
 };
