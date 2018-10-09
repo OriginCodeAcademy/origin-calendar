@@ -10,16 +10,24 @@ let nightmare;
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-const path = 'http://localhost:8080';
+const path = 'http://localhost:7000';
 
 describe('sending a success response', ()=>{
   before(() => {
-    server.listen(8080);
+    server.listen(7000);
   });
 
   beforeEach(()=>{
     nightmare = new Nightmare();
   });
+
+  it('should render login field', () =>
+    nightmare
+      .goto(path)
+      .wait('#inputEmail')
+      .evaluate(() => document.querySelector('button').extst)
+      .end()
+    ).timeout(6500);
 
   it('should expect input textarea and submit buttons to exist', () =>
   nightmare
