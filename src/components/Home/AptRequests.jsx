@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { request } from 'https';
 
 class AptRequests extends Component {
   constructor(props) {
@@ -10,11 +9,11 @@ class AptRequests extends Component {
       requests: []
     }
 
-    this.handleDelete = this.handleDelete.bind(this)
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleApprove = this.handleApprove.bind(this);
   }
 
-   componentDidMount() {
+  componentDidMount() {
     if (!this.props.userId) return;
     const currentDate = new Date();
     const currentDateIsoFormat = currentDate.toISOString();
@@ -37,8 +36,6 @@ class AptRequests extends Component {
       email: email,
       time: time
     })
-      .then(function (response) {
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -57,54 +54,64 @@ class AptRequests extends Component {
   }
 
   handleApprove(e) {
-    let slotId = null;
+    const time = e.currentTarget.getAttribute('time')
     let id = e.currentTarget.getAttribute('id');
     let requests = this.state.requests;
-    for (let i = 0; i < requests.length; i++) {
-      if (requests[i].id === id) {
-        axios.post(`/api/BookedApts`, {
-          "timeSlot": requests[i].time,
-          "studentName": requests[i].studentName,
-          "slotId": requests[i].slotId,
-          "visitorId": requests[i].visitorId,
-          "duration": 30
-        }).then((res) => {
-          axios.delete(`/api/Slots/${requests[i].slotId}`)
-          .then((r) => {
-          })
-          .catch((e) => {
-            console.log(e)
-          })
-        }).catch((err) => {
-          console.log(err)
-        })
 
-
+    let booked = requests.find((book) => {
+      return book.id === id
+    })
+    axios.post(`/api/BookedApts`, {
+      "timeSlot": booked.time,
+      "instructorId": booked.instructorId,
+      "studentName": booked.studentName,
+      "slotId": booked.slotId,
+      "visitorId": booked.visitorId,
+      "duration": 30
+    })
+    .then((res) => {
+      for (let i = 0; i < requests.length; i++) {
+        if (requests[i].time === time && requests[i].id !== booked.id) {
+          axios.post(`/api/AptRequests/replacedApt`, {
+            email: requests[i].email,
+            time: requests[i].time
+          })
+          .then(res => {
+            axios.post(`/api/AptRequests/approveEmail`, {
+              email: booked.email,
+              time: booked.time
+            })
+              .catch(function (error) {
+                console.log(error);
+              });
+          })
+          .catch(err => console.log(err))
+        }
       }
-    }
-    const email = e.currentTarget.getAttribute('email')
-    const time = e.currentTarget.getAttribute('time')
-    axios.post(`/api/AptRequests/approveEmail`, {
-      email: email,
-      time: time
-    })
-      .then(function (response) {
+      axios.delete(`/api/Slots/${booked.slotId}`)
+      .catch((e) => {
+        console.log(e)
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-    let deleted = requests.filter((el) => {
-      return el.id != id;
+    }).catch((err) => {
+      console.log(err)
+    })
+    
+    let replaced = requests.filter((el) => {
+      return el.time != time;
     });
-    axios.delete(`/api/AptRequests/${id}`)
-    .then((response) => {
-      this.setState({
-        requests: deleted
+    let deleted = requests.filter((le) => {
+      return le.time === time;
+    });
+   let results= deleted.map(Apt => axios.delete(`/api/AptRequests/${Apt.id}`))
+    return axios.all(results)
+      .then((response) => {
+        this.setState({
+          requests: replaced
+        })
       })
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   render() {
@@ -125,13 +132,13 @@ class AptRequests extends Component {
           <tbody className='table-striped'>
             {this.state.requests.map((e) => {
               return (
-                <tr>
+                <tr key={e.id}>
                   <td>{e.studentName}</td>
                   <td><strong>{e.topicSummary}</strong> - {e.issueDescription}</td>
                   <td>{moment(e.time).format('L')}</td>
                   <td>{moment(e.time).format('hh:mm a')}</td>
-                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' email={e.email} onClick={this.handleApprove}>Approve</button></td>
-                  <td><button id={e.id} time={e.time} visitorId={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
+                  <td><button id={e.id} time={e.time} type='button' className='btn btn-success' instructorId={e.instructorId} email={e.email} onClick={this.handleApprove}>Approve</button></td>
+                  <td><button id={e.id} time={e.time} visitor={e.visitorId} type='button' className='btn btn-danger' email={e.email} onClick={this.handleDelete}>Deny</button></td>
                 </tr>
               )
             })}

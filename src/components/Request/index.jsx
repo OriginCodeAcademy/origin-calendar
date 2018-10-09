@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom';
 
 
 class RequestForm extends Component{
@@ -11,6 +12,7 @@ class RequestForm extends Component{
       topic: '',
       description: '',
       time: '',
+      instructorId:'',
       slots: []
     }
     this.handleChange = this.handleChange.bind(this);
@@ -25,14 +27,15 @@ class RequestForm extends Component{
   }
 
   handleTimeSlot(e) {
-
     const index = e.target.selectedIndex - 1;
       this.setState({
         time: e.target.value,
         slotId: this.state.slots[index].id,
-        selectedSlot: this.state.slots[index]
+        selectedSlot: this.state.slots[index],
+        instructorId: this.state.slots[index].instructorId
       })
   }
+
 
   handleSubmit(e) {
     axios.post(`/api/Visitors/${this.props.user.id}/aptRequests`, {
@@ -41,7 +44,8 @@ class RequestForm extends Component{
       "email": this.props.user.email,
       "issueDescription": this.state.description,
       "time": this.state.time,
-      "slotId": this.state.slotId
+      "slotId": this.state.slotId,
+      "instructorId": this.state.instructorId
     }).then((response) => {
       this.setState({
         alert: 'Awesome possum! Your appointment has been requested.',
@@ -56,33 +60,37 @@ class RequestForm extends Component{
         error: true
       })
     })
+
+    const instructorEmail = `${this.state.selectedSlot.instructorId}@origincodeacademy.com`
+    const time = this.state.time;
+    const studentName = (this.props.user.firstName + ' ' + this.props.user.lastName);
+    axios.post(`/api/AptRequests/emailAdmin`, {
+      instructorEmail: instructorEmail,
+      time: time,
+      studentName: studentName,  
+    })
+      .catch((err) => console.log(err));
   }
   componentDidMount() {
     axios.get('/api/Slots').then(response => this.setState({ slots: response.data }))
+    
+ 
   }
   render() {
     return (
       <div className='form'>
-        <h2>Request an Appointment</h2>
+        <h2>Choose an instructor you would like to schedule and appointment with.</h2>
         { this.state.alert && <div className={`alert alert-${this.state.error ? 'danger': 'success'}`}>{this.state.alert}</div>}
           <div className='form-group'>
-            <label>Topic</label>
-            <input type='text' className='form-control' onChange={this.handleChange} value={this.state.topic} name='topic'/>
-          </div>
-          <div className='form-group'>
-            <label>Time</label>
-            <select className='form-control' onChange={this.handleTimeSlot} value={this.state.time} name='time'>
-              <option value=''>--- Select a Time Slot ---</option>
-              {this.state.slots.map(slot =>
-                <option key={slot.id} value={slot.timeSlot}>{ moment(slot.timeSlot).format("dddd, MMMM Do, h:mm a") } with {slot.instructorId}</option>
-              )}
-            </select >
-          </div>
-          <div className='form-group'>
-            <label>Description</label>
-            <textarea rows='4' columns='50' className='form-control' onChange={this.handleChange} value={this.state.description} name='description'></textarea>
-          </div>
-          <button className='btn btn-info' onClick={this.handleSubmit}>Submit</button>
+ 
+  <div className="nav nav-tabs text-center" id="nav-tab" role="tablist">
+    <Link to ='/christianviews' id='christian' className="nav-item nav-link" role="tab"aria-selected="true">Christian</Link>
+    <Link to ='/anthonyviews' className="nav-item nav-link" role="tab" aria-selected="true">Anthony</Link>
+    <Link to='/michaelviews' className="nav-item nav-link" role="tab" aria-selected="true">Michael</Link>
+  </div>
+
+            
+      </div>
       </div>)
   }
 }

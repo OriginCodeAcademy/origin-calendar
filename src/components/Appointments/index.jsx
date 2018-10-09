@@ -9,42 +9,63 @@ const Calendar = () => (
   </div>
 );
 
-const Row = (props) => {
-  const { appointment } = props;
-  return (
-    <tr>
-      <td>{appointment.studentName}</td>
-      <td>{moment(appointment.timeSlot).format('L')}</td>
-      <td>{moment(appointment.timeSlot).format('hh:mm a')}</td>
-      <td>{appointment.duration}</td>
-    </tr>
-  )
-}
 
 class Appointments extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      appointments: []
+    };
+
+    this.handleRemoveConfirmed = this.handleRemoveConfirmed.bind(this);
+  }
+
+  handleRemoveConfirmed(e) {
+    const id = e.currentTarget.getAttribute('id');
+    const studentEmail = e.currentTarget.getAttribute('email');
+    const instructorId = e.currentTarget.getAttribute('instructorId');
+    const time = e.currentTarget.getAttribute('time');
+    const studentName = e.currentTarget.getAttribute('studentName');
+
+    var deleted = this.state.appointments.filter(function (el) {
+      return el.id != id
+    });
+
+    axios.delete(`/api/BookedApts/${id}`)
+      .then((response) => {
+        axios.post('/api/BookedApts/removedConfirmed', {
+          email: `${instructorId}@origincodeacademy.com`,
+          time: time,
+          studentName: studentName
+        })
+          .catch(function (error) {
+            console.log(error, "error");
+          });
+          this.setState({
+            appointments: deleted
+          })
+      })
+      .catch((error) => {
+        console.log(error)
+      });
   }
 
   componentDidMount() {
     axios.get('/api/BookedApts')
-    .then(res => {
-      this.setState({
-        appointments: res.data
+      .then(res => {
+        this.setState({
+          appointments: res.data
+        })
       })
-    })
   }
 
   render() {
     if (!this.state.appointments) return null;
-
-
     return (
       <div className='row'>
         { this.state.appointments &&
         <div className='col-lg-4 col-md-4 col-sm-12'>
-            <PendingAppointments userId={this.props.user && this.props.user.id}/>
+            <PendingAppointments userId={this.props.user.id} user={this.props.user}/>
             <h2>Confirmed Appointments</h2>
             <table className='table'>
               <thead>
@@ -53,14 +74,28 @@ class Appointments extends Component {
                   <th>Date</th>
                   <th>Time</th>
                   <th>Duration</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody className='table-striped'>
-                { this.state.appointments.map(singleApt => <Row key={singleApt.timeSlot} appointment={singleApt} />) }
+
+                {this.state.appointments.map((e) => {
+                  return (
+                    <tr>
+                      <td>{e.studentName}</td>
+                      <td>{moment(e.timeSlot).format('L')}</td>
+                      <td>{moment(e.timeSlot).format('hh:mm a')}</td>
+                      <td>{e.duration}</td>
+                      <td>
+                        <button class="btn btn-danger" instructorId={e.instructorId} email={e.email} studentName={e.studentName} id={e.id} time={e.timeSlot} onClick={this.handleRemoveConfirmed}>X</button>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
-      }
+        }
         <div className='col-lg-8 col-md-8 col-sm-12'>
           <Calendar />
         </div>

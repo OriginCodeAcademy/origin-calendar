@@ -124,6 +124,14 @@ label {
   border-top: 1px solid #9393932b;
 }
 
+.table-striped {
+  overflow: scroll;
+  max-height: 500px;
+}
+.trash {
+  fill: #dc4245;
+}
+
 th {
   color: whitesmoke;
   background-color: #4f6995;
@@ -144,4 +152,23 @@ th {
   100% {
     opacity: 1
   }
+}
+
+.text-center{
+  margin:auto;
+  justify-content: center;
+}
+
+#cancelbro{
+  margin:10;
+}
+
+select.form-control{
+  width:30%;
+  margin:left;
+}
+.auth {
+  position: absolute;
+  right: 15px;
+  top: 3px;
 }
