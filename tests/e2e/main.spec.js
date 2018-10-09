@@ -36,11 +36,9 @@ describe('sending a success response', ()=>{
     .exists('input')
     .wait('option')
     .exists('option')
-    .evaluate(() => document.querySelector('button[name=submit]'))
-      .then(button => expect(button).to.equal)
     ).timeout(6500);
 
-    it('should check to see if select is populated with values greater than current time', ()=>
+    it('should check to see if select is populated with values greater than current time', () =>
     nightmare
       .goto(path)
       .wait('#inputEmail')
