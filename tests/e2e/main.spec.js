@@ -18,7 +18,7 @@ describe('sending a success response', ()=>{
   });
 
   beforeEach(()=>{
-    nightmare = new Nightmare({show: true});
+    nightmare = new Nightmare();
   });
 
   it('should expect input textarea and submit buttons to exist', () =>
